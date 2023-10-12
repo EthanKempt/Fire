@@ -1,11 +1,52 @@
+<!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fire1</title>
-</head>
-<body>
-    <h1>hi</h1>
-<script src="bundle.js"></script>
-</body>
+
+<html>
+    <head>
+        <meta charset="utf-8" />
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+
+        <script src="bundle.js"></script>
+
+    </head>
+    <body>
+        <div class="container text-center">
+            <div class="row align-items-start">
+              <div class="col">
+
+            </div>
+
+              <div class="col d-flex justify-content-center">
+                <div class="card" style="width: 18rem;">
+                    <div class="card-body">
+                      <h5 class="card-title">Log In</h5>
+                      <div class="input-group mb-3">
+                        <input type="text" name='name' class="form-control" placeholder="Team Name" id='username' aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <div class="input-group mb-3">
+                        <input type="text" name='password' class="form-control" placeholder="Password" id='password' aria-label="Username" aria-describedby="basic-addon1">
+                      </div>
+                      <button onclick='alert_names()' class="btn btn-primary">Log In</button>
+                      <br>
+                      <a href="#" class="card-link">Create Team</a>
+                      <a href="#" class="card-link">Reset Password</a>
+                    </div>
+                  </div>
+                </div>
+              <div class="col">
+
+            </div>
+          </div>
+        </div>
+    </body>
 </html>
+
+<script>
+    alert('s')
+    function login() {
+        var user = document.getElementById('username').value;
+        var pass = document.getElementById('password').value;
+
+    };
+<script/>

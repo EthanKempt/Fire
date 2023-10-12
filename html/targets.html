@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home Page</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    </head>
+<body>
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">Higley</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+            <div class="navbar-nav">
+              <a class="nav-link" href='home.html' aria-current="page">Home</a>
+              <a class="nav-link" href="teams.html">Teams</a>
+              <a class="nav-link active" href="targets.html">Targets</a>
+              <a class="nav-link" href="rules.html">Rules</a>
+              <button type="button" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+                Log In
+              </button>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="modal fade" id="loginModal" tabindex="-1">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Log In</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form>
+                <div class="mb-3">
+                    <label for="userTeamName" class="form-label">Team Name</label>
+                    <input type="text" class="form-control" id="userTeamName">
+                </div>
+                <div class="mb-3">
+                    <label for="userPassword" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="userPassword">
+                </div>
+                <br>
+              </form>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="container column text-center">
+        <div class="row align-items-middle">
+          <div class="col col-2 left-side">
+
+          </div>
+          <div class="col">
+            <br>
+            <p class="fs-5">Your team has <b>(has / has not)</b> gotten someone out this week meaning you are
+              <b>(safe / not safe)</b>. Your assigned team is <b>(team)</b> and the people on the team are:</p>
+            <br>
+            <div class="card-header">
+              <p class="fs-4">Team Name</p>
+            </div>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Person 1
+                <span class="badge bg-primary rounded-pill">In</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Person 2
+                <span class="badge bg-primary rounded-pill">In</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Person 3
+                <span class="badge bg-primary rounded-pill">Out</span>
+              </li>
+              <li class="list-group-item d-flex justify-content-between align-items-center">
+                Person 4
+                <span class="badge bg-primary rounded-pill">In</span>
+              </li>
+            </ul>
+          </div>
+          <div class="col">
+            <br>
+
+            <div class="input-group mb-3">
+              <input type="text" class="form-control view-box" disabled aria-label="Recipient's username" aria-describedby="button-addon2">
+            </div>
+            <div class="input-group mb-3">
+              <input type="text" class="form-control" placeholder="your message" aria-label="Recipient's username" aria-describedby="button-addon2">
+              <button class="btn btn-outline-primary" type="button" id="button-addon2">Send</button>
+            </div>
+
+          </div>
+          <div class="col col-2 right-side">
+
+          </div>
+        </div>
+      </div>
+    </body>
+  </html>
+
+  <style>
+      .navbar {
+    background-color: #2e4b73 !important;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: white !important;
+  }
+  .nav-link {
+    color: #C0C0C0;
+  }
+  .nav-link.active {
+    color: white !important;
+  }
+
+  .container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .display-1 {
+    font-weight: 500;
+  }
+  .h5 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+  .left-side {
+    background-color: #8B8B8B;
+    height: 100vh;
+  }
+  .right-side {
+    background-color: #8B8B8B;
+    height: 100vh;
+  }
+  .row {
+    width: 98.79vw;
+  }
+  .view-box {
+    height: 50vh;
+  }
+  .loginButton {
+    position: absolute;
+    right: 1vw;
+  }
+  @media (max-width: 991px) {
+    .right-side {
+      display: none;
+    }
+    .left-side {
+      display: none;
+    }
+  }
+  </style>

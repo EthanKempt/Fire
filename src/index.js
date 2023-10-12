@@ -19,6 +19,10 @@ const db = getFirestore()
 
 const colRef = collection(db, 'names')
 
+function test() {
+  
+}
+
 getDocs(colRef)
   .then((snapshot) => {
     let names = []
@@ -26,6 +30,7 @@ getDocs(colRef)
         names.push({ ...doc.data(), id: doc.id })
     })
     console.log(names)
+    return(names)
   })
   .catch(err => {
     console.log(err.message)
