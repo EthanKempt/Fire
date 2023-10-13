@@ -21,22 +21,26 @@ const colRef = collection(db, 'teams')
 
 getDocs(colRef)
   .then((snapshot) => {
-    let names = []
+    window.teams = []
     snapshot.docs.forEach((doc) => {
-        names.push({ ...doc.data(), id: doc.id })
+        teams.push({ ...doc.data(), id: doc.id })
     })
-    if (checkUser()) {
-      console.log(names[0].user1)
-    }
   })
   .catch(err => {
     console.log(err.message)
   })
 
-  function checkUser() {
-    if (userIn == 'b') {
-      return true;
-    }else {
-      return false;
+  window.login = function() {
+    userCheck(); //sets userIn to current username input
+    for (let i = 0; i < teams.length; i++) {
+      let x = i + 1;
+      let currentUser = users + x;
+      console.log(currentUser)
+      if (userIn == teams[0].currentUser) {
+        console.log('true')
+        return true;
+      }else {
+        console.log('false')
+      } 
     }
   }
