@@ -17,30 +17,25 @@ initializeApp(firebaseConfig)
 
 const db = getFirestore()
 
-const colRef = collection(db, 'teams')
+const colRef = collection(db, 'names')
 
 getDocs(colRef)
   .then((snapshot) => {
-    window.teams = []
+    window.names = []
     snapshot.docs.forEach((doc) => {
-        teams.push({ ...doc.data(), id: doc.id })
+        names.push({ ...doc.data(), id: doc.id })
     })
   })
   .catch(err => {
     console.log(err.message)
   })
-
   window.login = function() {
-    userCheck(); //sets userIn to current username input
-    for (let i = 0; i < teams.length; i++) {
-      let x = i + 1;
-      let currentUser = users + x;
-      console.log(currentUser)
-      if (userIn == teams[0].currentUser) {
-        console.log('true')
-        return true;
-      }else {
-        console.log('false')
-      } 
+    userCheck(); //sets userIn and UserInP to current input
+    for (let i = 0; i < names.length; i++) {
+       if (userIn == names[i].name && userInP == names[i].password) {
+         return true;
+       } else if (i + 1 == names.length) {
+        alert('incorrect username or password');
+       }
     }
-  }
+  } 
