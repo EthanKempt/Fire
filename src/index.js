@@ -17,7 +17,7 @@ initializeApp(firebaseConfig)
 
 const db = getFirestore()
 
-const colRef = collection(db, 'names')
+const colRef = collection(db, 'teams')
 
 getDocs(colRef)
   .then((snapshot) => {
@@ -25,9 +25,18 @@ getDocs(colRef)
     snapshot.docs.forEach((doc) => {
         names.push({ ...doc.data(), id: doc.id })
     })
-    //console.log(names)
-    console.log('a')
+    if (checkUser()) {
+      console.log(names[0].user1)
+    }
   })
   .catch(err => {
     console.log(err.message)
   })
+
+  function checkUser() {
+    if (userIn == 'b') {
+      return true;
+    }else {
+      return false;
+    }
+  }
