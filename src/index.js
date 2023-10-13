@@ -33,8 +33,8 @@ getDocs(colRef)
     userCheck(); //sets userIn and UserInP to current input
     for (let i = 0; i < names.length; i++) {
        if (userIn == names[i].name && userInP == names[i].password) {
-         return true;
-       } else if (i + 1 == names.length) {
+        history.pushState(null, null, '/html/home.html');
+      } else if (i + 1 == names.length) {
         alert('incorrect username or password');
        }
     }
