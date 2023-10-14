@@ -47,7 +47,7 @@ getDocs(colRef)
       } else if (userIn == userName && userInP == userPassword) {
         var userTeam = JSON.parse(sessionStorage.names)[i].team;
         sessionStorage.setItem('currentTeam', userTeam);
-        window.location.href = '/Fire/html/home.html';
+        window.location.href = '/html/home.html';
         return true; //stops code from continuing
       } else if (i + 1 == names.length) {
         alert('incorrect username or password');
