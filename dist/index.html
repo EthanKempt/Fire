@@ -49,6 +49,9 @@
 </style>
 
 <script>
+  function logout() {
+  window.location.href = '/dist/index.html';
+}
   window.userCheck = function() {
     window.userIn = document.getElementById('username').value;
     window.userInP = document.getElementById('password').value;
@@ -59,4 +62,5 @@
       if (key === 'Enter')
        login();
     }, false);
+    sessionStorage.removeItem('currentTeam')
 </script>

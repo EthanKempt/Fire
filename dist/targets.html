@@ -22,7 +22,7 @@
               <a class="nav-link" href="teams.html">Teams</a>
               <a class="nav-link active" href="targets.html">Targets</a>
               <a class="nav-link" href="rules.html">Rules</a>
-              <button type="button" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <button type="button" onclick='logout()' class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Log Out
               </button>
             </div>
@@ -56,10 +56,6 @@
 
                 <span class="badge bg-primary rounded-pill">Out</span>
               </li>
-              <!-- <li class="list-group-item d-flex justify-content-between align-items-center" id="player4">
-
-                <span class="badge bg-primary rounded-pill">In</span>
-              </li> -->
             </ul>
           </div>
           <div class="col">
@@ -139,6 +135,9 @@
   </style>
   
   <script>
+    function logout() {
+      window.location.href = '/dist/index.html';
+    }
     var infill = document.getElementById('not');
     var infill2 = document.getElementById('safer');
     var infill3 = document.getElementById('target');

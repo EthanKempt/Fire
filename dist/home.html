@@ -22,7 +22,7 @@
               <a class="nav-link" href="teams.html">Teams</a>
               <a class="nav-link" href="targets.html">Targets</a>
               <a class="nav-link" href="rules.html">Rules</a>
-              <button type="button" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <button type="button" onclick="logout()" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Log Out
               </button>
             </div>
@@ -159,4 +159,8 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 
     document.getElementById("timeSinceStart").innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
 } setInterval(refreshTime, 1000);
+
+function logout() {
+  window.location.href = '/dist/index.html';
+}
 </script>

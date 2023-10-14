@@ -42,7 +42,7 @@ getDocs(colRef)
       var userPassword = JSON.parse(sessionStorage.names)[i].password;
       if (userIn == teamsName && userInP == teamsPassword) {
         sessionStorage.setItem('currentTeam', teamsName);
-        window.location.href = '/Fire/dist/home.html';
+        window.location.href = '/dist/home.html';
         return true; //stops code from continuing
       } else if (userIn == userName && userInP == userPassword) {
         var userTeam = JSON.parse(sessionStorage.names)[i].team;

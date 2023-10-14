@@ -22,7 +22,7 @@
               <a class="nav-link" href="teams.html">Teams</a>
               <a class="nav-link" href="targets.html">Targets</a>
               <a class="nav-link active" href="rules.html">Rules</a>
-              <button type="button" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <button type="button" onclick="logout()" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
                 Log Out
               </button>
             </div>
@@ -170,6 +170,12 @@
       </div>
 </body>
 </html>
+
+<script>
+  function logout() {
+  window.location.href = '/dist/index.html';
+}
+</script>
 
 <style>    
     .navbar {
