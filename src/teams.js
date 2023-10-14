@@ -25,7 +25,15 @@ getDocs(colRef)
     snapshot.docs.forEach((doc) => {
         teams.push({ ...doc.data(), id: doc.id })
     })
+    createTeamsVar(teams);
   })
   .catch(err => {
     console.log(err.message)
   })
+function createTeamsVar(a) {
+ window.teams = a;
+}
+
+  window.setTeams = function() {
+    return teams;
+  }

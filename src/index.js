@@ -2,6 +2,7 @@ import { initializeApp } from 'firebase/app'
 import {
     getFirestore, collection, getDocs
 } from 'firebase/firestore'
+import { setTeams } from '/Users/ethan/Downloads/Fire/src/teams'
 
 const firebaseConfig = {
     apiKey: "AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE",
@@ -42,3 +43,5 @@ getDocs(colRef)
        }
     }
   }
+  window.teams = setTeams();
+  console.log(teams);
