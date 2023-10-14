@@ -34,10 +34,19 @@ getDocs(colRef)
   window.login = function() {
     userCheck(); //sets userIn and UserInP to current input
     for (var i = 0; i < names.length; i++) {
+      if (i < teams.length) {
       var teamsName = JSON.parse(sessionStorage.teams)[i].teamName;
       var teamsPassword = JSON.parse(sessionStorage.teams)[i].teamPass;
+      }
+      var userName = JSON.parse(sessionStorage.names)[i].name;
+      var userPassword = JSON.parse(sessionStorage.names)[i].password;
       if (userIn == teamsName && userInP == teamsPassword) {
-        sessionStorage.setItem('currentTeam', teams[i].teamName);
+        sessionStorage.setItem('currentTeam', teamsName);
+        window.location.href = '/html/home.html';
+        return true; //stops code from continuing
+      } else if (userIn == userName && userInP == userPassword) {
+        var userTeam = JSON.parse(sessionStorage.names)[i].team;
+        sessionStorage.setItem('currentTeam', userTeam);
         window.location.href = '/html/home.html';
         return true; //stops code from continuing
       } else if (i + 1 == names.length) {
@@ -45,5 +54,3 @@ getDocs(colRef)
        }
     }
   }
-
-  //userIn == names[i].name && userInP == names[i].password || 
