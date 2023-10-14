@@ -182,7 +182,7 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     let seconds = dateSince.getSeconds();
     let minutes = dateSince.getMinutes();    
     let hours = dateSince.getHours();    
-    let days = dateSince.getDay();    
+    let days = dateSince.getDay();
 
     document.getElementById("timeSinceStart").innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
 } setInterval(refreshTime, 1000);
