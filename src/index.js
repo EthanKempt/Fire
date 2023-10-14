@@ -54,3 +54,9 @@ getDocs(colRef)
        }
     }
   }
+  window.onload = function() {
+    var team = sessionStorage.getItem('currentTeam');
+    if (team == null && window.location.pathname != '/dist/index.html') {
+      window.location.href = '/dist/index.html';
+    }
+  }

@@ -35,13 +35,12 @@
           <div class="col col-2 left-side">
 
           </div>
-          <div class="col">
+          <div class="col-sm-8">
             <br>
-            <p class="fs-3">There are currently <b>20</b> teams left out of <b>50</b>
-            original teams with an average of <b>2.72</b> people left on each team. 
-            A full list of teams and people left is provided below.
+            <p class="fs-3">There are currently <b id="current"></b> teams left out of <b id="total"></b>
+            original teams with <b id="average"></b> of players left.
+            A full list of teams and people left is provided below:
           </p>
-
           </div>
           <div class="col col-2 right-side">
 
@@ -50,6 +49,29 @@
       </div>
     </body>
   </html>
+
+  <script>
+    var names = JSON.parse(sessionStorage.names);
+    var teams = JSON.parse(sessionStorage.teams);
+    let a = 0;
+    for (let i = 0; i < teams.length; i++) {
+      if (teams[i].status) {
+        a++;
+      }
+    }
+    var current = document.getElementById('current');
+    current.innerHTML = a;
+    total.innerHTML = teams.length; 
+    var usersLeft = 0;
+    for (let i = 0; i < names.length; i++) {
+      if (names[i].status) {
+        usersLeft++;
+      }
+    }
+    var totalUsers = names.length;
+    let average = usersLeft/totalUsers*100;
+    var innerAverage = document.getElementById('average').innerHTML = average + '%';
+  </script>
 
   <style>
       .navbar {
