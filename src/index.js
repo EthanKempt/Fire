@@ -42,5 +42,8 @@ getDocs(colRef)
        }
     }
   }
-  window.teams = setTeams();
-  console.log(teams);
+
+  window.addEventListener('load', function () {
+    setTeams();
+    //console.log(teams);
+  })
