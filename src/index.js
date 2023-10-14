@@ -24,6 +24,7 @@ getDocs(colRef)
     window.names = []
     snapshot.docs.forEach((doc) => {
         names.push({ ...doc.data(), id: doc.id })
+        sessionStorage.setItem('names', JSON.stringify(names));
     })
   })
   .catch(err => {
@@ -32,9 +33,11 @@ getDocs(colRef)
 
   window.login = function() {
     userCheck(); //sets userIn and UserInP to current input
-    for (let i = 0; i < names.length; i++) {
-       if (userIn == names[i].name && userInP == names[i].password) {
-        sessionStorage.setItem('currentUser', names[i].name);
+    for (var i = 0; i < names.length; i++) {
+      var teamsName = JSON.parse(sessionStorage.teams)[i].teamName;
+      var teamsPassword = JSON.parse(sessionStorage.teams)[i].teamPass;
+      if (userIn == teamsName && userInP == teamsPassword) {
+        sessionStorage.setItem('currentTeam', teams[i].teamName);
         window.location.href = '/html/home.html';
         return true; //stops code from continuing
       } else if (i + 1 == names.length) {
@@ -43,7 +46,4 @@ getDocs(colRef)
     }
   }
 
-  window.addEventListener('load', function () {
-    setTeams();
-    //console.log(teams);
-  })
+  //userIn == names[i].name && userInP == names[i].password || 

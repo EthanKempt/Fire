@@ -19,21 +19,15 @@ const db = getFirestore()
 
 const colRef = collection(db, 'teams')
 
+
 getDocs(colRef)
   .then((snapshot) => {
     window.teams = []
     snapshot.docs.forEach((doc) => {
-        teams.push({ ...doc.data(), id: doc.id })
-    })
-    createTeamsVar(teams);
+        teams.push({ ...doc.data()})
+     })
+     sessionStorage.setItem('teams', JSON.stringify(teams));
   })
   .catch(err => {
     console.log(err.message)
   })
-function createTeamsVar(a) {
- window.teams = a;
-}
-
-  window.setTeams = function() {
-    return teams;
-  }
