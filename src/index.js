@@ -33,6 +33,10 @@ getDocs(colRef)
 
   window.login = function() {
     userCheck(); //sets userIn and UserInP to current input
+    var in2 = userIn.trim();
+    var userInput = in2.toLowerCase();
+    var in2P = userInP.trim();
+    var userInputP = in2P.toLowerCase();
     for (var i = 0; i < names.length; i++) {
       if (i < teams.length) {
       var teamsName = JSON.parse(sessionStorage.teams)[i].teamName;
@@ -40,11 +44,11 @@ getDocs(colRef)
       }
       var userName = JSON.parse(sessionStorage.names)[i].name;
       var userPassword = JSON.parse(sessionStorage.names)[i].password;
-      if (userIn == teamsName && userInP == teamsPassword) {
+      if (userInput == teamsName && userInputP == teamsPassword) {
         sessionStorage.setItem('currentTeam', teamsName);
         window.location.href = '/dist/home.html';
         return true; //stops code from continuing
-      } else if (userIn == userName && userInP == userPassword) {
+      } else if (userInput == userName && userInputP == userPassword) {
         var userTeam = JSON.parse(sessionStorage.names)[i].team;
         sessionStorage.setItem('currentTeam', userTeam);
         window.location.href = '/dist/home.html';
