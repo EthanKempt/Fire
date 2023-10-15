@@ -36,7 +36,35 @@
 
           </div>
           <div class="col-sm-8">
-            
+
+            <div class="input-group mb-3" id="pot">
+              <span class="input-group-text" id="inputGroup-sizing-default">Current Pot Value</span>
+              <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+              <button class="btn btn-outline-primary" type="button" id="button-addon2">Update</button>
+            </div>
+            <div class="input-group mb-3">
+              <span class="input-group-text" id="inputGroup-sizing-default">Date Started</span>
+              <button class="btn btn-outline-secondary dropdown-toggle" id='month' type="button" data-bs-toggle="dropdown" aria-expanded="false">Month</button>
+              <ul class="dropdown-menu dropdown-menu-end">
+                <li><a class="dropdown-item" href="#">January</a></li>
+                <li><a class="dropdown-item" href="#">Febuary</a></li>
+                <li><a class="dropdown-item" href="#">March</a></li>
+                <li><a class="dropdown-item" href="#">April</a></li>
+                <li><a class="dropdown-item" href="#">May</a></li>
+                <li><a class="dropdown-item" href="#">June</a></li>
+                <li><a class="dropdown-item" href="#">Julu</a></li>
+                <li><a class="dropdown-item" href="#">August</a></li>
+                <li><a class="dropdown-item" href="#">September</a></li>
+                <li><a class="dropdown-item" href="#">October</a></li>
+                <li><a class="dropdown-item" href="#">November</a></li>
+                <li><a class="dropdown-item" href="#">December</a></li>
+              </ul>
+              <input type="text" class="form-control text-center" id='day' placeholder="Day" aria-label="Server">
+              <input type="text" class="form-control text-center" id='year' placeholder="Year" aria-label="Server">
+              <input type="text" class="form-control text-center" id='hour' placeholder="Hr" aria-label="Server">
+              <input type="text" class="form-control text-center  " id='minute' placeholder="Min" aria-label="Server">
+              <button class="btn btn-outline-primary" type="button" id="button-addon2">Update</button>
+            </div>
           </div>
           <div class="col col-2 right-side">
 
@@ -47,6 +75,10 @@
   </html>
 
   <script>
+    const flatpickr = require("flatpickr");
+    import flatpickr from "flatpickr";
+    flatpickr("#myID", {});
+
     function logout() {
       window.location.href = '/dist/index.html';
     }
@@ -107,5 +139,8 @@
     #logout {
       margin-top: 15px;
     }
+  }
+  #pot {
+    margin-top: 1rem;
   }
   </style>

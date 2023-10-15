@@ -47,7 +47,7 @@ getDocs(colRef)
       if (userInput == teamsName && userInputP == teamsPassword) {
         sessionStorage.setItem('currentTeam', teamsName);
         if (userInput == 'admin') {
-          window.location.href = '/admin/admin.html';
+          window.location.href = '/admin/home.html';
         } else {
           window.location.href = '/dist/home.html';
         }
@@ -56,7 +56,7 @@ getDocs(colRef)
         var userTeam = JSON.parse(sessionStorage.names)[i].team;
         sessionStorage.setItem('currentTeam', userTeam);
         if (userInput == 'admin') {
-          window.location.href = '/admin/admin.html';
+          window.location.href = '/admin/home.html';
         } else {
           window.location.href = '/dist/home.html';
         } 
