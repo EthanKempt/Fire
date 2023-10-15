@@ -46,12 +46,20 @@ getDocs(colRef)
       var userPassword = JSON.parse(sessionStorage.names)[i].password;
       if (userInput == teamsName && userInputP == teamsPassword) {
         sessionStorage.setItem('currentTeam', teamsName);
-        window.location.href = '/dist/home.html';
+        if (userInput == 'admin') {
+          window.location.href = '/admin/admin.html';
+        } else {
+          window.location.href = '/dist/home.html';
+        }
         return true; //stops code from continuing
       } else if (userInput == userName && userInputP == userPassword) {
         var userTeam = JSON.parse(sessionStorage.names)[i].team;
         sessionStorage.setItem('currentTeam', userTeam);
-        window.location.href = '/dist/home.html';
+        if (userInput == 'admin') {
+          window.location.href = '/admin/admin.html';
+        } else {
+          window.location.href = '/dist/home.html';
+        } 
         return true; //stops code from continuing
       } else if (i + 1 == names.length) {
         alert('incorrect username or password');
