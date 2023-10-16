@@ -30,19 +30,32 @@
         </div>
       </nav>
 
-      <div class="container column text-center">
-        <div class="row align-items-middle">
-          <div class="col col-2 left-side">
-
+      <div class="container-fluid text-center" id="container">
+        <div class="row align-items-start" id="row">
+          <div class="col col-2" id="left">
+            One of three columns
           </div>
-          <div class="col-sm-8">
-            
+          <div class="col">
+            <div class="container text-center">
+              <div class="row align-items-start">
+                <div class="col">
+                  One of three columns
+                </div>
+                <div class="col">
+                  One of three columns
+                </div>
+                <div class="col">
+                  One of three columns
+                </div>
+              </div>
+            </div>
           </div>
-          <div class="col col-2 right-side">
-
+          <div class="col col-2" id="right">
+            One of three columns
           </div>
         </div>
       </div>
+     
     </body>
   </html>
 
@@ -70,29 +83,6 @@
   .nav-link.active {
     color: white !important;
   }
-
-  .container {
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-  .display-1 {
-    font-weight: 500;
-  }
-  .h5 {
-    margin-top: 15px;
-    margin-bottom: 0px;
-  }
-  .left-side {
-    background-color: #8B8B8B;
-    height: 100vh;
-  }
-  .right-side {
-    background-color: #8B8B8B;
-    height: 100vh;
-  }
-  .row {
-    width: 98.79vw;
-  }
   .loginButton {
     position: absolute;
     right: 1vw;
@@ -107,5 +97,19 @@
     #logout {
       margin-top: 15px;
     }
+  }
+  #container {
+    min-height: 90vh;
+  }
+  #row {
+    min-height: 90vh;
+  }
+  #left {
+    background-color: #C0C0C0;
+    height: 100%;
+  }
+  #right {
+    background-color: #C0C0C0;
+    height: 100%;
   }
   </style>

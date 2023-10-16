@@ -147,7 +147,7 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 <script>
   refreshTime();
   function refreshTime() {
-    const start = new Date("September 18, 2023 12:45");
+    const start = new Date("September 30, 2023 12:45");
     let milli2 = start.getTime();
 
     const current = new Date();
@@ -159,8 +159,14 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     let minutes = dateSince.getMinutes();    
     let hours = dateSince.getHours();    
     let days = dateSince.getDay();
+    let weeksSec = timeSince / 1000;
+    let weeksMin = weeksSec / 60;
+    let weeksHr = weeksMin / 60;
+    let weeksDay = weeksHr / 24;
+    let weeksDeci = weeksDay / 7;
+    let weeks = Math.trunc(weeksDeci);
 
-    document.getElementById("timeSinceStart").innerHTML = days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+    document.getElementById("timeSinceStart").innerHTML = weeks + 'w ' + days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
 } setInterval(refreshTime, 1000);
 
 function logout() {
