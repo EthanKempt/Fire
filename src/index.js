@@ -44,8 +44,8 @@ getDocs(colRef)
       }
       var userName = JSON.parse(sessionStorage.names)[i].name;
       var userPassword = JSON.parse(sessionStorage.names)[i].password;
-      var adminUsername = JSON.parse(sessionStorage.admin)[i].teamName;
-      var adminPassword = JSON.parse(sessionStorage.admin)[i].teamPass;
+      var adminUsername = JSON.parse(sessionStorage.admin)[0].teamName;
+      var adminPassword = JSON.parse(sessionStorage.admin)[0].teamPass;
       if (userInput == teamsName && userInputP == teamsPassword || userInput == adminUsername && userInputP == adminPassword) {
         sessionStorage.setItem('currentTeam', teamsName);
         if (userInput == 'admin') {
