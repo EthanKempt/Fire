@@ -30,9 +30,9 @@
         </div>
       </nav>
 
-      <div class="container column text-center">
-        <div class="row align-items-middle">
-          <div class="col col-2 left-side">
+      <div class="container column text-center" id='container'>
+        <div class="row align-items-middle" id="row">
+          <div class="col col-2 left-side" id="left">
 
           </div>
           <div class="col">
@@ -47,7 +47,7 @@
               Time since start:
             </p>
             <h1 class="display-1" id="timeSinceStart">
-              
+              hi
             </h1>
             <hr>
             <p class="h5">
@@ -63,8 +63,16 @@
             <h1 class="display-1">
               59
             </h1>
+            <hr>
+            <p class="h5">
+              Safe:
+            </p>
+            <h1 class="display-1">
+              
+            </h1>
+
           </div>
-          <div class="col col-2 right-side">
+          <div class="col col-2 right-side" id="right">
 
           </div>
         </div>
@@ -91,6 +99,7 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 <style>
   .navbar {
     background-color: #2e4b73 !important;
+    height: 9vh;
   }
   .navbar-brand {
     color: white;
@@ -104,7 +113,6 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   .nav-link.active {
     color: white !important;
   }
-
   .container {
     margin-left: 0px;
     margin-right: 0px;
@@ -115,17 +123,6 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   .h5 {
     margin-top: 15px;
     margin-bottom: 0px;
-  }
-  .left-side {
-    background-color: #8B8B8B;
-    height: 100vh;
-  }
-  .right-side {
-    background-color: #8B8B8B;
-    height: 100vh;
-  }
-  .row {
-    width: 98.79vw;
   }
   .loginButton {
     position: absolute;
@@ -141,7 +138,22 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     #logout {
       margin-top: 15px;
     }
-}
+  }
+  #container {
+    min-height: 91vh;
+    max-width: 100%;
+  }
+  #row {
+    min-height: 91vh;
+  }
+  #left {
+    background-color: #8B8B8B;
+    min-height: 91vh;
+  }
+  #right {
+    background-color: #8B8B8B;
+    min-height: 91vh;
+  }
 </style>
 
 <script>
@@ -173,3 +185,5 @@ function logout() {
   window.location.href = '/dist/index.html';
 }
 </script>
+
+<!-- npm run build -->

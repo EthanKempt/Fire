@@ -30,25 +30,63 @@
         </div>
       </nav>
 
-      <div class="container column text-center">
-        <div class="row align-items-middle">
-          <div class="col col-2 left-side">
+      <div class="container-fluid text-center">
+        <div class="row align-items-start" id="row">
+          <div class="col col-2" id="left">
 
           </div>
-          <div class="col-sm-8">
-            <br>
-            <p class="fs-3">There are currently <b id="current"></b> teams left out of <b id="total"></b>
-            original teams with <b id="average"></b> of players left.
-            A full list of teams and people left is provided below:
-          </p>
+          <div class="col">
+            <div class="container text-center">
+              <div class="row align-items-start">
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header">
+                      Team Name
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Squad Wipes: 2</li>
+                      <li class="list-group-item">Kills: 6</li>
+                      <li class="list-group-item">Members left: 3</li>
+                    </ul>
+                  </div>                </div>
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header">
+                      Teams
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">An item</li>
+                      <li class="list-group-item">A second item</li>
+                      <li class="list-group-item">A third item</li>
+                    </ul>
+                  </div>                </div>
+                <div class="col">
+                  <div class="card">
+                    <div class="card-header">
+                      Teams
+                    </div>
+                    <ul class="list-group list-group-flush">
+                      <li class="list-group-item">An item</li>
+                      <li class="list-group-item">A second item</li>
+                      <li class="list-group-item">A third item</li>
+                    </ul>
+                  </div>                </div>
+              </div>
+            </div>
           </div>
-          <div class="col col-2 right-side">
+          <div class="col col-2" id="right">
 
           </div>
         </div>
       </div>
+
     </body>
   </html>
+
+  <!-- <p class="fs-3">There are currently <b id="current"></b> teams left out of <b id="total"></b>
+    original teams with <b id="average"></b> of players left.
+    A full list of teams and people left is provided below:
+  </p> -->
 
   <script>
     function logout() {
@@ -77,8 +115,9 @@
   </script>
 
   <style>
-      .navbar {
+   .navbar {
     background-color: #2e4b73 !important;
+    min-height: 9vh;
   }
   .navbar-brand {
     color: white;
@@ -92,42 +131,43 @@
   .nav-link.active {
     color: white !important;
   }
-
-  .container {
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-  .display-1 {
-    font-weight: 500;
-  }
-  .h5 {
-    margin-top: 15px;
-    margin-bottom: 0px;
-  }
-  .left-side {
-    background-color: #8B8B8B;
-    height: 100vh;
-  }
-  .right-side {
-    background-color: #8B8B8B;
-    height: 100vh;
-  }
-  .row {
-    width: 98.79vw;
-  }
   .loginButton {
     position: absolute;
     right: 1vw;
   }
   @media (max-width: 991px) {
-    .right-side {
+    #right {
       display: none;
     }
-    .left-side {
+    #left {
       display: none;
     }
     #logout {
       margin-top: 15px;
     }
+  }
+  #container {
+    min-height: 91vh;
+  }
+  #row {
+    min-height: 91vh;
+  }
+  .col {
+    min-height: 91vh;
+  }
+  #left {
+    background-color: #8B8B8B;
+    height: 100%;
+  }
+  #right {
+    background-color: #8B8B8B;
+    height: 100%;
+  }
+  .navbar-toggler {
+    border-color: white;
+    color: white;
+  }
+  .card {
+    margin-top: 1rem;
   }
   </style>

@@ -71,4 +71,4 @@ getDocs(colRef)
     if (team == null && window.location.pathname != '/dist/index.html') {
       window.location.href = '/dist/index.html';
     }
-  }
+  } 
