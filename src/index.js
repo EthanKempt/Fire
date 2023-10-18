@@ -44,14 +44,15 @@ getDocs(colRef)
       }
       var userName = JSON.parse(sessionStorage.names)[i].name;
       var userPassword = JSON.parse(sessionStorage.names)[i].password;
-      if (userInput == teamsName && userInputP == teamsPassword) {
+      var adminUsername = JSON.parse(sessionStorage.admin)[i].teamName;
+      var adminPassword = JSON.parse(sessionStorage.admin)[i].teamPass;
+      if (userInput == teamsName && userInputP == teamsPassword || userInput == adminUsername && userInputP == adminPassword) {
         sessionStorage.setItem('currentTeam', teamsName);
         if (userInput == 'admin') {
           window.location.href = '/admin/home.html';
         } else {
           window.location.href = '/dist/home.html';
         }
-        return true; //stops code from continuing
       } else if (userInput == userName && userInputP == userPassword) {
         var userTeam = JSON.parse(sessionStorage.names)[i].team;
         sessionStorage.setItem('currentTeam', userTeam);

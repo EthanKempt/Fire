@@ -21,3 +21,15 @@ module.exports = {
     },
     watch: true
 }
+
+const path3 = require('path')
+
+module.exports = {
+    mode: 'development',
+    entry: './src/admin.js',
+    output: {
+        path: path3.resolve(__dirname, 'admin'),
+        filename: 'bundleAdmin.js'
+    },
+    watch: true
+}
