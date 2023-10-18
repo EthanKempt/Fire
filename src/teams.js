@@ -32,11 +32,30 @@ getDocs(colRef)
     console.log(err.message)
   })
 
-  window.adminEdit = function(team, a, b, c) {
+  window.reUpdate = function() {
+    getDocs(colRef)
+  .then((snapshot) => {
+    window.teams = []
+    snapshot.docs.forEach((doc) => {
+        teams.push({ ...doc.data()})
+     })
+     sessionStorage.setItem('teams', JSON.stringify(teams));
+  })
+  .catch(err => {
+    console.log(err.message)
+  })
+  }
+
+  window.adminEdit = function(team, a, b, c, d) {
     const docRef = doc(db, 'teams', team)
     updateDoc(docRef, {
       player1: a,
       player2: b,
       player3: c
     })
+    if (d) {
+      updateDoc(docRef, {
+        player4: d
+      })
+    }
   }

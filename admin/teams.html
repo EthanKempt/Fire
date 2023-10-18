@@ -95,8 +95,11 @@
       var player3Var = document.getElementById(currentTeam + '-player3').value;
       if (teamArray.player4) {
         var player4Var = document.getElementById(currentTeam + '-player4').value;
+      } else {
+        var player4Var = null;
       }
-      adminEdit(currentTeam, player1Var, player2Var, player3Var);
+      adminEdit(currentTeam, player1Var, player2Var, player3Var, player4Var);
+      reUpdate();
     }
   </script>
 

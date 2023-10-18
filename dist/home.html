@@ -177,8 +177,13 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     let weeksDay = weeksHr / 24;
     let weeksDeci = weeksDay / 7;
     let weeks = Math.trunc(weeksDeci);
+    if (String(seconds).length == 1) {
+      var zero = '0'
+    } else {
+      var zero = '';
+    }
 
-    document.getElementById("timeSinceStart").innerHTML = weeks + 'w ' + days + 'd ' + hours + 'h ' + minutes + 'm ' + seconds + 's';
+    document.getElementById("timeSinceStart").innerHTML = weeks + 'w ' + days + 'd ' + hours + ':' + minutes + ':' + zero + seconds + '';
 } setInterval(refreshTime, 1000);
 
 function logout() {
