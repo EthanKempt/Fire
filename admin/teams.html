@@ -217,8 +217,9 @@
 
     if ((player1Var, player2Var, player3Var)) {
       adminEdit(a, player1Var, player2Var, player3Var, player4Var);
-      adminEditCheck(a, player1Checked, player2Checked, player3Checked, player4Checked);
-      updateAll();
+      adminEditCheck(a, player1Checked, player2Checked, player3Checked, player4Checked, player1Var, player2Var, player3Var, player4Var);
+      updateTeams();
+      updateUsers();
     } else {
       alert("Must have all values filled (excpet player 4)");
     }

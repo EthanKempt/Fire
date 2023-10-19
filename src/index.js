@@ -94,14 +94,12 @@ window.onload = function () {
   }
 };
 
-window.adminEditCheck = function (i, a, b, c, d) {
-  //sets the status of each player
+window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
   var team = teams[i];
   var player1 = team.player1;
   var player2 = team.player2;
   var player3 = team.player3;
-
-  debugger;
+  var player4 = team.player4;
 
   for (let i = 0; i < names.length; i++) {
     if (names[i].name == player1) {
@@ -109,6 +107,7 @@ window.adminEditCheck = function (i, a, b, c, d) {
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
         status: a,
+        name: a2,
       });
     }
     if (names[i].name == player2) {
@@ -116,6 +115,7 @@ window.adminEditCheck = function (i, a, b, c, d) {
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
         status: b,
+        name: b2,
       });
     }
     if (names[i].name == player3) {
@@ -123,7 +123,18 @@ window.adminEditCheck = function (i, a, b, c, d) {
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
         status: c,
+        name: c2,
       });
+    }
+    if (d != null) {
+      if (names[i].name == player4) {
+        var currentName = names[i].name;
+        const docRef = doc(db, "names", currentName);
+        updateDoc(docRef, {
+          status: d,
+          name: d2,
+        });
+      }
     }
   }
 };
