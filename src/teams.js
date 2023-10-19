@@ -58,7 +58,6 @@ window.adminEdit = function (i, a, b, c, d) {
     player2: b,
     player3: c,
   });
-  debugger;
   if (d) {
     if (teams[i].player4) {
       updateDoc(docRef, {

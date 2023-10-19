@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, updateDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE",
@@ -62,7 +62,6 @@ window.login = function () {
       } else {
         window.location.href = "/dist/home.html";
       }
-      return true; //stops code from continuing
     } else if (i + 1 == names.length) {
       alert("incorrect username or password");
     }
@@ -72,5 +71,38 @@ window.onload = function () {
   var team = sessionStorage.getItem("currentTeam");
   if (team == null && window.location.pathname != "/dist/index.html") {
     window.location.href = "/dist/index.html";
+  }
+};
+
+window.adminEditCheck = function (i, a, b, c, d) { //sets the status of each player
+  var team = teams[i];
+  var player1 = team.player1;
+  var player2 = team.player2;
+  var player3 = team.player3;
+
+  debugger;
+
+  for (let i = 0; i < names.length; i++) {
+    if (names[i].name == player1) {
+      var currentName = names[i].name;
+      const docRef = doc(db, "names", currentName);
+      updateDoc(docRef, {
+        status: a
+      });
+    }
+    if (names[i].name == player2) {
+      var currentName = names[i].name;
+      const docRef = doc(db, "names", currentName);
+      updateDoc(docRef, {
+        status: b
+      });
+    }
+    if (names[i].name == player3) {
+      var currentName = names[i].name;
+      const docRef = doc(db, "names", currentName);
+      updateDoc(docRef, {
+        status: c
+      });
+    }
   }
 };

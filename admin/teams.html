@@ -198,13 +198,26 @@
     var player2Var = document.getElementById(currentTeam + "-player2").value;
     var player3Var = document.getElementById(currentTeam + "-player3").value;
     var player4Var = document.getElementById(currentTeam + "-player4");
+    var player4Var2 = document.getElementById(currentTeam + "-player4");
     if (player4Var.value) {
       var player4Var = document.getElementById(currentTeam + "-player4").value;
     } else {
       var player4Var = null;
     }
+
+    var player1Checked = document.getElementById(currentTeam + "Box1").checked;
+    var player2Checked = document.getElementById(currentTeam + "Box2").checked;
+    var player3Checked = document.getElementById(currentTeam + "Box3").checked;
+    if (player4Var2.value) {
+      var player4Checked = document.getElementById(currentTeam + "Box4").checked;
+    } else {
+      var player4Checked = null;
+    }
+
+
     if ((player1Var, player2Var, player3Var)) {
       adminEdit(a, player1Var, player2Var, player3Var, player4Var);
+      adminEditCheck(a, player1Checked, player2Checked, player3Checked, player4Checked);
       reUpdate();
     } else {
       alert("Must have all values filled (excpet player 4)");
