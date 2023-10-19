@@ -86,6 +86,8 @@
     modalArea.innerHTML += "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 3</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" + teams[i].teamName + "-player3' value='" + teams[i].player3 + "'> </div>"
     if (teams[i].player4) {
       modalArea.innerHTML += "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" + teams[i].teamName + "-player4' value='" + teams[i].player4 + "'> </div>"
+    } else {
+      modalArea.innerHTML += "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" + teams[i].teamName + "-player4'> </div>"
     }
   }
     function save(a) {
@@ -94,13 +96,18 @@
       var player1Var = document.getElementById(currentTeam + '-player1').value;
       var player2Var = document.getElementById(currentTeam + '-player2').value;
       var player3Var = document.getElementById(currentTeam + '-player3').value;
-      if (teamArray.player4) {
+      var player4Var = document.getElementById(currentTeam + '-player4');
+      if (player4Var.value) {
         var player4Var = document.getElementById(currentTeam + '-player4').value;
       } else {
         var player4Var = null;
       }
-      adminEdit(currentTeam, player1Var, player2Var, player3Var, player4Var);
+      if (player1Var, player2Var, player3Var) {
+      adminEdit(a, player1Var, player2Var, player3Var, player4Var);
       reUpdate();
+      } else {
+        alert('Must have all values filled (excpet player 4)')
+      }
     }
   </script>
 

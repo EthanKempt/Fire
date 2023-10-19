@@ -1,6 +1,6 @@
 import { initializeApp } from 'firebase/app'
 import {
-    getFirestore, collection, getDocs, updateDoc, doc, getDoc
+    getFirestore, collection, getDocs, updateDoc, doc, deleteField
 } from 'firebase/firestore'
 
 const firebaseConfig = {
@@ -46,16 +46,30 @@ getDocs(colRef)
   })
   }
 
-  window.adminEdit = function(team, a, b, c, d) {
+  window.adminEdit = function(i, a, b, c, d) {
+    var team = teams[i].teamName;
     const docRef = doc(db, 'teams', team)
     updateDoc(docRef, {
       player1: a,
       player2: b,
       player3: c
     })
+    debugger;
     if (d) {
+      if (teams[i].player4) {
       updateDoc(docRef, {
         player4: d
       })
+    } else {
+      updateDoc(docRef, {
+        player4: d
+      })
+    }
+    } else {
+      if (teams[i].player4) {
+        updateDoc(docRef, {
+          player4: deleteField()
+        })
+      }
     }
   }
