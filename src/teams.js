@@ -36,7 +36,7 @@ getDocs(colRef)
     console.log(err.message);
   });
 
-window.reUpdate = function () {
+window.updateTeams = function () {
   getDocs(colRef)
     .then((snapshot) => {
       window.teams = [];

@@ -36,7 +36,7 @@ getDocs(colRef)
     console.log(err.message);
   });
 
-window.reUpdate = function () {
+window.updateAdmin = function () {
   getDocs(colRef)
     .then((snapshot) => {
       window.admin = [];

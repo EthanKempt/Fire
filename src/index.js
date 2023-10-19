@@ -1,5 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, updateDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  updateDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE",
@@ -28,6 +34,20 @@ getDocs(colRef)
   .catch((err) => {
     console.log(err.message);
   });
+
+window.updateUsers = function () {
+  getDocs(colRef)
+    .then((snapshot) => {
+      window.names = [];
+      snapshot.docs.forEach((doc) => {
+        names.push({ ...doc.data(), id: doc.id });
+        sessionStorage.setItem("names", JSON.stringify(names));
+      });
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
 
 window.login = function () {
   userCheck(); //sets userIn and UserInP to current input
@@ -74,7 +94,8 @@ window.onload = function () {
   }
 };
 
-window.adminEditCheck = function (i, a, b, c, d) { //sets the status of each player
+window.adminEditCheck = function (i, a, b, c, d) {
+  //sets the status of each player
   var team = teams[i];
   var player1 = team.player1;
   var player2 = team.player2;
@@ -87,21 +108,21 @@ window.adminEditCheck = function (i, a, b, c, d) { //sets the status of each pla
       var currentName = names[i].name;
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
-        status: a
+        status: a,
       });
     }
     if (names[i].name == player2) {
       var currentName = names[i].name;
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
-        status: b
+        status: b,
       });
     }
     if (names[i].name == player3) {
       var currentName = names[i].name;
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
-        status: c
+        status: c,
       });
     }
   }
