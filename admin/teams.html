@@ -62,9 +62,7 @@
           <div class="container text-center">
             <div class="row align-items-start">
               <div class="col" id="col1"></div>
-              <div class="col" id="col2">
-
-              </div>
+              <div class="col" id="col2"></div>
               <div class="col" id="col3"></div>
             </div>
           </div>
@@ -83,6 +81,9 @@
   var teams = JSON.parse(sessionStorage.teams);
 
   var currentColNum = 0;
+
+  updateTeams();
+  updateUsers();
 
   for (let i = 0; i < teams.length; i++) {
     if (currentColNum < 3) {
@@ -209,15 +210,26 @@
     var player2Checked = document.getElementById(currentTeam + "Box2").checked;
     var player3Checked = document.getElementById(currentTeam + "Box3").checked;
     if (player4Var2.value) {
-      var player4Checked = document.getElementById(currentTeam + "Box4").checked;
+      var player4Checked = document.getElementById(
+        currentTeam + "Box4"
+      ).checked;
     } else {
       var player4Checked = null;
     }
 
-
     if ((player1Var, player2Var, player3Var)) {
+      adminEditCheck(
+        a,
+        player1Checked,
+        player2Checked,
+        player3Checked,
+        player4Checked,
+        player1Var,
+        player2Var,
+        player3Var,
+        player4Var
+      );
       adminEdit(a, player1Var, player2Var, player3Var, player4Var);
-      adminEditCheck(a, player1Checked, player2Checked, player3Checked, player4Checked, player1Var, player2Var, player3Var, player4Var);
       updateTeams();
       updateUsers();
     } else {
