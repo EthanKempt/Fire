@@ -16,7 +16,8 @@
   "dependencies": {
     "@easepick/core": "^1.2.1",
     "firebase": "^10.4.0",
-    "flatpickr": "^4.6.13"
+    "flatpickr": "^4.6.13",
+    "select2": "^4.1.0-rc.0"
   },
   "description": ""
 }
