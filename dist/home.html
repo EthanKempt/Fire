@@ -1,100 +1,148 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Home Page</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
-  <script src="bundle.js"></script>
-  <script src="bundleTeams.js"></script>
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="bundle.js"></script>
+    <script src="bundleTeams.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" integrity="sha512-z/90a5SWiu4MWVelb5+ny7sAayYUfMmdXKEAbpj27PfdkamNdyI3hcjxPxkOPbrXoKIm7r9V2mElt5f1OtVhqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  </head>
+  <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand">Higley</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link active" href='home.html' aria-current="page">Home</a>
-              <a class="nav-link" href="teams.html">Teams</a>
-              <a class="nav-link" href="targets.html">Targets</a>
-              <a class="nav-link" href="rules.html">Rules</a>
-              <button type="button" id='logout' onclick="logout()" class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Log Out
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div class="container column text-center" id='container'>
-        <div class="row align-items-middle" id="row">
-          <div class="col col-2 left-side" id="left">
-
-          </div>
-          <div class="col">
-            <p class="h5">
-              Current pot value:
-            </p>
-            <h1 class="display-1">
-              $A TONNNN
-            </h1>
-            <hr>
-            <p class="h5">
-              Time since start:
-            </p>
-            <h1 class="display-1" id="timeSinceStart">
-              hi
-            </h1>
-            <hr>
-            <p class="h5">
-              Teams remaining:
-            </p>
-            <h1 class="display-1">
-              28
-            </h1>
-            <hr>
-            <p class="h5">
-              Players remaining:
-            </p>
-            <h1 class="display-1">
-              59
-            </h1>
-            <hr>
-            <p class="h5">
-              Safe:
-            </p>
-            <h1 class="display-1">
-              
-            </h1>
-
-          </div>
-          <div class="col col-2 right-side" id="right">
-
+      <div class="container-fluid">
+        <a class="navbar-brand">Higley</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link active" href="home.html" aria-current="page"
+              >Home</a
+            >
+            <a class="nav-link" href="teams.html">Teams</a>
+            <a class="nav-link" href="targets.html">Targets</a>
+            <a class="nav-link" href="rules.html">Rules</a>
+            <button
+              type="button"
+              id="logout"
+              onclick="logout()"
+              class="btn btn-primary me-auto loginButton"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Log Out
+            </button>
           </div>
         </div>
       </div>
+    </nav>
 
-<!-- CARSON LOOK HERE!!!!!! im guessing you know this but green is a comment so
+    <div class="container column text-center" id="container">
+      <div class="row align-items-middle" id="row">
+        <div class="col col-2 left-side" id="left"></div>
+        <div class="col">
+          <p class="h5">Current pot value:</p>
+          <h1 class="display-1">$A TONNNN</h1>
+          <hr />
+          <p class="h5">Time since start:</p>
+          <h1 class="display-1" id="timeSinceStart">hi</h1>
+          <hr />
+          <p class="h5">Teams remaining:</p>
+          <h1 class="display-1">28</h1>
+          <hr />
+          <p class="h5">Players remaining:</p>
+          <h1 class="display-1">59</h1>
+          <hr />
+          <p class="h5">Safe:</p>
+          <h1 class="display-1"></h1>
+        </div>
+        <div class="col col-2 right-side" id="right"></div>
+      </div>
+    </div>
+
+    <!-- CARSON LOOK HERE!!!!!! im guessing you know this but green is a comment so
 thats what were including in that section. If you want to comment just type something,
 seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 
-  <!-- info to include: $$$
-  time going*
+    <!-- info to include: $$$
   if your in or not*
   messaging service
-  rules
-  if youve gotten anyone out*
   if there is a minigame coming up
   past minigames
   instagram videos
   announcments section of who is out -->
-
-</body>
+  </body>
 </html>
+
+<script>
+  refreshTime();
+  function refreshTime() {
+    const start = new Date("September 30, 2023 12:45");
+    let milli2 = start.getTime();
+
+    const current = new Date();
+    let milli = current.getTime();
+
+    let timeSince = milli - milli2;
+    let dateSince = new Date(timeSince);
+    let seconds = dateSince.getSeconds();
+    let minutes = dateSince.getMinutes();
+    let hours = dateSince.getHours();
+    let days = dateSince.getDay();
+    let weeksSec = timeSince / 1000;
+    let weeksMin = weeksSec / 60;
+    let weeksHr = weeksMin / 60;
+    let weeksDay = weeksHr / 24;
+    let weeksDeci = weeksDay / 7;
+    let weeks = Math.trunc(weeksDeci);
+    if (String(seconds).length == 1) {
+      var zero = "0";
+    } else {
+      var zero = "";
+    }
+
+    document.getElementById("timeSinceStart").innerHTML =
+      weeks +
+      "w " +
+      days +
+      "d " +
+      hours +
+      ":" +
+      minutes +
+      ":" +
+      zero +
+      seconds +
+      "";
+  }
+  setInterval(refreshTime, 1000);
+
+  function logout() {
+    window.location.href = "/dist/index.html";
+  }
+</script>
 
 <style>
   .navbar {
@@ -108,7 +156,7 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     color: white !important;
   }
   .nav-link {
-    color: #C0C0C0;
+    color: #c0c0c0;
   }
   .nav-link.active {
     color: white !important;
@@ -147,48 +195,13 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     min-height: 91vh;
   }
   #left {
-    background-color: #8B8B8B;
+    background-color: #8b8b8b;
     min-height: 91vh;
   }
   #right {
-    background-color: #8B8B8B;
+    background-color: #8b8b8b;
     min-height: 91vh;
   }
 </style>
-
-<script>
-  refreshTime();
-  function refreshTime() {
-    const start = new Date("September 30, 2023 12:45");
-    let milli2 = start.getTime();
-
-    const current = new Date();
-    let milli = current.getTime();
-
-    let timeSince = milli - milli2;
-    let dateSince = new Date(timeSince);
-    let seconds = dateSince.getSeconds();
-    let minutes = dateSince.getMinutes();    
-    let hours = dateSince.getHours();    
-    let days = dateSince.getDay();
-    let weeksSec = timeSince / 1000;
-    let weeksMin = weeksSec / 60;
-    let weeksHr = weeksMin / 60;
-    let weeksDay = weeksHr / 24;
-    let weeksDeci = weeksDay / 7;
-    let weeks = Math.trunc(weeksDeci);
-    if (String(seconds).length == 1) {
-      var zero = '0'
-    } else {
-      var zero = '';
-    }
-
-    document.getElementById("timeSinceStart").innerHTML = weeks + 'w ' + days + 'd ' + hours + ':' + minutes + ':' + zero + seconds + '';
-} setInterval(refreshTime, 1000);
-
-function logout() {
-  window.location.href = '/dist/index.html';
-}
-</script>
 
 <!-- npm run build -->
