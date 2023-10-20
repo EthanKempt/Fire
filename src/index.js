@@ -5,6 +5,7 @@ import {
   getDocs,
   doc,
   updateDoc,
+  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -139,3 +140,24 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
     }
   }
 };
+
+window.writeNewUsers = function (a, b, c, d, e, f, g, h) {
+  setDoc(doc(db, 'names', c), {
+    name: c,
+    password: b,
+    status: h,
+    team: a,
+  })
+  setDoc(doc(db, 'names', d), {
+    name: d,
+    password: b,
+    status: h,
+    team: a,
+  })
+  setDoc(doc(db, 'names', e), {
+    name: e,
+    password: b,
+    status: h,
+    team: a,
+  })
+}
