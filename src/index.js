@@ -161,6 +161,14 @@ window.writeNewUsers = function (a, b, c, d, e, f, g, h) {
     status: h,
     team: a,
   })
+  if (f) {
+    setDoc(doc(db, 'names', f), {
+      name: f,
+      password: b,
+      status: h,
+      team: a,
+    })
+  }
 }
 
 window.deleteUsers = function (a, b, c, d) {
