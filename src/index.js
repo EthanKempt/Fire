@@ -6,6 +6,7 @@ import {
   doc,
   updateDoc,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -160,4 +161,13 @@ window.writeNewUsers = function (a, b, c, d, e, f, g, h) {
     status: h,
     team: a,
   })
+}
+
+window.deleteUsers = function (a, b, c, d) {
+  deleteDoc(doc(db, 'names', a))
+  deleteDoc(doc(db, 'names', b))
+  deleteDoc(doc(db, 'names', c))
+  if (d) {
+  deleteDoc(doc(db, 'names', d))
+  }
 }
