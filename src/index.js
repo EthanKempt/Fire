@@ -81,6 +81,7 @@ window.login = function () {
         window.location.href = "/admin/home.html";
       } else {
         window.location.href = "/dist/home.html";
+        return true;
       }
     } else if (i + 1 == names.length) {
       alert("incorrect username or password");

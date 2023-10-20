@@ -50,13 +50,14 @@ window.updateTeams = function () {
     });
 };
 
-window.adminEdit = function (i, a, b, c, d) {
+window.adminEdit = function (i, a, b, c, d, e) {
   var team = teams[i].teamName;
   const docRef = doc(db, "teams", team);
   updateDoc(docRef, {
     player1: a,
     player2: b,
     player3: c,
+    targets: e,
   });
   if (d) {
     if (teams[i].player4) {
