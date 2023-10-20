@@ -6,6 +6,7 @@ import {
   updateDoc,
   doc,
   deleteField,
+  setDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -77,3 +78,30 @@ window.adminEdit = function (i, a, b, c, d, e) {
     }
   }
 };
+
+window.writeNewTeam = function (a, b, c, d, e, f, g, h) {
+  const currentRef = doc(db, "teams", a);
+
+  setDoc(doc(db, "teams", a), {
+    teamName: a,
+    teamPass: b,
+    player1: c,
+    player2: d,
+    player3: e,
+    status: h,
+  });
+  if (f) {
+    updateDoc(currentRef, {
+      player4: f,
+    });
+  }
+  if (g != null) {
+    updateDoc(currentRef, {
+      targets: g,
+    });
+  } else {
+    updateDoc(currentRef, {
+      targets: 'none',
+    });
+  }
+}

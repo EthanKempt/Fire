@@ -67,7 +67,7 @@
                       <div class="input-group mb-3">
                         <span class="input-group-text">Team Name</span>
                         <div class="input-group-text">
-                          <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                          <input id='addCheck' class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
                         </div>  
                         <input id="addName" type="text" class="form-control" placeholder="Team Name" aria-label="Username"
                           aria-describedby="basic-addon1" />
@@ -392,11 +392,19 @@
   }
   function addTeam() {
     var name = document.getElementById('addName').value;
+    var checked = document.getElementById('addCheck').checked;
     var password = document.getElementById('addPassword').value;
     var player1 = document.getElementById('addPlayer1').value;
     var player2 = document.getElementById('addPlayer2').value;
     var player3 = document.getElementById('addPlayer3').value;
+    var testVal = document.getElementById('addPlayer4').value;
+    if (testVal) {
     var player4 = document.getElementById('addPlayer4').value;
+    } else {
+      var player4 = false;
+    }
+    var target = document.getElementById('addSelect').value;
+    writeNewTeam(name, password, player1, player2, player3, player4, target, checked);
   }
 </script>
 
@@ -465,8 +473,8 @@
 
   .teamButton {
     margin-top: 2rem;
-    margin-left: 2.5rem;
-    margin-right: 2.5rem;
+    margin-left: 3.5rem;
+    margin-right: 3.5rem;
     margin-bottom: 1rem;
   }
 </style>
