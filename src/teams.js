@@ -7,6 +7,7 @@ import {
   doc,
   deleteField,
   setDoc,
+  deleteDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -105,4 +106,8 @@ window.writeNewTeam = function (a, b, c, d, e, f, g, h) {
       targets: 'none',
     });
   }
+}
+
+window.deleteCurrent = function (a) {
+  deleteDoc(doc(db, 'teams', a));
 }

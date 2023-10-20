@@ -237,7 +237,7 @@
                         >
                           Close
                         </button>
-                        <button type="button" class="btn btn-primary">
+                        <button type="button" onclick='deleteTeam()' class="btn btn-primary">
                           Save changes
                         </button>
                       </div>
@@ -577,6 +577,10 @@
       checked
     );
   }
+  function deleteTeam() {
+      var input = document.getElementById('deleteSelect').value;
+      deleteCurrent(input);
+    }
 </script>
 
 <style>
