@@ -1,86 +1,181 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Assassins</title>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
-      crossorigin="anonymous"
-    />
-    <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-      crossorigin="anonymous"
-    ></script>
-    <script src="/dist/bundle.js"></script>
-    <script src="/dist/bundleTeams.js"></script>
-    <script src="/bundleAdmin.js"></script>
-    <script
-      src="https://code.jquery.com/jquery-3.7.1.js"
-      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
-      rel="stylesheet"
-    />
-    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-  </head>
-  <body>
-    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-      <div class="container-fluid">
-        <a class="navbar-brand">Higley</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link" href="home.html">Home</a>
-            <a class="nav-link active" href="teams.html">Teams</a>
-            <a class="nav-link" href="messages.html">Messages</a>
-            <a class="nav-link" href="rules.html">Rules</a>
-            <button
-              type="button"
-              id="logout"
-              onclick="logout()"
-              class="btn btn-primary me-auto loginButton"
-              data-bs-toggle="modal"
-              data-bs-target="#loginModal"
-            >
-              Log Out
-            </button>
-          </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Assassins</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+    crossorigin="anonymous"></script>
+  <script src="/dist/bundle.js"></script>
+  <script src="/dist/bundleTeams.js"></script>
+  <script src="/bundleAdmin.js"></script>
+  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+    crossorigin="anonymous"></script>
+  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+</head>
+
+<body>
+  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+    <div class="container-fluid">
+      <a class="navbar-brand">Higley</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link" href="home.html">Home</a>
+          <a class="nav-link active" href="teams.html">Teams</a>
+          <a class="nav-link" href="messages.html">Messages</a>
+          <a class="nav-link" href="rules.html">Rules</a>
+          <button type="button" id="logout" onclick="logout()" class="btn btn-primary me-auto loginButton"
+            data-bs-toggle="modal" data-bs-target="#loginModal">
+            Log Out
+          </button>
         </div>
       </div>
-    </nav>
+    </div>
+  </nav>
 
-    <div class="container-fluid text-center" id="container">
-      <div class="row align-items-start" id="row">
-        <div class="col col-2" id="left"></div>
-        <div class="col">
-          <div class="container text-center">
-            <div class="row align-items-start">
-              <div class="col" id="col1"></div>
-              <div class="col" id="col2"></div>
-              <div class="col" id="col3"></div>
+  <div class="container-fluid text-center" id="container">
+    <div class="row align-items-start" id="row">
+      <div class="col col-2" id="left"></div>
+      <div class="col">
+        <div class="container text-center">
+          <div class="row align-items-start">
+            <div class="col" id="col1">
+              <button type="button" class="btn btn-outline-primary teamButton" data-bs-toggle="modal"
+                data-bs-target="#addModal">
+                Add Team
+              </button>
+              <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Add Team Form
+                      </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body" id="addBody">
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Team Name</span>
+                        <div class="input-group-text">
+                          <input class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
+                        </div>  
+                        <input id="addName" type="text" class="form-control" placeholder="Team Name" aria-label="Username"
+                          aria-describedby="basic-addon1" />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Team Password</span>
+                        <input id="addPassword" type="text" class="form-control" placeholder="Password" aria-label="Username"
+                          aria-describedby="basic-addon1" />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Player 1</span>
+                        <input id="addPlayer1" type="text" class="form-control" placeholder="Name" aria-label="Username"
+                          aria-describedby="basic-addon1" />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Player 2</span>
+                        <input type="text" id="addPlayer2" class="form-control" placeholder="Name" aria-label="Username"
+                          aria-describedby="basic-addon1" />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Player 3</span>
+                        <input id="addPlayer3" type="text" class="form-control" placeholder="Name" aria-label="Username"
+                          aria-describedby="basic-addon1" />
+                      </div>
+                      <div class="input-group mb-3">
+                        <span class="input-group-text">Player 4</span>
+                        <input id="addPlayer4" type="text" class="form-control" placeholder="Name (optional)" aria-label="Username"
+                          aria-describedby="basic-addon1" />
+                      </div>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" onclick='addTeam()' class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col" id="col2">
+              <button type="button" class="btn btn-outline-primary teamButton" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Delete Team
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Modal title
+                      </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">...</div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="col" id="col3">
+              <button type="button" class="btn btn-outline-primary teamButton" data-bs-toggle="modal"
+                data-bs-target="#exampleModal">
+                Auto Assign Teams
+              </button>
+              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h1 class="modal-title fs-5" id="exampleModalLabel">
+                        Modal title
+                      </h1>
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">...</div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
+                        Close
+                      </button>
+                      <button type="button" class="btn btn-primary">
+                        Save changes
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
-        <div class="col col-2" id="right"></div>
       </div>
+      <div class="col col-2" id="right"></div>
     </div>
-  </body>
+  </div>
+</body>
+
 </html>
 
 <script>
@@ -96,6 +191,18 @@
   updateTeams();
   updateUsers();
 
+  var addArea = document.getElementById('addBody');
+  addArea.innerHTML += "Targets: <select id='addSelect'> </select>";
+
+  var addSelect = document.getElementById('addSelect');
+  addSelect.innerHTML +=
+  "<option value='null'>none</option>";
+
+    for (let z = 0; z < teams.length; z++) {
+      addSelect.innerHTML +=
+      "<option value='" + teams[z].teamName + "'>" + teams[z].teamName + "</option>";
+    }
+
   for (let i = 0; i < teams.length; i++) {
     if (currentColNum < 3) {
       currentColNum++;
@@ -106,6 +213,12 @@
     $(document).ready(function () {
       $("#" + teams[i].teamName + "Select").select2({
         dropdownParent: $("#" + teams[i].teamName),
+      });
+    });
+
+    $(document).ready(function () {
+      $("#addSelect").select2({
+        dropdownParent: $("#addModal"),
       });
     });
 
@@ -175,9 +288,19 @@
     for (let y = 0; y < teams.length; y++) {
       if (teams[i].teamName != teams[y].teamName) {
         if (teams[i].targets != teams[y].teamName) {
-          currentSelect.innerHTML += "<option value='" + teams[y].teamName + "'>" + teams[y].teamName + "</option>";
+          currentSelect.innerHTML +=
+            "<option value='" +
+            teams[y].teamName +
+            "'>" +
+            teams[y].teamName +
+            "</option>";
         } else if (teams[i].targets == teams[y].teamName) {
-          currentSelect.innerHTML += "<option value='" + teams[y].teamName + "' selected>" + teams[y].teamName + "</option>";
+          currentSelect.innerHTML +=
+            "<option value='" +
+            teams[y].teamName +
+            "' selected>" +
+            teams[y].teamName +
+            "</option>";
         }
       }
     }
@@ -257,7 +380,7 @@
         player3Var,
         player4Var
       );
-      
+
       var targets = document.getElementById(currentTeam + "Select").value;
 
       adminEdit(a, player1Var, player2Var, player3Var, player4Var, targets);
@@ -267,58 +390,83 @@
       alert("Must have all values filled (excpet player 4)");
     }
   }
+  function addTeam() {
+    var name = document.getElementById('addName').value;
+    var password = document.getElementById('addPassword').value;
+    var player1 = document.getElementById('addPlayer1').value;
+    var player2 = document.getElementById('addPlayer2').value;
+    var player3 = document.getElementById('addPlayer3').value;
+    var player4 = document.getElementById('addPlayer4').value;
+  }
 </script>
 
 <style>
   .select2-container {
     min-width: 10rem !important;
   }
+
   .navbar {
     background-color: #2e4b73 !important;
     min-height: 9vh;
   }
+
   .navbar-brand {
     color: white;
   }
+
   .navbar-brand:hover {
     color: white !important;
   }
+
   .nav-link {
     color: #c0c0c0;
   }
+
   .nav-link.active {
     color: white !important;
   }
+
   .loginButton {
     position: absolute;
     right: 1vw;
   }
+
   @media (max-width: 991px) {
     .right-side {
       display: none;
     }
+
     .left-side {
       display: none;
     }
+
     #logout {
       margin-top: 15px;
     }
   }
+
   #container {
     min-height: 90vh;
   }
+
   #row {
     min-height: 90vh;
   }
+
   #left {
     background-color: #8b8b8b;
     min-height: 91vh;
   }
+
   #right {
     background-color: #8b8b8b;
     height: 91vh;
   }
+
   .teamButton {
-    margin-top: 1rem;
+    margin-top: 2rem;
+    margin-left: 2.5rem;
+    margin-right: 2.5rem;
+    margin-bottom: 1rem;
   }
 </style>
