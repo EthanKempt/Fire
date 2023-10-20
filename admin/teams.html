@@ -283,6 +283,12 @@
         "-player4'> </div>";
     }
     modalArea.innerHTML +=
+      "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Password</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+      teams[i].teamName +
+      "-player3' value='" +
+      teams[i].teamPass +
+      "'> </div>";
+    modalArea.innerHTML +=
       "Targets: <select id='" + teams[i].teamName + "Select'> </select>";
     var currentSelect = document.getElementById(teams[i].teamName + "Select");
     for (let y = 0; y < teams.length; y++) {
