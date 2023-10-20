@@ -103,7 +103,6 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
   var player4 = team.player4;
 
   for (let i = 0; i < names.length; i++) {
-    debugger;
     if (names[i].name == player1) {
       var currentName = names[i].id;
       const docRef = doc(db, "names", currentName);

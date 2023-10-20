@@ -1,168 +1,293 @@
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Assassins</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script src="/dist/bundle.js"></script>
+    <script src="/dist/bundleTeams.js"></script>
+    <script src="/bundleAdmin.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Assassins</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
-    integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous" />
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-    integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-    crossorigin="anonymous"></script>
-  <script src="/dist/bundle.js"></script>
-  <script src="/dist/bundleTeams.js"></script>
-  <script src="/bundleAdmin.js"></script>
-  <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
-    crossorigin="anonymous"></script>
-  <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-  <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
-</head>
-
-<body>
-  <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-    <div class="container-fluid">
-      <a class="navbar-brand">Higley</a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-        <div class="navbar-nav">
-          <a class="nav-link" href="home.html">Home</a>
-          <a class="nav-link active" href="teams.html">Teams</a>
-          <a class="nav-link" href="messages.html">Messages</a>
-          <a class="nav-link" href="rules.html">Rules</a>
-          <button type="button" id="logout" onclick="logout()" class="btn btn-primary me-auto loginButton"
-            data-bs-toggle="modal" data-bs-target="#loginModal">
-            Log Out
-          </button>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Higley</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="home.html">Home</a>
+            <a class="nav-link active" href="teams.html">Teams</a>
+            <a class="nav-link" href="messages.html">Messages</a>
+            <a class="nav-link" href="rules.html">Rules</a>
+            <button
+              type="button"
+              id="logout"
+              onclick="logout()"
+              class="btn btn-primary me-auto loginButton"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Log Out
+            </button>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
 
-  <div class="container-fluid text-center" id="container">
-    <div class="row align-items-start" id="row">
-      <div class="col col-2" id="left"></div>
-      <div class="col">
-        <div class="container text-center">
-          <div class="row align-items-start">
-            <div class="col" id="col1">
-              <button type="button" class="btn btn-outline-primary teamButton" data-bs-toggle="modal"
-                data-bs-target="#addModal">
-                Add Team
-              </button>
-              <div class="modal fade" id="addModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        Add Team Form
-                      </h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body" id="addBody">
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">Team Name</span>
-                        <div class="input-group-text">
-                          <input id='addCheck' class="form-check-input mt-0" type="checkbox" value="" aria-label="Checkbox for following text input">
-                        </div>  
-                        <input id="addName" type="text" class="form-control" placeholder="Team Name" aria-label="Username"
-                          aria-describedby="basic-addon1" />
+    <div class="container-fluid text-center" id="container">
+      <div class="row align-items-start" id="row">
+        <div class="col col-2" id="left"></div>
+        <div class="col">
+          <div class="container text-center">
+            <div class="row align-items-start">
+              <div class="col" id="col1">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary teamButton"
+                  data-bs-toggle="modal"
+                  data-bs-target="#addModal"
+                >
+                  Add Team
+                </button>
+                <div
+                  class="modal fade"
+                  id="addModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                          Add Team Form
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
                       </div>
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">Team Password</span>
-                        <input id="addPassword" type="text" class="form-control" placeholder="Password" aria-label="Username"
-                          aria-describedby="basic-addon1" />
+                      <div class="modal-body" id="addBody">
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Team Name</span>
+                          <div class="input-group-text">
+                            <input
+                              id="addCheck"
+                              class="form-check-input mt-0"
+                              type="checkbox"
+                              value=""
+                              aria-label="Checkbox for following text input"
+                            />
+                          </div>
+                          <input
+                            id="addName"
+                            type="text"
+                            class="form-control"
+                            placeholder="Team Name"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Team Password</span>
+                          <input
+                            id="addPassword"
+                            type="text"
+                            class="form-control"
+                            placeholder="Password"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Player 1</span>
+                          <input
+                            id="addPlayer1"
+                            type="text"
+                            class="form-control"
+                            placeholder="Name"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Player 2</span>
+                          <input
+                            type="text"
+                            id="addPlayer2"
+                            class="form-control"
+                            placeholder="Name"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Player 3</span>
+                          <input
+                            id="addPlayer3"
+                            type="text"
+                            class="form-control"
+                            placeholder="Name"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
+                        <div class="input-group mb-3">
+                          <span class="input-group-text">Player 4</span>
+                          <input
+                            id="addPlayer4"
+                            type="text"
+                            class="form-control"
+                            placeholder="Name (optional)"
+                            aria-label="Username"
+                            aria-describedby="basic-addon1"
+                          />
+                        </div>
                       </div>
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">Player 1</span>
-                        <input id="addPlayer1" type="text" class="form-control" placeholder="Name" aria-label="Username"
-                          aria-describedby="basic-addon1" />
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button
+                          type="button"
+                          onclick="addTeam()"
+                          class="btn btn-primary"
+                        >
+                          Save changes
+                        </button>
                       </div>
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">Player 2</span>
-                        <input type="text" id="addPlayer2" class="form-control" placeholder="Name" aria-label="Username"
-                          aria-describedby="basic-addon1" />
-                      </div>
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">Player 3</span>
-                        <input id="addPlayer3" type="text" class="form-control" placeholder="Name" aria-label="Username"
-                          aria-describedby="basic-addon1" />
-                      </div>
-                      <div class="input-group mb-3">
-                        <span class="input-group-text">Player 4</span>
-                        <input id="addPlayer4" type="text" class="form-control" placeholder="Name (optional)" aria-label="Username"
-                          aria-describedby="basic-addon1" />
-                      </div>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="button" onclick='addTeam()' class="btn btn-primary">
-                        Save changes
-                      </button>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col" id="col2">
-              <button type="button" class="btn btn-outline-primary teamButton" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
-                Delete Team
-              </button>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        Modal title
-                      </h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">...</div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="button" class="btn btn-primary">
-                        Save changes
-                      </button>
+              <div class="col" id="col2">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary teamButton"
+                  data-bs-toggle="modal"
+                  data-bs-target="#deleteModal"
+                >
+                  Delete Team
+                </button>
+                <div
+                  id="deleteModal"
+                  class="modal fade"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                          Delete Team Form
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body" id="deleteBody"></div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                          Save changes
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
 
-            <div class="col" id="col3">
-              <button type="button" class="btn btn-outline-primary teamButton" data-bs-toggle="modal"
-                data-bs-target="#exampleModal">
-                Auto Assign Teams
-              </button>
-              <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel"
-                aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h1 class="modal-title fs-5" id="exampleModalLabel">
-                        Modal title
-                      </h1>
-                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                    </div>
-                    <div class="modal-body">...</div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">
-                        Close
-                      </button>
-                      <button type="button" class="btn btn-primary">
-                        Save changes
-                      </button>
+              <div class="col" id="col3">
+                <button
+                  type="button"
+                  class="btn btn-outline-primary teamButton"
+                  data-bs-toggle="modal"
+                  data-bs-target="#exampleModal"
+                >
+                  Auto Assign Teams
+                </button>
+                <div
+                  class="modal fade"
+                  id="exampleModal"
+                  tabindex="-1"
+                  aria-labelledby="exampleModalLabel"
+                  aria-hidden="true"
+                >
+                  <div class="modal-dialog">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <h1 class="modal-title fs-5" id="exampleModalLabel">
+                          Modal title
+                        </h1>
+                        <button
+                          type="button"
+                          class="btn-close"
+                          data-bs-dismiss="modal"
+                          aria-label="Close"
+                        ></button>
+                      </div>
+                      <div class="modal-body">...</div>
+                      <div class="modal-footer">
+                        <button
+                          type="button"
+                          class="btn btn-secondary"
+                          data-bs-dismiss="modal"
+                        >
+                          Close
+                        </button>
+                        <button type="button" class="btn btn-primary">
+                          Save changes
+                        </button>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -170,12 +295,10 @@
             </div>
           </div>
         </div>
+        <div class="col col-2" id="right"></div>
       </div>
-      <div class="col col-2" id="right"></div>
     </div>
-  </div>
-</body>
-
+  </body>
 </html>
 
 <script>
@@ -191,17 +314,32 @@
   updateTeams();
   updateUsers();
 
-  var addArea = document.getElementById('addBody');
+  var addArea = document.getElementById("addBody");
   addArea.innerHTML += "Targets: <select id='addSelect'> </select>";
+  var addSelect = document.getElementById("addSelect");
+  addSelect.innerHTML += "<option value='null'>none</option>";
 
-  var addSelect = document.getElementById('addSelect');
-  addSelect.innerHTML +=
-  "<option value='null'>none</option>";
+  for (let z = 0; z < teams.length; z++) {
+    addSelect.innerHTML +=
+      "<option value='" +
+      teams[z].teamName +
+      "'>" +
+      teams[z].teamName +
+      "</option>";
+  }
 
-    for (let z = 0; z < teams.length; z++) {
-      addSelect.innerHTML +=
-      "<option value='" + teams[z].teamName + "'>" + teams[z].teamName + "</option>";
-    }
+  var deleteArea = document.getElementById("deleteBody");
+  deleteArea.innerHTML += "Targets: <select id='deleteSelect'> </select>";
+  var deleteSelect = document.getElementById("deleteSelect");
+
+  for (let a = 0; a < teams.length; a++) {
+    deleteSelect.innerHTML +=
+      "<option value='" +
+      teams[a].teamName +
+      "'>" +
+      teams[a].teamName +
+      "</option>";
+  }
 
   for (let i = 0; i < teams.length; i++) {
     if (currentColNum < 3) {
@@ -219,6 +357,12 @@
     $(document).ready(function () {
       $("#addSelect").select2({
         dropdownParent: $("#addModal"),
+      });
+    });
+
+    $(document).ready(function () {
+      $("#deleteSelect").select2({
+        dropdownParent: $("#deleteModal"),
       });
     });
 
@@ -285,9 +429,10 @@
     modalArea.innerHTML +=
       "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Password</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
       teams[i].teamName +
-      "-player3' value='" +
+      "Password' value='" +
       teams[i].teamPass +
       "'> </div>";
+
     modalArea.innerHTML +=
       "Targets: <select id='" + teams[i].teamName + "Select'> </select>";
     var currentSelect = document.getElementById(teams[i].teamName + "Select");
@@ -363,6 +508,8 @@
       var player4Var = null;
     }
 
+    var newPassword = document.getElementById(currentTeam + "Password").value;
+
     var player1Checked = document.getElementById(currentTeam + "Box1").checked;
     var player2Checked = document.getElementById(currentTeam + "Box2").checked;
     var player3Checked = document.getElementById(currentTeam + "Box3").checked;
@@ -384,12 +531,21 @@
         player1Var,
         player2Var,
         player3Var,
-        player4Var
+        player4Var,
+        newPassword
       );
 
       var targets = document.getElementById(currentTeam + "Select").value;
 
-      adminEdit(a, player1Var, player2Var, player3Var, player4Var, targets);
+      adminEdit(
+        a,
+        player1Var,
+        player2Var,
+        player3Var,
+        player4Var,
+        targets,
+        newPassword
+      );
       updateTeams();
       updateUsers();
     } else {
@@ -397,20 +553,29 @@
     }
   }
   function addTeam() {
-    var name = document.getElementById('addName').value;
-    var checked = document.getElementById('addCheck').checked;
-    var password = document.getElementById('addPassword').value;
-    var player1 = document.getElementById('addPlayer1').value;
-    var player2 = document.getElementById('addPlayer2').value;
-    var player3 = document.getElementById('addPlayer3').value;
-    var testVal = document.getElementById('addPlayer4').value;
+    var name = document.getElementById("addName").value;
+    var checked = document.getElementById("addCheck").checked;
+    var password = document.getElementById("addPassword").value;
+    var player1 = document.getElementById("addPlayer1").value;
+    var player2 = document.getElementById("addPlayer2").value;
+    var player3 = document.getElementById("addPlayer3").value;
+    var testVal = document.getElementById("addPlayer4").value;
     if (testVal) {
-    var player4 = document.getElementById('addPlayer4').value;
+      var player4 = document.getElementById("addPlayer4").value;
     } else {
       var player4 = false;
     }
-    var target = document.getElementById('addSelect').value;
-    writeNewTeam(name, password, player1, player2, player3, player4, target, checked);
+    var target = document.getElementById("addSelect").value;
+    writeNewTeam(
+      name,
+      password,
+      player1,
+      player2,
+      player3,
+      player4,
+      target,
+      checked
+    );
   }
 </script>
 

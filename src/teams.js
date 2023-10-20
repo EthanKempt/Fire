@@ -51,7 +51,7 @@ window.updateTeams = function () {
     });
 };
 
-window.adminEdit = function (i, a, b, c, d, e) {
+window.adminEdit = function (i, a, b, c, d, e, f) {
   var team = teams[i].teamName;
   const docRef = doc(db, "teams", team);
   updateDoc(docRef, {
@@ -59,6 +59,7 @@ window.adminEdit = function (i, a, b, c, d, e) {
     player2: b,
     player3: c,
     targets: e,
+    teamPass: f,
   });
   if (d) {
     if (teams[i].player4) {
