@@ -790,6 +790,65 @@
       return number;
     }
   }
+
+  initTargets();
+
+  function initTargets() {
+    var history = JSON.parse(sessionStorage.history);
+    var admin = JSON.parse(sessionStorage.admin);
+    var modalBody = document.getElementById("randomBody");
+    modalBody.innerHTML += "<div id=rep></div>";
+
+    let length = history.length - 1;
+    let currentWeek = history[length];
+    let week = Object.values(currentWeek);
+    let firstTeam = week[0];
+    let order = [];
+    order.push(firstTeam);
+      let xlength2 = order.length - 1;
+      let xlast = order[xlength2];
+      let xnewTeam = eval("currentWeek." + xlast + ";");
+      let xlength3 = order.xlength - 1;
+      let xlast2 = order[xlength3];
+    modalBody.innerHTML +=
+      '<br> <span class="badge text-bg-secondary">' + order[0];
+    if (checkInit(order[xlast], order[xlast2])) {
+      modalBody.innerHTML +=
+        '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
+    } else {
+      modalBody.innerHTML +=
+        '</span> <br> <i class="bi bi-caret-down-fill"></i>';
+    }
+
+    for (let a = 0; a < week.length - 2; a++) {
+      let length2 = order.length - 1;
+      let last = order[length2];
+      let newTeam = eval("currentWeek." + last + ";");
+      order.push(newTeam);
+      let length3 = order.length - 1;
+      let last2 = order[length3];
+      modalBody.innerHTML +=
+        '<br> <span class="badge text-bg-secondary">' + order[length3];
+      if (checkInit(order[last], order[last2])) {
+        modalBody.innerHTML +=
+          '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
+      } else {
+        modalBody.innerHTML +=
+          '</span> <br> <i class="bi bi-caret-down-fill"></i>';
+      }
+    }
+    modalBody.lastElementChild.remove();
+    function checkInit(a, b) {
+      //a = pers   b = target
+      for (let c = 0; c < history.length; c++) {
+        let past = eval("history[c]." + a + ";");
+        if (past == b) {
+          return true;
+        }
+        return false;
+      }
+    }
+  }
 </script>
 
 <style>
