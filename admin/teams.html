@@ -804,12 +804,13 @@
     let week = Object.values(currentWeek);
     let firstTeam = week[0];
     let order = [];
+    let errors = 0;
     order.push(firstTeam);
-      let xlength2 = order.length - 1;
-      let xlast = order[xlength2];
-      let xnewTeam = eval("currentWeek." + xlast + ";");
-      let xlength3 = order.xlength - 1;
-      let xlast2 = order[xlength3];
+    let xlength2 = order.length - 1;
+    let xlast = order[xlength2];
+    let xnewTeam = eval("currentWeek." + xlast + ";");
+    let xlength3 = order.xlength - 1;
+    let xlast2 = order[xlength3];
     modalBody.innerHTML +=
       '<br> <span class="badge text-bg-secondary">' + order[0];
     if (checkInit(order[xlast], order[xlast2])) {
@@ -832,15 +833,24 @@
       if (checkInit(order[last], order[last2])) {
         modalBody.innerHTML +=
           '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
+        errors++;
       } else {
         modalBody.innerHTML +=
           '</span> <br> <i class="bi bi-caret-down-fill"></i>';
       }
     }
+
+    let replacement = document.getElementById("rep");
+    if (errors > 0) {
+      replacement.innerHTML +=
+        '<h3><span class="badge bg-warning"><i class="bi bi-exclamation-triangle"></i> There are ' +
+        errors +
+        ' teams with repeat targets <i class="bi bi-exclamation-triangle"></i></span></h3>';
+    }
     modalBody.lastElementChild.remove();
     function checkInit(a, b) {
       //a = pers   b = target
-      for (let c = 0; c < history.length; c++) {
+      for (let c = 0; c + 1 < history.length; c++) {
         let past = eval("history[c]." + a + ";");
         if (past == b) {
           return true;
