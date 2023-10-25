@@ -15,6 +15,10 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
     <script src="/dist/bundle.js"></script>
     <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
@@ -281,12 +285,29 @@
                           aria-label="Close"
                         ></button>
                       </div>
-                      <div class="modal-body">
+                      <div id="randomBody" class="modal-body">
                         <button
+                          id="randButton"
                           type="button"
                           onclick="generateTeams()"
                           class="btn btn-primary"
                         >
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="16"
+                            height="16"
+                            fill="currentColor"
+                            class="bi bi-shuffle"
+                            viewBox="0 0 16 16"
+                          >
+                            <path
+                              fill-rule="evenodd"
+                              d="M0 3.5A.5.5 0 0 1 .5 3H1c2.202 0 3.827 1.24 4.874 2.418.49.552.865 1.102 1.126 1.532.26-.43.636-.98 1.126-1.532C9.173 4.24 10.798 3 13 3v1c-1.798 0-3.173 1.01-4.126 2.082A9.624 9.624 0 0 0 7.556 8a9.624 9.624 0 0 0 1.317 1.918C9.828 10.99 11.204 12 13 12v1c-2.202 0-3.827-1.24-4.874-2.418A10.595 10.595 0 0 1 7 9.05c-.26.43-.636.98-1.126 1.532C4.827 11.76 3.202 13 1 13H.5a.5.5 0 0 1 0-1H1c1.798 0 3.173-1.01 4.126-2.082A9.624 9.624 0 0 0 6.444 8a9.624 9.624 0 0 0-1.317-1.918C4.172 5.01 2.796 4 1 4H.5a.5.5 0 0 1-.5-.5z"
+                            />
+                            <path
+                              d="M13 5.466V1.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192zm0 9v-3.932a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384l-2.36 1.966a.25.25 0 0 1-.41-.192z"
+                            />
+                          </svg>
                           Randomize
                         </button>
                       </div>
@@ -642,113 +663,13 @@
     deleteUsers(del1, del2, del3, del4);
   }
 
-  function randomize() {
-    var tNames = [];
-    var targets = [];
-    var teams = JSON.parse(sessionStorage.teams);
-
-    for (let d = 0; d < teams.length; d++) {
-      tNames.push(teams[d].teamName);
-      targets.push(teams[d].teamName);
-    }
-
-    var randomTeam = [];
-    var randNames = [];
-    var history = JSON.parse(sessionStorage.history);
-    var newN = randInt(tNames.length);
-    var newNt = randInt(tNames.length);
-    while (newN == newNt) {
-      newNt = randInt(tNames.length);
-    }
-    var pers = tNames[newN];
-    var tar = targets[newNt];
-    var upInt = newNt + 1;
-    if (upInt >= targets.length) {
-      upInt = 0;
-    }
-    if (checkPast(pers, tar)) {
-      //if team already had the target
-      while (upInt != newNt) {
-        //while theres still teams we havent checked
-        var newTar = targets[upInt]; //make new target
-        if (checkPast(pers, newTar)) {
-          //if new target still doesnt work
-          if (upInt + 1 < targets.length) {
-            upInt++; // do it again
-          } else {
-            upInt = 0;
-          }
-        } else {
-          pers;
-          newTar;
-          var upInt = newNt; //else stop looping
-        }
-      }
-      if (checkPast(pers, newTar)) {
-        //if we coud not find a valid avaliale target
-        var size = teams.length;
-        for (let checked = 0; checked <= size; checked++) {
-          //while there are remaining choices of all the teams
-          var team = teams[checked].teamName;
-          if (checkPast(pers, team)) {
-          } else {
-            //if the team has not had the targets but the targets already have persuers
-            for (let e = 0; e < tNames.length; e++) {
-              if (tNames[e] == team) {
-                //find the selected target
-                var f = e - 1;
-                var pers2 = tNames[f]; //find their persuers
-                for (let g = 0; g < teams.length; g++) {
-                  //see if they have any avalaible targets
-                  var newTeam = teams[g].teamName;
-                  if (checkPast(pers2, newTeam)) {
-                    //if they already had the target
-                  } else {
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-  function randInt(a) {
-    var numb = Math.floor(Math.random() * a);
-    return numb;
-  }
-  function checkPast(a, b) {
-    var history = JSON.parse(sessionStorage.history);
-    for (let f = 0; f < history.length; f++) {
-      var past = eval("history[f]." + a + ";");
-      if (past == b) {
-        return true;
-      }
-      if (a == b) {
-        return true;
-      }
-    }
-    return false;
-  }
-
-  //***create a random array of all the teams with no two teams next to each other that have been together in previous weeks unless nessesary
-
-  //--create teams array of all teams
-  //--create random array that will contain the new order
-  //--find random team
-  //--find random target
-  //--if target has been chosen by team in past find a new target
-  //--if there are no targets remaining that work then look through all the targets to see if any work
-  //--if none work then keep the original target
-  //else if a target does work assign the target to the team but only if the targets current persuers have a different target option
-  //else give the og team the og target and dont mess with the persuers or there targets
-
   function generateTeams() {
     let history = JSON.parse(sessionStorage.history);
     let teams = JSON.parse(sessionStorage.teams);
     let read = JSON.parse(sessionStorage.teams);
 
     window.randomTeams = [];
+    let errors = 0;
 
     while (teams.length != 0) {
       let numb = genInt();
@@ -764,7 +685,41 @@
         a++;
       }
       teams.splice(teamNumber, 1);
-      console.log(randomTeams);
+    }
+    if (teams.length == 0) {
+      let modalBody = document.getElementById("randomBody");
+
+      while (modalBody.childElementCount > 1) {
+        modalBody.lastElementChild.remove();
+      }
+      modalBody.innerHTML += "<div id=rep></div>";
+
+      for (let b = 0; b < randomTeams.length; b++) {
+        modalBody.innerHTML +=
+          '<br> <span class="badge text-bg-secondary">' + randomTeams[b];
+        let c = b - 1;
+        if (c == -1) {
+          c = randomTeams.length - 1;
+        }
+        if (checkHistory(randomTeams[c], randomTeams[b])) {
+          modalBody.innerHTML +=
+            '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
+          errors++;
+        } else {
+          modalBody.innerHTML +=
+            '</span> <br> <i class="bi bi-caret-down-fill"></i>';
+        }
+      }
+      modalBody.lastElementChild.remove();
+      let replacement = document.getElementById("rep");
+      if (errors > 0) {
+        replacement.innerHTML +=
+          '<h3><span class="badge bg-warning"><i class="bi bi-exclamation-triangle"></i> There are ' +
+          errors +
+          ' teams with repeat targets <i class="bi bi-exclamation-triangle"></i></span></h3>';
+      }
+    } else {
+      alert("sorry, there was an error");
     }
     function getValidTeam(numb) {
       let team = teams[numb].teamName;
@@ -781,18 +736,21 @@
         for (let a = 0; a < teams.length; a++) {
           //find a new team
           let team2 = teams[a].teamName;
+          let x = a + 1;
+          if (team == team2 && x != teams.length) {
+            a++;
+            let team2 = teams[a].teamName;
+          }
           if (checkHistory(pers, team2)) {
             //if the new target does have history
             for (let b = 0; b < teams.length; b++) {
               //look for new pers
-              //debugger
               let pers2 = teams[b].teamName;
               if (checkHistory(pers2, team)) {
                 //if they also have history switch out persuer
                 let removedPers = randomTeams.pop();
                 for (let c = 0; c < read.length; c++) {
                   //get object > string
-                  console.log("a");
                   if (read[c].teamName == removedPers) {
                     teams.push(read[c]);
                   }
@@ -818,11 +776,9 @@
     function checkHistory(a, b) {
       //a = pers   b = target
       for (let c = 0; c < history.length; c++) {
-        for (let d = 0; d < history[c].length; d++) {
-          let past = eval("history[c]." + a + ";");
-          if (past == b) {
-            return true;
-          }
+        let past = eval("history[c]." + a + ";");
+        if (past == b) {
+          return true;
         }
         return false;
       }
@@ -905,9 +861,11 @@
       margin-right: 3.5rem;
     }
   }
-
   .teamButton {
     margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+  #randButton {
     margin-bottom: 1rem;
   }
 </style>
