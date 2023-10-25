@@ -3,9 +3,6 @@ import {
   getFirestore,
   collection,
   getDocs,
-  updateDoc,
-  doc,
-  getDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -22,30 +19,16 @@ initializeApp(firebaseConfig);
 
 const db = getFirestore();
 
-const colRef = collection(db, "admin");
+const colRef = collection(db, "history");
 
 getDocs(colRef)
   .then((snapshot) => {
-    window.admin = [];
+    var history = [];
     snapshot.docs.forEach((doc) => {
-      admin.push({ ...doc.data() });
+      history.push({ ...doc.data(), id: doc.id });
+      sessionStorage.setItem("history", JSON.stringify(history));
     });
-    sessionStorage.setItem("admin", JSON.stringify(admin));
   })
   .catch((err) => {
     console.log(err.message);
   });
-
-window.updateAdmin = function () {
-  getDocs(colRef)
-    .then((snapshot) => {
-      window.admin = [];
-      snapshot.docs.forEach((doc) => {
-        admin.push({ ...doc.data() });
-      });
-      sessionStorage.setItem("admin", JSON.stringify(admin));
-    })
-    .catch((err) => {
-      console.log(err.message);
-    });
-};
