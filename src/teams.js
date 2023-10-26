@@ -111,3 +111,21 @@ window.writeNewTeam = function (a, b, c, d, e, f, g, h) {
 window.deleteCurrent = function (a) {
   deleteDoc(doc(db, 'teams', a));
 }
+
+window.newSave = function (random) {
+  let order = random;
+  for (let a = 0; a < order.length; a++) {
+    let pers = order[a];
+    if (a + 1 == order.length) {
+      var b = 0;
+    } else {
+      var b = a + 1;
+    }
+    let target = order[b];
+
+    const currentRef = doc(db, "teams", pers);
+    updateDoc(currentRef, {
+      targets: target,
+    });
+  }
+}
