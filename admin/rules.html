@@ -65,11 +65,19 @@
         <div class="col-sm-8" id="middle">
           <button
             type="button"
-            class="btn btn-primary"
+            class="btn headBtn btn-primary"
             onclick="update()"
             id="upBtn"
           >
             Update All
+          </button>
+
+          <button
+            type="button"
+            onclick="addRule()"
+            class="headBtn btn btn-secondary"
+          >
+            <i class="bi bi-plus-lg"></i>
           </button>
         </div>
         <div class="col col-2 right-side"></div>
@@ -96,20 +104,29 @@
         }
       }
       column.innerHTML +=
-        '<div class="input-group mb-3"> <input type="text" class="form-control title" id="title' +
+        '<div class="input-group mb-3" id="delTitle' +
+        a +
+        '"> <input type="text" class="form-control title" id="title' +
         a +
         '" placeholder="Rule Title" value="' +
         title +
-        '" aria-label="Title" aria-describedby="basic-addon2">  <button class="btn btn-outline-danger" type="button"><i class="bi bi-trash3"></i></button> <span class="input-group-text" id="basic-addon2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="switch' +
+        '" aria-label="Title" aria-describedby="basic-addon2">  <button class="btn btn-outline-danger" type="button" onclick="deleteItem(' +
+        a +
+        ')"><i class="bi bi-trash3"></i></button> <span class="input-group-text" id="basic-addon2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="switch' +
         a +
         '" checked></div></span> </div>';
       column.innerHTML +=
-        '<div class="mb-3"><textarea class="form-control rule" id="rule' +
+        '<div id="' +
+        a +
+        '" class="mb-3"><textarea class="form-control rule" id="rule' +
         a +
         '" id="exampleFormControlTextarea1" rows="3">' +
         rule +
-        '</textarea></div> <hr class="border border-dark border-2 opacity-50">';
+        '</textarea></div> <hr id="hr' +
+        a +
+        '" class="border border-dark border-2 opacity-50">';
     }
+    column.lastElementChild.remove();
   }
 
   function update() {
@@ -124,10 +141,43 @@
       titles.push(current);
       let current2 = document.getElementById("rule" + a).value;
       rules.push(current2);
-      let box = document.getElementById('switch' + a).checked;
+      let box = document.getElementById("switch" + a).checked;
       checked.push(box);
     }
     updateTitles(titles, rules, checked);
+  }
+
+  function deleteItem(a) {
+    var title = document.getElementById("delTitle" + a);
+    let rule = document.getElementById("rule" + a);
+    let hr = document.getElementById("hr" + a);
+    title.remove();
+    rule.remove();
+    hr.remove();
+  }
+
+  function addRule() {
+    let column = document.getElementById("middle");
+    let b = Number(column.lastElementChild.id.charAt(column.length - 1)) + 1;
+    console.log(b);
+    column.innerHTML +=
+      '<hr id="hr' +
+      b +
+      '" class="border border-dark border-2 opacity-50"> <div class="input-group mb-3" id="delTitle' +
+      b +
+      '"> <input type="text" class="form-control title" id="title' +
+      b +
+      '" placeholder="Rule Title" aria-label="Title" aria-describedby="basic-addon2">  <button class="btn btn-outline-danger" type="button" onclick="deleteItem(' +
+      b +
+      ')"><i class="bi bi-trash3"></i></button> <span class="input-group-text" id="basic-addon2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="switch' +
+      b +
+      '" checked></div></span> </div>';
+    column.innerHTML +=
+      '<div class="mb-3" id="' +
+      b +
+      '"><textarea class="form-control rule" id="rule' +
+      b +
+      '" id="exampleFormControlTextarea1" rows="3"></textarea></div>';
   }
 </script>
 
@@ -188,7 +238,7 @@
   .mb-3 {
     margin-top: 1rem;
   }
-  #upBtn {
+  .headBtn {
     margin-top: 1rem;
   }
 </style>
