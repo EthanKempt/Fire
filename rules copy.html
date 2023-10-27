@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Rules</title>
+    <script src="bundle.js"></script>
+    <script src="bundleTeams.js"></script>
+  </head>
+  <body>
+    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">Higley</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="home.html" aria-current="page">Home</a>
+            <a class="nav-link" href="teams.html">Teams</a>
+            <a class="nav-link" href="targets.html">Targets</a>
+            <a class="nav-link active" href="rules.html">Rules</a>
+            <button
+              type="button"
+              id="logout"
+              onclick="logout()"
+              class="btn btn-primary me-auto loginButton"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Log Out
+            </button>
+          </div>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container column text-left">
+      <div class="row align-items-middle">
+        <div class="col col-2 left-side"></div>
+        <div class="col">
+          <br />
+          <h1>Rules</h1>
+          <div class="accordion" id="accordionExample">
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseOne"
+                  aria-expanded="false"
+                  aria-controls="collapseOne"
+                >
+                  Game Overview
+                </button>
+              </h2>
+              <div id="collapseOne" class="accordion-collapse collapse show">
+                <div class="accordion-body">
+                  Higley Assassins is a continuous competition organized by
+                  students and for students at Higley. During the game, students
+                  organize into teams and play the roles of assassins, targeting
+                  other students in attempts to eliminate them. The final team
+                  with any players not eliminated are the winners of the game
+                  and the prize money.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseTwo"
+                  aria-expanded="false"
+                  aria-controls="collapseTwo"
+                >
+                  Team Registration
+                </button>
+              </h2>
+              <div id="collapseTwo" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Juniors and Seniors must form teams of 3 or 4 students and pay
+                  the entry fee of [DOLLARS] before the deadline of [DATE] to be
+                  registered to play. The entire team must be paid for at one
+                  time. When paying the entry fee, teams must also communicate
+                  their team name and their members with the directors. Payment
+                  can be taken in cash, with written team details attached, or
+                  through Venmo to the account [ACCOUNT], with team details in
+                  the transaction description.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseThree"
+                  aria-expanded="false"
+                  aria-controls="collapseThree"
+                >
+                  Eliminating Targets
+                </button>
+              </h2>
+              <div id="collapseThree" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Barring [Variation Weeks], teams are each secretly assigned a
+                  target team through Instagram [LINK TO INSTAGRAM PAGE] and
+                  their team page on HigleyAssassins.com [LINK] every week. To
+                  eliminate a member of their target team, they must get their
+                  targets wet using water in any method they choose, then give
+                  video evidence to the directors through Instagram [LINK]. For
+                  an elimination to be official, the assassins must not have
+                  broken any other rules in the process and have easily
+                  verifiable proof that the target was caught. Official
+                  eliminations will be posted publicly on Instagram [LINK]. A
+                  team’s failure to eliminate a member of their target team in a
+                  given week will result in their own elimination. For
+                  determining a team’s standing with respect to this rule,
+                  evidence of the elimination of a target must be sent to the
+                  directors prior to 6:00 p.m., Sunday. At or very soon after
+                  this point, teams will receive their next assignment and the
+                  next week will begin.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFour"
+                  aria-expanded="false"
+                  aria-controls="collapseFour"
+                >
+                  Safe Zones
+                </button>
+              </h2>
+              <div id="collapseFour" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  A number of places are Safe Zones, where players cannot be
+                  eliminated. These include and are limited to:
+                  <ul>
+                    <li>
+                      Higley Campus, including parking lots, sports fields, and,
+                      during the player’s scheduled school hours, the Seminary
+                      church and space between it and the main campus.
+                    </li>
+                    <li>
+                      Williams Field Campus, including parking lots, sports
+                      fields, and the pool.
+                    </li>
+                    <li>
+                      A player’s own home interior. This does not apply if
+                      invited in by a resident. This intentionally does not
+                      include yards.
+                    </li>
+                    <li>
+                      A player’s own workplace. This only applies while the
+                      student is currently clocked in and working a shift,
+                      including working outside the building (such as taking out
+                      trash or walking to a delivery driving car), although it
+                      intentionally does not apply while they are walking into
+                      or out of work before or after their shift, even if they
+                      tried to clock in from their car.
+                    </li>
+                    <li>
+                      Venues where players attend athletic or other programs
+                      specifically run by Higley High School, including
+                      practices, games, performances, etc. This safety applies
+                      only to students participating or involved in the Higley
+                      program, and only during the times which they occur.
+                      Parking lots are included.
+                    </li>
+                    <li>
+                      Venues where religious activities take place, including
+                      parking lots or, in the case of activities at a home or
+                      other small building, the yard and general surroundings.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseFive"
+                  aria-expanded="false"
+                  aria-controls="collapseFive"
+                >
+                  Buy Backs
+                </button>
+              </h2>
+              <div id="collapseFive" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  There will be limited opportunities for eliminated players to
+                  buy back into the game, meaning they will be immediately
+                  reinstated as active players upon paying. The price of buy
+                  backs and the circumstances in which they will be available
+                  are up to the discretion of the directors and may not be
+                  announced prior to their availability. If a player buys back,
+                  the team that is currently assigned to hunt them will be
+                  notified.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseSix"
+                  aria-expanded="false"
+                  aria-controls="collapseSix"
+                >
+                  Bonus Challenges & Rewards
+                </button>
+              </h2>
+              <div id="collapseSix" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  There may be announcements made by the directors of bonus
+                  challenges with associated rewards. These will typically
+                  involve a deadline by which teams must complete the challenge
+                  or end once one team completes it. Specific details for each
+                  bonus challenge and its reward will be announced together.
+                  There will be no punishments for non-completion of bonus
+                  challenges.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseSeven"
+                  aria-expanded="false"
+                  aria-controls="collapseSeven"
+                >
+                  Variation Weeks
+                </button>
+              </h2>
+              <div id="collapseSeven" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  There may be variation weeks announced, during which the
+                  typical flow of Assassins will be intentionally altered to
+                  provide additional novelty during the week. Critical gameplay
+                  elements will not be altered. Any rules that will be removed,
+                  added, or adjusted during variation weeks will be announced on
+                  Instagram [LINK] and HigleyAssassins.com [LINK] along with the
+                  time period for which the ruleset will be altered.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseEight"
+                  aria-expanded="false"
+                  aria-controls="collapseEight"
+                >
+                  Prize Money
+                </button>
+              </h2>
+              <div id="collapseEight" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  Prize money accumulates in the pot when players pay the entry
+                  fee or buy back. At any time during the game, the current pot
+                  value will be public on HigleyAssassins.com [LINK]. The
+                  directors may each take a small cut of the money, not any more
+                  than [DOLLARS]. Additionally, maintenance costs for the
+                  website will be sourced from the pot money. All information on
+                  monetary history will always be public on HigleyAssassins.com.
+                  The remaining money is then delivered to the winning team at
+                  their convenience. In the case of all remaining teams
+                  simultaneously being eliminated or multiple teams remaining by
+                  the end of the school year, they will all be considered the
+                  winners and the money will be equally distributed between the
+                  teams.
+                </div>
+              </div>
+            </div>
+            <div class="accordion-item">
+              <h2 class="accordion-header">
+                <button
+                  class="accordion-button collapsed"
+                  type="button"
+                  data-bs-toggle="collapse"
+                  data-bs-target="#collapseNine"
+                  aria-expanded="false"
+                  aria-controls="collapseNine"
+                >
+                  Notes
+                </button>
+              </h2>
+              <div id="collapseNine" class="accordion-collapse collapse">
+                <div class="accordion-body">
+                  <ul class="list-unstyled">
+                    <li>
+                      This Ruleset is intended to be comprehensive, detailed,
+                      and clear. A particular situation or action not
+                      specifically outlined in or following from a common sense
+                      reading of these rules is generally permitted, though,
+                      ultimately, the directors will collectively decide on
+                      matters where the rules may be vague or ambiguous, then
+                      reclarify the rules to reflect our decision.
+                    </li>
+                    <br />
+                    <li>
+                      In the case of a rule change, announcements will be made
+                      on both Instagram [LINK] and on HigleyAssassins.com
+                      [LINK].
+                    </li>
+                    <br />
+                    <li>
+                      To clarify rules or to report a rule violation, you can
+                      contact us
+                      <a href="https://forms.gle/2y6FtBBm9U5VDpa17">here</a>.
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-2 right-side"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function logout() {
+    window.location.href = "/dist/index.html";
+  }
+</script>
+
+<style>
+  .navbar {
+    background-color: #2e4b73 !important;
+    min-height: 9vh;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: white !important;
+  }
+  .nav-link {
+    color: #c0c0c0;
+  }
+  .nav-link.active {
+    color: white !important;
+  }
+  .navbar-toggler {
+    border-color: white;
+    border-width: 2px;
+  }
+  .container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .display-1 {
+    font-weight: 500;
+  }
+  .h5 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+  .left-side {
+    background-color: #8b8b8b;
+    min-height: 91vh;
+  }
+  .right-side {
+    background-color: #8b8b8b;
+    min-height: 91vh;
+  }
+  .row {
+    width: 98.79vw;
+  }
+  .view-box {
+    height: 50vh;
+  }
+  .loginButton {
+    position: absolute;
+    right: 1vw;
+  }
+  @media (max-width: 991px) {
+    .right-side {
+      display: none;
+    }
+    .left-side {
+      display: none;
+    }
+    #logout {
+      margin-top: 15px;
+    }
+  }
+</style>

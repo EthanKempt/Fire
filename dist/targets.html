@@ -1,84 +1,130 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Targets</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand">Higley</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link" href='home.html' aria-current="page">Home</a>
-              <a class="nav-link" href="teams.html">Teams</a>
-              <a class="nav-link active" href="targets.html">Targets</a>
-              <a class="nav-link" href="rules.html">Rules</a>
-              <button type="button" id='logout' onclick='logout()' class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Log Out
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div class="container column text-center">
-        <div class="row align-items-middle">
-          <div class="col col-2 left-side">
-
-          </div>
-          <div class="col">
-            <br>
-            <p class="fs-5">Your team <b id="not"></b> gotten someone out this week meaning you are
-              <b id="safer"></b>. Your assigned team is <b id="target"></b> and the people on the team are:</p>
-            <br>
-            <div class="card-header">
-              <p class="fs-4" id="teamTitle">Team Name</p>
-            </div>
-            <ul class="list-group list-group-flush" id="list">
-              <li class="list-group-item d-flex justify-content-between align-items-center" id="player1">
-
-                <span class="badge bg-primary rounded-pill">In</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center" id="player2">
-
-                <span class="badge bg-primary rounded-pill">In</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-center" id="player3">
-
-                <span class="badge bg-primary rounded-pill">Out</span>
-              </li>
-            </ul>
-          </div>
-          <div class="col">
-            <br>
-
-            <div class="input-group mb-3">
-              <input type="text" class="form-control view-box" disabled aria-label="Recipient's username" aria-describedby="button-addon2">
-            </div>
-            <div class="input-group mb-3">
-              <input type="text" class="form-control" placeholder="your message" aria-label="Recipient's username" aria-describedby="button-addon2">
-              <button class="btn btn-outline-primary" type="button" id="button-addon2">Send</button>
-            </div>
-
-          </div>
-          <div class="col col-2 right-side">
-
+      <div class="container-fluid">
+        <a class="navbar-brand">Higley</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="home.html" aria-current="page">Home</a>
+            <a class="nav-link" href="teams.html">Teams</a>
+            <a class="nav-link active" href="targets.html">Targets</a>
+            <a class="nav-link" href="rules.html">Rules</a>
+            <button
+              type="button"
+              id="logout"
+              onclick="logout()"
+              class="btn btn-primary me-auto loginButton"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Log Out
+            </button>
           </div>
         </div>
       </div>
-    </body>
-  </html>
+    </nav>
 
-  <style>
+    <div class="container column text-center">
+      <div class="row align-items-middle">
+        <div class="col col-2 left-side"></div>
+        <div class="col">
+          <br />
+          <p class="fs-5">
+            Your team <b id="not"></b> gotten someone out this week meaning you
+            are <b id="safer"></b>. Your assigned team is
+            <b id="target"></b> and the people on the team are:
+          </p>
+          <br />
+          <div class="card-header">
+            <p class="fs-4" id="teamTitle">Team Name</p>
+          </div>
+          <ul class="list-group list-group-flush" id="list">
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              id="player1"
+            >
+              <span class="badge bg-primary rounded-pill">In</span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              id="player2"
+            >
+              <span class="badge bg-primary rounded-pill">In</span>
+            </li>
+            <li
+              class="list-group-item d-flex justify-content-between align-items-center"
+              id="player3"
+            >
+              <span class="badge bg-primary rounded-pill">Out</span>
+            </li>
+          </ul>
+        </div>
+        <div class="col">
+          <br />
+
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control view-box"
+              disabled
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+          </div>
+          <div class="input-group mb-3">
+            <input
+              type="text"
+              class="form-control"
+              placeholder="your message"
+              aria-label="Recipient's username"
+              aria-describedby="button-addon2"
+            />
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              id="button-addon2"
+            >
+              Send
+            </button>
+          </div>
+        </div>
+        <div class="col col-2 right-side"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<style>
   .navbar {
     background-color: #2e4b73 !important;
   }
@@ -89,10 +135,14 @@
     color: white !important;
   }
   .nav-link {
-    color: #C0C0C0;
+    color: #c0c0c0;
   }
   .nav-link.active {
     color: white !important;
+  }
+  .navbar-toggler {
+    border-color: white;
+    border-width: 2px;
   }
 
   .container {
@@ -107,11 +157,11 @@
     margin-bottom: 0px;
   }
   .left-side {
-    background-color: #8B8B8B;
+    background-color: #8b8b8b;
     height: 100vh;
   }
   .right-side {
-    background-color: #8B8B8B;
+    background-color: #8b8b8b;
     height: 100vh;
   }
   .row {
@@ -135,89 +185,98 @@
       margin-top: 15px;
     }
   }
-  </style>
-  
-  <script>
-    function logout() {
-      window.location.href = '/dist/index.html';
-    }
-    var infill = document.getElementById('not');
-    var infill2 = document.getElementById('safer');
-    var infill3 = document.getElementById('target');
-    var infill4 = document.getElementById('teamTitle');
-    var team = sessionStorage.currentTeam;
-    var teams = JSON.parse(sessionStorage.teams);
-    for (let i = 0; i < teams.length; i++) {
+</style>
+
+<script>
+  function logout() {
+    window.location.href = "/dist/index.html";
+  }
+  var infill = document.getElementById("not");
+  var infill2 = document.getElementById("safer");
+  var infill3 = document.getElementById("target");
+  var infill4 = document.getElementById("teamTitle");
+  var team = sessionStorage.currentTeam;
+  var teams = JSON.parse(sessionStorage.teams);
+  for (let i = 0; i < teams.length; i++) {
+    if (team == teams[i].teamName) {
+      if (teams[i].safe) {
+        infill.innerHTML = "has";
+        infill2.innerHTML = "safe";
+      } else {
+        infill.innerHTML = "has not";
+        infill2.innerHTML = "not safe";
+      }
       if (team == teams[i].teamName) {
-        if (teams[i].safe) {
-          infill.innerHTML = 'has';
-          infill2.innerHTML = 'safe';
-        } else {
-          infill.innerHTML = 'has not';
-          infill2.innerHTML = 'not safe';
-        }
-        if (team == teams[i].teamName) {
-          var target = teams[i].targets;
-          infill3.innerHTML = target;
-          infill4.innerHTML = target;
-        }
-        for (let x = 0; x < teams.length; x++) {
-          if (target == teams[x].teamName) {
-            var target1 = teams[x].player1;
-            var target2 = teams[x].player2;
-            var target3 = teams[x].player3;
-            player1.innerHTML = target1;
-            if (checkIn(target1)) {
-              var ele = document.getElementById('player1');
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>In</span>"
+        var target = teams[i].targets;
+        infill3.innerHTML = target;
+        infill4.innerHTML = target;
+      }
+      for (let x = 0; x < teams.length; x++) {
+        if (target == teams[x].teamName) {
+          var target1 = teams[x].player1;
+          var target2 = teams[x].player2;
+          var target3 = teams[x].player3;
+          player1.innerHTML = target1;
+          if (checkIn(target1)) {
+            var ele = document.getElementById("player1");
+            ele.innerHTML +=
+              "<span class='badge bg-primary rounded-pill'>In</span>";
+          } else {
+            var ele = document.getElementById("player1");
+            ele.innerHTML +=
+              "<span class='badge bg-primary rounded-pill'>Out</span>";
+          }
+          player2.innerHTML = target2;
+          if (checkIn(target2)) {
+            var ele = document.getElementById("player2");
+            ele.innerHTML +=
+              "<span class='badge bg-primary rounded-pill'>In</span>";
+          } else {
+            var ele = document.getElementById("player2");
+            ele.innerHTML +=
+              "<span class='badge bg-primary rounded-pill'>Out</span>";
+          }
+          player3.innerHTML = target3;
+          if (checkIn(target3)) {
+            var ele = document.getElementById("player3");
+            ele.innerHTML +=
+              "<span class='badge bg-primary rounded-pill'>In</span>";
+          } else {
+            var ele = document.getElementById("player3");
+            ele.innerHTML +=
+              "<span class='badge bg-primary rounded-pill'>Out</span>";
+          }
+          if (teams[x].player4) {
+            var list = document.getElementById("list");
+            list.innerHTML +=
+              "<li class='list-group-item d-flex justify-content-between align-items-center' id='player4'> <span class='badge bg-primary rounded-pill'>In</span> </li>";
+            var target4 = teams[x].player4;
+            player4.innerHTML = target4;
+            if (checkIn(target4)) {
+              var ele = document.getElementById("player4");
+              ele.innerHTML +=
+                "<span class='badge bg-primary rounded-pill'>In</span>";
             } else {
-              var ele = document.getElementById('player1')
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>Out</span>"
+              var ele = document.getElementById("player4");
+              ele.innerHTML +=
+                "<span class='badge bg-primary rounded-pill'>Out</span>";
             }
-            player2.innerHTML = target2;
-            if (checkIn(target2)) {
-              var ele = document.getElementById('player2');
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>In</span>"
-            } else {
-              var ele = document.getElementById('player2')
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>Out</span>"
-            }
-            player3.innerHTML = target3;
-            if (checkIn(target3)) {
-              var ele = document.getElementById('player3');
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>In</span>"
-            } else {
-              var ele = document.getElementById('player3')
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>Out</span>"
-            }
-            if (teams[x].player4) {
-              var list = document.getElementById('list');
-              list.innerHTML += "<li class='list-group-item d-flex justify-content-between align-items-center' id='player4'> <span class='badge bg-primary rounded-pill'>In</span> </li>"
-              var target4 = teams[x].player4;
-              player4.innerHTML = target4;
-              if (checkIn(target4)) {
-              var ele = document.getElementById('player4');
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>In</span>"
-            } else {
-              var ele = document.getElementById('player4')
-              ele.innerHTML += "<span class='badge bg-primary rounded-pill'>Out</span>"
-            }
-            }
-            function checkIn(a) {
-              var names = JSON.parse(sessionStorage.names);
-              for (let y = 0; y < names.length; y++) {
-                var userIn = names[y].name;
-                if (a == userIn) {
-                  if (names[y].status) {
-                    return true;
-                  } else {
-                    return false;
-                  }
+          }
+          function checkIn(a) {
+            var names = JSON.parse(sessionStorage.names);
+            for (let y = 0; y < names.length; y++) {
+              var userIn = names[y].name;
+              if (a == userIn) {
+                if (names[y].status) {
+                  return true;
+                } else {
+                  return false;
                 }
               }
             }
           }
+        }
       }
     }
   }
-  </script>
+</script>
