@@ -78,22 +78,24 @@
   initAccordian();
 
   function initAccordian() {
-    var admin = JSON.parse(sessionStorage.admin);
-    let len = Object.keys(admin[1]);
-    for (let a = 0; a < len.length; a++) {
-      let currentTitleSpaces = admin[1][a];
-      let currentTitle = currentTitleSpaces.replace(/\s/g, "");
-      let currentBody = eval("admin[2]." + currentTitle);
+    var rules = JSON.parse(sessionStorage.rules);
+    for (let a = 0; a < rules.length; a++) {
+      for (let b = 0; b < rules.length; b++) {
+        if (rules[b].order == a) {
+          var title = rules[b].id;
+          var rule = rules[b].rule;
+        }
+      }
       let main = document.getElementById("ruleAccordian");
       main.innerHTML +=
         '<div class="accordion-item"> <h2 class="accordion-header"> <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#item' +
         a +
         '" aria-expanded="false" aria-controls="collapseOne">' +
-        currentTitleSpaces +
+        title +
         '</button> </h2><div id="item' +
         a +
         '" class="accordion-collapse collapse" data-bs-parent="#accordionExample"><div class="accordion-body">' +
-        currentBody +
+        rule +
         "</div></div></div>";
     }
   }
