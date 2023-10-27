@@ -1,5 +1,5 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs } from "firebase/firestore";
+import { getFirestore, collection, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE",
@@ -28,3 +28,22 @@ getDocs(colRef)
   .catch((err) => {
     console.log(err.message);
   });
+
+window.updateTitles = function (a, b, c) {
+  var titlesArray = a;
+  var rulesArray = b;
+  var checked = c;
+  console.log(checked)
+  var rules = JSON.parse(sessionStorage.rules);
+  for (let z = 0; z < rules.length; z++) {
+    let current = rules[z].id;
+    deleteDoc(doc(db, 'rules', current));
+  }
+  for (let y = 0; y < titlesArray.length; y++) {
+    setDoc(doc(db, "rules", titlesArray[y]), {
+      rule: rulesArray[y],
+      order: y,
+      enabled: checked[y],
+    });
+  }
+};
