@@ -159,7 +159,6 @@
   function addRule() {
     let column = document.getElementById("middle");
     let b = Number(column.lastElementChild.id.charAt(column.length - 1)) + 1;
-    console.log(b);
     column.innerHTML +=
       '<hr id="hr' +
       b +
@@ -184,6 +183,7 @@
 <style>
   .navbar {
     background-color: #2e4b73 !important;
+    min-height: 9vh;
   }
   .navbar-brand {
     color: white;
@@ -211,11 +211,11 @@
   }
   .left-side {
     background-color: #8b8b8b;
-    height: 100vh;
+    min-height: 91vh;
   }
   .right-side {
     background-color: #8b8b8b;
-    height: 100vh;
+    min-height: 91vh;
   }
   .row {
     width: 98.79vw;

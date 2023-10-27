@@ -49,3 +49,10 @@ window.updateAdmin = function () {
       console.log(err.message);
     });
 };
+
+window.savePot = function (a) {
+  const docRef = doc(db, "admin", 'admin');
+  updateDoc(docRef, {
+    pot: a,
+  });
+}

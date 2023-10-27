@@ -33,7 +33,6 @@ window.updateTitles = function (a, b, c) {
   var titlesArray = a;
   var rulesArray = b;
   var checked = c;
-  console.log(checked)
   var rules = JSON.parse(sessionStorage.rules);
   for (let z = 0; z < rules.length; z++) {
     let current = rules[z].id;

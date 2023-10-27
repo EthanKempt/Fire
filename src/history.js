@@ -1,5 +1,11 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, setDoc, doc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  setDoc,
+  doc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE",
@@ -30,10 +36,10 @@ getDocs(colRef)
   });
 
 window.saveHistory = function (random) {
-    var history = JSON.parse(sessionStorage.history);
-    let size = history.length + 1;
-    let thisWeek = "week" + size;
-    setDoc(doc(db, "history", thisWeek), {});
+  var history = JSON.parse(sessionStorage.history);
+  let size = history.length + 1;
+  let thisWeek = "week" + size;
+  setDoc(doc(db, "history", thisWeek), {});
   let order = random;
   for (let a = 0; a < order.length; a++) {
     var pers = order[a];
@@ -45,7 +51,7 @@ window.saveHistory = function (random) {
     let target = order[b];
     const docRef = doc(db, "history", thisWeek);
     updateDoc(docRef, {
-      [pers]: target
+      [pers]: target,
     });
   }
 };

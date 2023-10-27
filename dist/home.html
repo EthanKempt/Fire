@@ -65,7 +65,7 @@
         <div class="col col-2 left-side" id="left"></div>
         <div class="col">
           <p class="h5">Current pot value:</p>
-          <h1 class="display-1">$A TONNNN</h1>
+          <h1 class="display-1" id="pot">$</h1>
           <hr />
           <p class="h5">Time since start:</p>
           <h1 class="display-1" id="timeSinceStart">hi</h1>
@@ -87,7 +87,7 @@
 thats what were including in that section. If you want to comment just type something,
 seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 
-    <!-- info to include: $$$
+    <!-- info to include: 
   if your in or not*
   messaging service
   if there is a minigame coming up
@@ -142,6 +142,11 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   function logout() {
     window.location.href = "/dist/index.html";
   }
+
+  var admin = JSON.parse(sessionStorage.admin);
+  let pot = document.getElementById('pot');
+  console.log(admin)
+  pot.innerHTML += admin[0].pot;
 </script>
 
 <style>
