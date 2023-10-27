@@ -100,8 +100,8 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 <script>
   refreshTime();
   function refreshTime() {
-    const start = new Date("September 30, 2023 12:45");
-    let milli2 = start.getTime();
+    var admin = JSON.parse(sessionStorage.admin);
+    let milli2 = admin[0].startDate;
 
     const current = new Date();
     let milli = current.getTime();

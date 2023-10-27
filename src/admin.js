@@ -56,3 +56,10 @@ window.savePot = function (a) {
     pot: a,
   });
 }
+
+window.saveDate = function (a) {
+  const docRef = doc(db, "admin", 'admin');
+  updateDoc(docRef, {
+    startDate: a,
+  });
+}
