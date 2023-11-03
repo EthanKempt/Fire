@@ -17,6 +17,12 @@
     ></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
+    <script src="bundleTeams.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
@@ -85,21 +91,19 @@
               class="list-group-item d-flex justify-content-between align-items-center"
               id="player3"
             >
-              <span class="badge bg-primary rounded-pill">Out</span>
+              <span class="badge bg-primary rounded-pill">In</span>
             </li>
           </ul>
         </div>
-        <div class="col">
+        <div class="col message-col">
           <br />
 
-          <div class="input-group mb-3">
-            <input
-              type="text"
-              class="form-control view-box"
-              disabled
-              aria-label="Recipient's username"
-              aria-describedby="button-addon2"
-            />
+          <div class="card text-bg-light mb-3 message-display text-start">
+            <div class="card-header message-header">Admin</div>
+            <div
+              class="card-body message-body overflow-auto"
+              id="messager"
+            ></div>
           </div>
           <div class="input-group mb-3">
             <input
@@ -123,69 +127,6 @@
     </div>
   </body>
 </html>
-
-<style>
-  .navbar {
-    background-color: #2e4b73 !important;
-  }
-  .navbar-brand {
-    color: white;
-  }
-  .navbar-brand:hover {
-    color: white !important;
-  }
-  .nav-link {
-    color: #c0c0c0;
-  }
-  .nav-link.active {
-    color: white !important;
-  }
-  .navbar-toggler {
-    border-color: white;
-    border-width: 2px;
-  }
-
-  .container {
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-  .display-1 {
-    font-weight: 500;
-  }
-  .h5 {
-    margin-top: 15px;
-    margin-bottom: 0px;
-  }
-  .left-side {
-    background-color: #8b8b8b;
-    height: 100vh;
-  }
-  .right-side {
-    background-color: #8b8b8b;
-    height: 100vh;
-  }
-  .row {
-    width: 98.79vw;
-  }
-  .view-box {
-    height: 50vh;
-  }
-  .loginButton {
-    position: absolute;
-    right: 1vw;
-  }
-  @media (max-width: 991px) {
-    .right-side {
-      display: none;
-    }
-    .left-side {
-      display: none;
-    }
-    #logout {
-      margin-top: 15px;
-    }
-  }
-</style>
 
 <script>
   function logout() {
@@ -279,4 +220,152 @@
       }
     }
   }
+
+  initScroll();
+  function initScroll() {
+    let element = document.getElementById("messager");
+    element.scrollTop = element.scrollHeight;
+  }
+
+  function updateScroll(a, b) {
+    let element = document.getElementById("messager");
+    var bottom = true;
+    if (!atBottom()) {
+      var bottom = false;
+    }
+    addTest(a, b);
+    if (bottom) {
+      element.scrollTop = element.scrollHeight;
+    }
+  }
+
+  function addTest(a, b) {
+    let element = document.getElementById("messager");
+    var color = 'primary'
+    if (b == 'admin') {
+      color = 'secondary'
+    }
+    element.innerHTML +=
+      '<h4><div class="badge bg-' + color + ' message">' + a + '</div></h4>';
+  }
+
+  function atBottom() {
+    var ele = document.getElementById("messager");
+    var sh = ele.scrollHeight; //total height
+    var st = ele.scrollTop; //how far its scrolled
+    var ht = ele.offsetHeight;
+    if (ht == 0) {
+      return true;
+    }
+    if (st == sh - ht) {
+      return true;
+    } else {
+      return false;
+    }
+  }
+
+  // basic message: <h4><div class="badge bg-primary message">hi</div></h4>
+
+  initMessages();
+  function initMessages() {
+    var team = sessionStorage.currentTeam;
+    var teams = JSON.parse(sessionStorage.teams);
+    for (let a = 0; a < teams.length; a++) {
+      if (teams[a].teamName == team) {
+        getMessages(team);
+        var messages = JSON.parse(sessionStorage.messages);
+        var sorted = [];
+        var author = [];
+        for (let b = 0; b < messages.length; b++) {
+          for (let c = 0; c < messages.length; c++) {
+            if (messages[b].order == b) {
+              sorted.unshift(messages[c].value);
+              author.unshift(messages[c].author);
+            }
+          }
+        }
+        for (let d = 0; d < sorted.length; d++) {
+          updateScroll(sorted[d], author[d]);
+        }
+      }
+    }
+  }
 </script>
+
+<style>
+  .navbar {
+    background-color: #2e4b73 !important;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: white !important;
+  }
+  .nav-link {
+    color: #c0c0c0;
+  }
+  .nav-link.active {
+    color: white !important;
+  }
+  .navbar-toggler {
+    border-color: white;
+    border-width: 2px;
+  }
+
+  .container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .display-1 {
+    font-weight: 500;
+  }
+  .h5 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+  .left-side {
+    background-color: #8b8b8b;
+    height: 100vh;
+  }
+  .right-side {
+    background-color: #8b8b8b;
+    height: 100vh;
+  }
+  .row {
+    width: 98.79vw;
+  }
+  .view-box {
+    height: 50vh;
+  }
+  .loginButton {
+    position: absolute;
+    right: 1vw;
+  }
+  @media (max-width: 991px) {
+    .right-side {
+      display: none;
+    }
+    .left-side {
+      display: none;
+    }
+    #logout {
+      margin-top: 15px;
+    }
+  }
+  .message-display {
+    max-width: 100%;
+    height: 18rem;
+  }
+  .message-header {
+    font-weight: 700;
+  }
+  .message-col {
+    max-width: 33.33%;
+  }
+  .message {
+    max-width: 100%;
+    white-space: normal;
+    text-align: left;
+  }
+</style>

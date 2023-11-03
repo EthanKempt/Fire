@@ -106,14 +106,14 @@ window.writeNewTeam = function (a, b, c, d, e, f, g, h) {
     });
   } else {
     updateDoc(currentRef, {
-      targets: 'none',
+      targets: "none",
     });
   }
-}
+};
 
 window.deleteCurrent = function (a) {
-  deleteDoc(doc(db, 'teams', a));
-}
+  deleteDoc(doc(db, "teams", a));
+};
 
 window.newSave = function (random) {
   let order = random;
@@ -131,13 +131,28 @@ window.newSave = function (random) {
       targets: target,
     });
   }
-}
+};
 
 const q = query(collection(db, "teams"));
 onSnapshot(q, (querySnapshot) => {
   const cities = [];
   querySnapshot.forEach((doc) => {
-      cities.push(doc.data().teamName);
+    cities.push(doc.data().teamName);
   });
-  console.log("Current cities in CA: ", cities.join(", "));
+  // console.log("Current cities in CA: ", cities.join(", "));
 });
+
+window.getMessages = function (a) {
+  const colRef2 = collection(db, "teams", a, "messages");
+  getDocs(colRef2)
+    .then((snapshot) => {
+      window.messages = [];
+      snapshot.docs.forEach((doc) => {
+        messages.push({ ...doc.data() });
+      });
+      sessionStorage.setItem("messages", JSON.stringify(messages));
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+};
