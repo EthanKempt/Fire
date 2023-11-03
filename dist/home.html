@@ -17,6 +17,7 @@
     ></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
+    <script src="bundleAdmin.js"></script>
     <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" integrity="sha512-z/90a5SWiu4MWVelb5+ny7sAayYUfMmdXKEAbpj27PfdkamNdyI3hcjxPxkOPbrXoKIm7r9V2mElt5f1OtVhqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
@@ -71,10 +72,10 @@
           <h1 class="display-1" id="timeSinceStart">hi</h1>
           <hr />
           <p class="h5">Teams remaining:</p>
-          <h1 class="display-1">28</h1>
+          <h1 class="display-1" id="teamsR">Could not load</h1>
           <hr />
           <p class="h5">Players remaining:</p>
-          <h1 class="display-1">59</h1>
+          <h1 class="display-1" id="playersR">Could not load</h1>
           <hr />
           <p class="h5">Safe:</p>
           <h1 class="display-1"></h1>
@@ -145,8 +146,15 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 
   var admin = JSON.parse(sessionStorage.admin);
   let pot = document.getElementById('pot');
-  console.log(admin)
   pot.innerHTML += admin[0].pot;
+
+  var teams = JSON.parse(sessionStorage.teams);
+  let input = document.getElementById('teamsR');
+  input.innerHTML = teams.length;
+
+  var names = JSON.parse(sessionStorage.names);
+  let input2 = document.getElementById('playersR');
+  input2.innerHTML = names.length;
 </script>
 
 <style>

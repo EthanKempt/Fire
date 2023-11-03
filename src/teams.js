@@ -8,6 +8,9 @@ import {
   deleteField,
   setDoc,
   deleteDoc,
+  onSnapshot,
+  query,
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -129,3 +132,12 @@ window.newSave = function (random) {
     });
   }
 }
+
+const q = query(collection(db, "teams"));
+onSnapshot(q, (querySnapshot) => {
+  const cities = [];
+  querySnapshot.forEach((doc) => {
+      cities.push(doc.data().teamName);
+  });
+  console.log("Current cities in CA: ", cities.join(", "));
+});

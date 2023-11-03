@@ -241,10 +241,11 @@
     }
     new Date("September 30, 2023 12:45");
     let date = new Date(
-      month + " " + day + ", " + year + " " + hour + ":" + minute + ":" + second
+      month + " " + day + ", " + year + " " + hour + ":" + minute
     );
 
     let dateMilli = date.getTime();
+    let a = new Date().getTime()
     saveDate(dateMilli);
   }
   function updateMonth(a) {
