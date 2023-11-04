@@ -45,6 +45,7 @@
             <a class="nav-link" href="teams.html">Teams</a>
             <a class="nav-link active" href="targets.html">Targets</a>
             <a class="nav-link" href="rules.html">Rules</a>
+
             <button
               type="button"
               id="logout"
@@ -110,13 +111,14 @@
               type="text"
               class="form-control"
               placeholder="your message"
-              aria-label="Recipient's username"
               aria-describedby="button-addon2"
+              id="messageVal"
             />
             <button
               class="btn btn-outline-primary"
               type="button"
               id="button-addon2"
+              onclick="sendMessage()"
             >
               Send
             </button>
@@ -221,80 +223,40 @@
     }
   }
 
-  initScroll();
-  function initScroll() {
-    let element = document.getElementById("messager");
-    element.scrollTop = element.scrollHeight;
-  }
-
-  function updateScroll(a, b) {
-    let element = document.getElementById("messager");
-    var bottom = true;
-    if (!atBottom()) {
-      var bottom = false;
-    }
-    addTest(a, b);
-    if (bottom) {
-      element.scrollTop = element.scrollHeight;
-    }
-  }
-
-  function addTest(a, b) {
-    let element = document.getElementById("messager");
-    var color = 'primary'
-    if (b == 'admin') {
-      color = 'secondary'
-    }
-    element.innerHTML +=
-      '<h4><div class="badge bg-' + color + ' message">' + a + '</div></h4>';
-  }
-
-  function atBottom() {
-    var ele = document.getElementById("messager");
-    var sh = ele.scrollHeight; //total height
-    var st = ele.scrollTop; //how far its scrolled
-    var ht = ele.offsetHeight;
-    if (ht == 0) {
-      return true;
-    }
-    if (st == sh - ht) {
-      return true;
-    } else {
-      return false;
-    }
-  }
-
-  // basic message: <h4><div class="badge bg-primary message">hi</div></h4>
-
   initMessages();
   function initMessages() {
-    var team = sessionStorage.currentTeam;
-    var teams = JSON.parse(sessionStorage.teams);
-    for (let a = 0; a < teams.length; a++) {
-      if (teams[a].teamName == team) {
-        getMessages(team);
-        var messages = JSON.parse(sessionStorage.messages);
-        var sorted = [];
-        var author = [];
-        for (let b = 0; b < messages.length; b++) {
-          for (let c = 0; c < messages.length; c++) {
-            if (messages[b].order == b) {
-              sorted.unshift(messages[c].value);
-              author.unshift(messages[c].author);
-            }
-          }
-        }
-        for (let d = 0; d < sorted.length; d++) {
-          updateScroll(sorted[d], author[d]);
-        }
+    messagesArray = JSON.parse(sessionStorage.messages);
+    var sorted = messagesArray.sort((a, b) => a.time.seconds - b.time.seconds);
+    var messageBox = document.getElementById("messager");
+
+    for (let a = 0; a < sorted.length; a++) {
+      let message = sorted[a].value;
+      var color = "primary";
+      if (sorted[a].author == "admin") {
+        color = "secondary";
       }
+      messageBox.innerHTML +=
+        '<h4><div class="badge bg-' +
+        color +
+        ' message">' +
+        message +
+        "</div></h4>";
     }
+  }
+
+  function sendMessage() {
+    var team = sessionStorage.currentTeam;
+    getMessages(team);
+    let auth = "team";
+    let val = document.getElementById("messageVal").value;
+    addMessage(team, auth, val); //teamName + author + value
   }
 </script>
 
 <style>
   .navbar {
     background-color: #2e4b73 !important;
+    height: 9vh;
   }
   .navbar-brand {
     color: white;
@@ -326,14 +288,14 @@
   }
   .left-side {
     background-color: #8b8b8b;
-    height: 100vh;
+    min-height: 91vh;
   }
   .right-side {
     background-color: #8b8b8b;
-    height: 100vh;
+    min-height: 91vh;
   }
   .row {
-    width: 98.79vw;
+    width: 100vw;
   }
   .view-box {
     height: 50vh;

@@ -11,6 +11,8 @@ import {
   onSnapshot,
   query,
   where,
+  serverTimestamp,
+  addDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -133,26 +135,67 @@ window.newSave = function (random) {
   }
 };
 
-const q = query(collection(db, "teams"));
-onSnapshot(q, (querySnapshot) => {
-  const cities = [];
-  querySnapshot.forEach((doc) => {
-    cities.push(doc.data().teamName);
-  });
-  // console.log("Current cities in CA: ", cities.join(", "));
-});
-
-window.getMessages = function (a) {
-  const colRef2 = collection(db, "teams", a, "messages");
+window.getMessages = function () {
+  const colRef2 = collection(
+    db,
+    "teams",
+    sessionStorage.currentTeam,
+    "messages"
+  );
   getDocs(colRef2)
     .then((snapshot) => {
       window.messages = [];
       snapshot.docs.forEach((doc) => {
         messages.push({ ...doc.data() });
       });
-      sessionStorage.setItem("messages", JSON.stringify(messages));
+      var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
+      sessionStorage.setItem("messages", JSON.stringify(sorted));
     })
     .catch((err) => {
       console.log(err.message);
     });
 };
+
+window.addMessage = function (a, b, c) {
+  addDoc(collection(db, "teams", a, "messages"), {
+    author: b,
+    value: c,
+    time: new Date(),
+  });
+};
+
+const q = query(
+  collection(db, "teams", sessionStorage.currentTeam, "messages")
+);
+onSnapshot(q, (querySnapshot) => {
+  if (!querySnapshot.metadata.hasPendingWrites) {
+    const messages = [];
+    querySnapshot.forEach((doc) => {
+      messages.push(doc.data());
+    });
+    var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
+    sessionStorage.setItem("messages", JSON.stringify(sorted));
+    addMessage();
+  }
+});
+
+const startTime = new Date().getTime() / 1000;
+
+function addMessage() {
+  let messageBox = document.getElementById("messager");
+  let messages = JSON.parse(sessionStorage.messages);
+  let size = messages.length - 1;
+  let last = messages[size];
+  var color = "secondary";
+  if (last.author == "team") {
+    color = "primary";
+  }
+  let message = last.value;
+  if (last.time.seconds >= startTime)
+    messageBox.innerHTML +=
+      '<h4><div class="badge bg-' +
+      color +
+      ' message">' +
+      message +
+      "</div></h4>";
+}
