@@ -234,7 +234,7 @@
 
   initMessages();
   function initMessages() {
-    messagesArray = JSON.parse(sessionStorage.messages);
+    var messagesArray = JSON.parse(sessionStorage.messages);
     var sorted = messagesArray.sort((a, b) => a.time.seconds - b.time.seconds);
     var messageBox = document.getElementById("messager");
 
