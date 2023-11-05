@@ -223,6 +223,15 @@
     }
   }
 
+  document.addEventListener("DOMContentLoaded", () => {
+    scrollBottom();
+  });
+
+  function scrollBottom() {
+    let messageBox = document.getElementById("messager");
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
   initMessages();
   function initMessages() {
     messagesArray = JSON.parse(sessionStorage.messages);

@@ -191,11 +191,23 @@ function addMessage() {
     color = "primary";
   }
   let message = last.value;
-  if (last.time.seconds >= startTime)
+  var scroll = false;
+  if (
+    messageBox.scrollTop + messageBox.clientHeight ==
+    messageBox.scrollHeight
+  ) {
+    scroll = true;
+  }
+  if (last.time.seconds >= startTime) {
     messageBox.innerHTML +=
       '<h4><div class="badge bg-' +
       color +
       ' message">' +
       message +
       "</div></h4>";
+  }
+  document.getElementById("messageVal").value = "";
+  if (scroll) {
+    scrollBottom();
+  }
 }
