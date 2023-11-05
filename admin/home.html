@@ -176,13 +176,6 @@
               placeholder="Min"
               aria-label="Server"
             />
-            <input
-              type="text"
-              class="form-control text-center"
-              id="second"
-              placeholder="Sec"
-              aria-label="Server"
-            />
             <button
               class="btn btn-outline-secondary"
               type="button"
@@ -233,7 +226,6 @@
     let year = document.getElementById("year").value;
     let hour = document.getElementById("hour").value;
     let minute = document.getElementById("minute").value;
-    let second = document.getElementById("second").value;
     let after = document.getElementById("M").innerHTML;
     if (after == "PM") {
       let hr = Number(hour);
@@ -243,10 +235,7 @@
     let date = new Date(
       month + " " + day + ", " + year + " " + hour + ":" + minute
     );
-
-    let dateMilli = date.getTime();
-    let a = new Date().getTime()
-    saveDate(dateMilli);
+    saveDate(date);
   }
   function updateMonth(a) {
     let month = document.getElementById("month");

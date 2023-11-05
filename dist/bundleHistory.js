@@ -30,13 +30,13 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 
 /***/ }),
 
-/***/ "./src/admin.js":
-/*!**********************!*\
-  !*** ./src/admin.js ***!
-  \**********************/
+/***/ "./src/history.js":
+/*!************************!*\
+  !*** ./src/history.js ***!
+  \************************/
 /***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
 
-eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE\",\r\n  authDomain: \"higleyassassinsproject.firebaseapp.com\",\r\n  projectId: \"higleyassassinsproject\",\r\n  storageBucket: \"higleyassassinsproject.appspot.com\",\r\n  messagingSenderId: \"237417001265\",\r\n  appId: \"1:237417001265:web:1c4100d2b41e455cccc010\",\r\n  measurementId: \"G-E7TK2NYFL4\",\r\n};\r\n\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)();\r\n\r\nconst colRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"admin\");\r\n\r\n(0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(colRef)\r\n  .then((snapshot) => {\r\n    window.admin = [];\r\n    snapshot.docs.forEach((doc) => {\r\n      admin.push({ ...doc.data() });\r\n    });\r\n    sessionStorage.setItem(\"admin\", JSON.stringify(admin));\r\n  })\r\n  .catch((err) => {\r\n    console.log(err.message);\r\n  });\r\n\r\nwindow.updateAdmin = function () {\r\n  (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(colRef)\r\n    .then((snapshot) => {\r\n      window.admin = [];\r\n      snapshot.docs.forEach((doc) => {\r\n        admin.push({ ...doc.data() });\r\n      });\r\n      sessionStorage.setItem(\"admin\", JSON.stringify(admin));\r\n    })\r\n    .catch((err) => {\r\n      console.log(err.message);\r\n    });\r\n};\r\n\r\nwindow.savePot = function (a) {\r\n  const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, \"admin\", 'admin');\r\n  (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(docRef, {\r\n    pot: a,\r\n  });\r\n}\r\n\r\nwindow.saveDate = function (a) {\r\n  const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, \"admin\", 'admin');\r\n  (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.updateDoc)(docRef, {\r\n    startDate: a,\r\n  });\r\n}\n\n//# sourceURL=webpack://fire/./src/admin.js?");
+eval("__webpack_require__.r(__webpack_exports__);\n/* harmony import */ var firebase_app__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! firebase/app */ \"./node_modules/firebase/app/dist/esm/index.esm.js\");\n/* harmony import */ var firebase_firestore__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! firebase/firestore */ \"./node_modules/firebase/firestore/dist/esm/index.esm.js\");\n\r\n\r\n\r\nconst firebaseConfig = {\r\n  apiKey: \"AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE\",\r\n  authDomain: \"higleyassassinsproject.firebaseapp.com\",\r\n  projectId: \"higleyassassinsproject\",\r\n  storageBucket: \"higleyassassinsproject.appspot.com\",\r\n  messagingSenderId: \"237417001265\",\r\n  appId: \"1:237417001265:web:1c4100d2b41e455cccc010\",\r\n  measurementId: \"G-E7TK2NYFL4\",\r\n};\r\n\r\n(0,firebase_app__WEBPACK_IMPORTED_MODULE_0__.initializeApp)(firebaseConfig);\r\n\r\nconst db = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getFirestore)();\r\n\r\nconst colRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.collection)(db, \"history\");\r\n\r\n(0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.getDocs)(colRef)\r\n  .then((snapshot) => {\r\n    var history = [];\r\n    snapshot.docs.forEach((doc) => {\r\n      history.push({ ...doc.data(), id: doc.id });\r\n      sessionStorage.setItem(\"history\", JSON.stringify(history));\r\n    });\r\n  })\r\n  .catch((err) => {\r\n    console.log(err.message);\r\n  });\r\n\r\nwindow.saveHistory = function (random) {\r\n  var history = JSON.parse(sessionStorage.history);\r\n  let size = history.length + 1;\r\n  let thisWeek = \"week\" + size;\r\n  (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.setDoc)((0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, \"history\", thisWeek), {});\r\n  let order = random;\r\n  for (let a = 0; a < order.length; a++) {\r\n    var pers = order[a];\r\n    if (a + 1 == order.length) {\r\n      var b = 0;\r\n    } else {\r\n      var b = a + 1;\r\n    }\r\n    let target = order[b];\r\n    const docRef = (0,firebase_firestore__WEBPACK_IMPORTED_MODULE_1__.doc)(db, \"history\", thisWeek);\r\n    updateDoc(docRef, {\r\n      [pers]: target,\r\n    });\r\n  }\r\n};\n\n//# sourceURL=webpack://fire/./src/history.js?");
 
 /***/ }),
 
@@ -192,7 +192,7 @@ eval("__webpack_require__.r(__webpack_exports__);\n/* harmony export */ __webpac
 /******/ 	// startup
 /******/ 	// Load entry module and return exports
 /******/ 	// This entry module can't be inlined because the eval devtool is used.
-/******/ 	var __webpack_exports__ = __webpack_require__("./src/admin.js");
+/******/ 	var __webpack_exports__ = __webpack_require__("./src/history.js");
 /******/ 	
 /******/ })()
 ;

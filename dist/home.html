@@ -18,9 +18,22 @@
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
     <script src="bundleAdmin.js"></script>
-    <script src="https://code.jquery.com/jquery-3.7.1.js" integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4=" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css" integrity="sha512-z/90a5SWiu4MWVelb5+ny7sAayYUfMmdXKEAbpj27PfdkamNdyI3hcjxPxkOPbrXoKIm7r9V2mElt5f1OtVhqA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/select2-bootstrap-5-theme/1.3.0/select2-bootstrap-5-theme.min.css"
+      integrity="sha512-z/90a5SWiu4MWVelb5+ny7sAayYUfMmdXKEAbpj27PfdkamNdyI3hcjxPxkOPbrXoKIm7r9V2mElt5f1OtVhqA=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css"
+      rel="stylesheet"
+    />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
   <body>
@@ -69,7 +82,7 @@
           <h1 class="display-1" id="pot">$</h1>
           <hr />
           <p class="h5">Time since start:</p>
-          <h1 class="display-1" id="timeSinceStart">hi</h1>
+          <h1 class="display-1" id="timeSinceStart">Could not load</h1>
           <hr />
           <p class="h5">Teams remaining:</p>
           <h1 class="display-1" id="teamsR">Could not load</h1>
@@ -102,23 +115,24 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   refreshTime();
   function refreshTime() {
     var admin = JSON.parse(sessionStorage.admin);
-    let milli2 = admin[0].startDate;
+    let startMilli = admin[0].startDate.seconds * 1000;
 
     const current = new Date();
     let milli = current.getTime();
 
-    let timeSince = milli - milli2;
-    let dateSince = new Date(timeSince);
-    let seconds = dateSince.getSeconds();
-    let minutes = dateSince.getMinutes();
-    let hours = dateSince.getHours();
-    let days = dateSince.getDay();
-    let weeksSec = timeSince / 1000;
-    let weeksMin = weeksSec / 60;
-    let weeksHr = weeksMin / 60;
-    let weeksDay = weeksHr / 24;
-    let weeksDeci = weeksDay / 7;
-    let weeks = Math.trunc(weeksDeci);
+    let timeSince = milli - startMilli;
+    
+    let weeksLong = timeSince / 604800000;
+    let weeks = Math.floor(weeksLong);
+    let daysLong = (weeksLong - weeks) * 7;
+    let days = Math.floor(daysLong);
+    let hoursLong = (daysLong - days) * 24;
+    let hours = Math.floor(hoursLong);
+    let minutesLong = (hoursLong - hours) * 60;
+    let minutes = Math.floor(minutesLong);
+    let secondsLong = (minutesLong - minutes) * 60;
+    let seconds = Math.floor(secondsLong);
+
     if (String(seconds).length == 1) {
       var zero = "0";
     } else {
@@ -145,15 +159,15 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   }
 
   var admin = JSON.parse(sessionStorage.admin);
-  let pot = document.getElementById('pot');
+  let pot = document.getElementById("pot");
   pot.innerHTML += admin[0].pot;
 
   var teams = JSON.parse(sessionStorage.teams);
-  let input = document.getElementById('teamsR');
+  let input = document.getElementById("teamsR");
   input.innerHTML = teams.length;
 
   var names = JSON.parse(sessionStorage.names);
-  let input2 = document.getElementById('playersR');
+  let input2 = document.getElementById("playersR");
   input2.innerHTML = names.length;
 </script>
 
