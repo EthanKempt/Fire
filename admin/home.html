@@ -192,6 +192,9 @@
             >
               Update
             </button>
+            <div id="underTime" class="form-text"> 
+              Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+            </div>
           </div>
         </div>
         <div class="col col-2 right-side"></div>
@@ -210,6 +213,8 @@
 
   let pot = document.getElementById("potVal");
   pot.value = admin[0].pot;
+
+  document.getElementById("M").innerHTML = "AM";
 
   function updatePot() {
     var number = document.getElementById("potVal").value;
@@ -250,6 +255,82 @@
       box.innerHTML = "AM";
     }
   }
+
+  initDate();
+  function initDate() {
+    let months = [
+      "January",
+      "February",
+      "March",
+      "April",
+      "May",
+      "June",
+      "July",
+      "August",
+      "September",
+      "October",
+      "November",
+      "December",
+    ];
+    let startDate = new Date(admin[0].startDate.seconds * 1000);
+    var hoursM = startDate.getHours();
+    var m = "AM";
+    if (hoursM > 12) {
+      hoursM = hoursM - 12;
+      m = "PM";
+    }
+    let day = (document.getElementById("day").value = startDate.getDate());
+    let month = (document.getElementById("month").innerHTML =
+      months[startDate.getMonth()]);
+    let year = (document.getElementById("year").value =
+      startDate.getFullYear());
+    let hour = (document.getElementById("hour").value = hoursM);
+    let minute = (document.getElementById("minute").value =
+      startDate.getMinutes());
+    let after = (document.getElementById("M").innerHTML = m);
+  }
+
+  refreshTime();
+  function refreshTime() {
+    var admin = JSON.parse(sessionStorage.admin);
+    let startMilli = admin[0].startDate.seconds * 1000;
+
+    const current = new Date();
+    let milli = current.getTime();
+
+    let timeSince = milli - startMilli;
+    
+    let weeksLong = timeSince / 604800000;
+    let weeks = Math.floor(weeksLong);
+    let daysLong = (weeksLong - weeks) * 7;
+    let days = Math.floor(daysLong);
+    let hoursLong = (daysLong - days) * 24;
+    let hours = Math.floor(hoursLong);
+    let minutesLong = (hoursLong - hours) * 60;
+    let minutes = Math.floor(minutesLong);
+    let secondsLong = (minutesLong - minutes) * 60;
+    let seconds = Math.floor(secondsLong);
+
+    if (String(seconds).length == 1) {
+      var zero = "0";
+    } else {
+      var zero = "";
+    }
+
+    document.getElementById("underTime").innerHTML =
+      weeks +
+      "w " +
+      days +
+      "d " +
+      hours +
+      ":" +
+      minutes +
+      ":" +
+      zero +
+      seconds +
+      "";
+  }
+  setInterval(refreshTime, 1000);
 </script>
 
 <style>
@@ -308,5 +389,12 @@
   }
   #pot {
     margin-top: 1rem;
+  }
+  #updateDate {
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+  #underTime {
+    margin-right: 40rem;
   }
 </style>

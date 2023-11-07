@@ -62,4 +62,4 @@ window.saveDate = function (a) {
   updateDoc(docRef, {
     startDate: a,
   });
-}
+} 
