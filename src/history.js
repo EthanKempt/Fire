@@ -5,6 +5,7 @@ import {
   getDocs,
   setDoc,
   doc,
+  updateDoc
 } from "firebase/firestore";
 
 const firebaseConfig = {

@@ -142,11 +142,11 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
   }
 };
 
-window.writeNewUsers = function (a, b, c, d, e, f, g, h) {
+window.writeNewUsers = function (a, b, c, d, e, f, g, h, i, j) {
   setDoc(doc(db, 'names', c), {
     name: c,
     password: b,
-    status: h,
+    status: g,
     team: a,
   })
   setDoc(doc(db, 'names', d), {
@@ -158,14 +158,14 @@ window.writeNewUsers = function (a, b, c, d, e, f, g, h) {
   setDoc(doc(db, 'names', e), {
     name: e,
     password: b,
-    status: h,
+    status: i,
     team: a,
   })
   if (f) {
     setDoc(doc(db, 'names', f), {
       name: f,
       password: b,
-      status: h,
+      status: j,
       team: a,
     })
   }

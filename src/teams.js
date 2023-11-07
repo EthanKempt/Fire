@@ -164,20 +164,22 @@ window.addMessage = function (a, b, c) {
   });
 };
 
-const q = query(
-  collection(db, "teams", sessionStorage.currentTeam, "messages")
-);
-onSnapshot(q, (querySnapshot) => {
-  if (!querySnapshot.metadata.hasPendingWrites) {
-    const messages = [];
-    querySnapshot.forEach((doc) => {
-      messages.push(doc.data());
-    });
-    var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
-    sessionStorage.setItem("messages", JSON.stringify(sorted));
-    addMessage();
-  }
-});
+if (window.location.pathname == "/dist/targets.html") {
+  const q = query(
+    collection(db, "teams", sessionStorage.currentTeam, "messages")
+  );
+  onSnapshot(q, (querySnapshot) => {
+    if (!querySnapshot.metadata.hasPendingWrites) {
+      const messages = [];
+      querySnapshot.forEach((doc) => {
+        messages.push(doc.data());
+      });
+      var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
+      sessionStorage.setItem("messages", JSON.stringify(sorted));
+      addMessage();
+    }
+  });
+}
 
 const startTime = new Date().getTime() / 1000;
 
