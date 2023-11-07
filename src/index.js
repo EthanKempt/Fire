@@ -97,7 +97,7 @@ window.onload = function () {
   }
 };
 
-window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
+window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {
   var team = teams[i];
   var player1 = team.player1;
   var player2 = team.player2;
@@ -111,6 +111,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
       updateDoc(docRef, {
         status: a,
         name: a2,
+        password: e,
       });
     }
     if (names[i].name == player2) {
@@ -119,6 +120,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
       updateDoc(docRef, {
         status: b,
         name: b2,
+        password: e,
       });
     }
     if (names[i].name == player3) {
@@ -127,6 +129,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
       updateDoc(docRef, {
         status: c,
         name: c2,
+        password: e,
       });
     }
     if (d != null) {
@@ -136,6 +139,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2) {
         updateDoc(docRef, {
           status: d,
           name: d2,
+          password: e,
         });
       }
     }
