@@ -234,11 +234,18 @@
 
   initMessages();
   function initMessages() {
+    getMessages();
     var messagesArray = JSON.parse(sessionStorage.messages);
     var sorted = messagesArray.sort((a, b) => a.time.seconds - b.time.seconds);
     var messageBox = document.getElementById("messager");
+    var done = true;
 
     for (let a = 0; a < sorted.length; a++) {
+      if (sorted.length > 20 && done) {
+        a = sorted.length - 20;
+        var done = false;
+        window.firstMessage = sorted[a];
+      }
       let message = sorted[a].value;
       var color = "primary";
       if (sorted[a].author == "admin") {
@@ -260,6 +267,53 @@
     let val = document.getElementById("messageVal").value;
     addMessage(team, auth, val); //teamName + author + value
   }
+
+  let messageBox = document.getElementById("messager");
+  messageBox.addEventListener("scroll", (event) => {
+    var messageBox = document.getElementById("messager");
+    var totalMessages = JSON.parse(sessionStorage.messages);
+    // console.clear()
+    // console.log('scrollHeight' + messageBox.scrollHeight)
+    // console.log('scrollTop' + messageBox.scrollTop)
+    // console.log('offsetHeight' + messageBox.offsetHeight)
+    // console.log('clientHeight' + messageBox.clientHeight)
+    if (messageBox.scrollTop == 0 && messageBox.childElementCount != totalMessages.length - 1) {
+      var keep = messageBox.firstElementChild;
+      var messagesArray = JSON.parse(sessionStorage.messages);
+      var sorted = messagesArray.sort(
+        (a, b) => a.time.seconds - b.time.seconds
+      );
+
+      indexF = sorted.findIndex(firstOf);
+      function firstOf(checking) {
+        return checking.time.seconds == firstMessage.time.seconds;
+      }
+      let short = sorted.splice(0, indexF);
+      var amountToLoad = 20;
+      if (short.length < 20) {
+        amountToLoad = short.length;
+      }
+      for (let b = 0; b < amountToLoad - 1; b++) {
+        var fullMessage = short.pop();
+        if (b == amountToLoad - 2) {
+          window.firstMessage = fullMessage;
+        }
+        var color = "primary";
+        if (fullMessage.author == "admin") {
+          color = "secondary";
+        }
+        let message = fullMessage.value;
+        let currentMessage =
+          '<h4><div class="badge bg-' +
+          color +
+          ' message">' +
+          message +
+          "</div></h4>";
+        messageBox.insertAdjacentHTML("afterbegin", currentMessage);
+      }
+      keep.scrollIntoView();
+    }
+  });
 </script>
 
 <style>
