@@ -84,7 +84,7 @@
 
   <script>
     function userCheck() {
-      let userIn = document.getElementById("username").value;
+      let userIn = document.getElementById("username").value.toLowerCase().trim();
       let userInP = document.getElementById("password").value;
       updateTeams();
       updateUsers();
