@@ -29,19 +29,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "teams");
 
-window.updateTeams = function () {
+window.updateTeams = new Promise((resolve, reject) => {
   getDocs(colRef)
     .then((snapshot) => {
       window.teams = [];
       snapshot.docs.forEach((doc) => {
-        teams.push({ ...doc.data() });
+        teams.push({ ...doc.data(), id: doc.id });
       });
-      sessionStorage.setItem("teams", JSON.stringify(teams));
+      resolve(teams);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
+});
 
 window.adminEdit = function (i, a, b, c, d, e, f) {
   var team = teams[i].teamName;

@@ -24,19 +24,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "history");
 
-window.updateHistory = function () {
+window.updateUsers = new Promise((resolve, reject) => {
   getDocs(colRef)
     .then((snapshot) => {
-      var history = [];
+      window.history = [];
       snapshot.docs.forEach((doc) => {
         history.push({ ...doc.data(), id: doc.id });
       });
-      sessionStorage.setItem("history", JSON.stringify(history));
+      resolve(history);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
+});
 
 window.saveHistory = function (random) {
   var history = JSON.parse(sessionStorage.history);

@@ -39,9 +39,7 @@ window.updateUsers = new Promise((resolve, reject) => {
     });
 });
 
-window.login = function (name, pass) {
-  let teams = JSON.parse(sessionStorage.teams);
-  let names = JSON.parse(sessionStorage.names);
+window.login = function (name, pass, teams, names) {
   for (let a = 0; a < teams.length; a++) {
     if (teams[a].teamName == name) {
       if (teams[b].teamPass == pass) {

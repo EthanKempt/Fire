@@ -83,13 +83,12 @@
   </style>
 
   <script>
-    function userCheck() {
+    async function userCheck() {
       let userIn = document.getElementById("username").value.toLowerCase().trim();
       let userInP = document.getElementById("password").value;
-      updateTeams();
-      updateUsers();
-      updateAdmin();
-      let result = login(userIn, userInP);
+      let teams = await updateTeams;
+      let users = await updateUsers;
+      let result = login(userIn, userInP, teams, users);
       let type = result.constructor;
       if (result == "pass") {
         alert("incorrect pasword");

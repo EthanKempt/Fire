@@ -24,19 +24,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "rules");
 
-window.updateRules = function () {
+window.updateRules = new Promise((resolve, reject) => {
   getDocs(colRef)
     .then((snapshot) => {
-      var rules = [];
+      window.rules = [];
       snapshot.docs.forEach((doc) => {
         rules.push({ ...doc.data(), id: doc.id });
       });
-      sessionStorage.setItem("rules", JSON.stringify(rules));
+      resolve(rules);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
+});
 
 window.updateTitles = function (a, b, c) {
   var titlesArray = a;

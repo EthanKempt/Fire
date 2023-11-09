@@ -75,33 +75,47 @@
 </html>
 
 <script>
-  var names = JSON.parse(sessionStorage.names);
-  var teams = JSON.parse(sessionStorage.teams);
-  var colN = 3;
-  for (let a = 0; a < teams.length; a++) {
-    if (colN == 3) {
-      colN = 1;
-    } else {
-      colN++;
+  initTeamButtons();
+  async function initTeamButtons() {
+    var names = await updateUsers;
+    var teams = await updateTeams;
+    var colN = 3;
+    for (let a = 0; a < teams.length; a++) {
+      if (colN == 3) {
+        colN = 1;
+      } else {
+        colN++;
+      }
+      let currentCol = document.getElementById("col" + colN);
+      currentCol.innerHTML +=
+        '<button onclick="initMessages(this)" type="button" class="btn btn-primary teamButton" data-bs-toggle="modal" data-bs-target="#' +
+        a +
+        '">' +
+        teams[a].teamName +
+        '</button><div class="modal fade modal-xl" id="' +
+        a +
+        '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' +
+        teams[a].teamName +
+        '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body" id="body' +
+        teams[a].teamName +
+        '"></div> <div class="modal-footer" id="footer' +
+        teams[a].teamName +
+        '">a</div></div></div></div>';
     }
-    let currentCol = document.getElementById("col" + colN);
-    currentCol.innerHTML +=
-      '<button onclick="initMessages(this)" type="button" class="btn btn-primary teamButton" data-bs-toggle="modal" data-bs-target="#' +
-      a +
-      '">' +
-      teams[a].teamName +
-      '</button><div class="modal fade modal-xl" id="' +
-      a +
-      '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' +
-      teams[a].teamName +
-      '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body" id="body' +
-      teams[a].teamName +
-      '"></div></div></div></div>';
+  }
+
+  function scrollBottom(team) {
+    let messageBox = document.getElementById("body" + team);
+    messageBox.scrollTop = messageBox.scrollHeight;
   }
 
   window.addMessages = function (allMessages, team) {
     var body = document.getElementById("body" + team);
     body.innerHTML = "";
+    var footer = document.getElementById("footer" + team);
+    footer.innerHTML =
+      '<div class="input-group mb-3 messageIn"> <input type="text" class="form-control" placeholder="your message" aria-label="Recipients username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2">send</button></div>';
+
     for (let b = 0; b < allMessages.length; b++) {
       let message = allMessages[b].value;
       let color = "primary";
@@ -112,8 +126,7 @@
         message +
         "</div></h4>";
     }
-    body.innerHTML +=
-      '<div class="input-group mb-3 messageIn"> <input type="text" class="form-control" placeholder="your message" aria-label="Recipients username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2">send</button></div>';
+    scrollBottom(team);
   };
 </script>
 
@@ -134,7 +147,6 @@
   .nav-link.active {
     color: white !important;
   }
-
   .container {
     margin-left: 0px;
     margin-right: 0px;
@@ -186,6 +198,6 @@
   .messageIn {
     position: absolute;
     bottom: 10px;
-    width: 67rem
+    width: 68rem;
   }
 </style>
