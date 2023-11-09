@@ -199,3 +199,24 @@ function addMessage() {
     scrollBottom();
   }
 }
+
+window.initMessages = async function (a) {
+  var team = a.innerHTML;
+
+  window.updateMessages = new Promise((resolve, reject) => {
+    const colRef3 = query(collection(db, "teams", team, "messages"));
+    getDocs(colRef3)
+      .then((snapshot) => {
+        window.messages = [];
+        snapshot.docs.forEach((doc) => {
+          messages.push({ ...doc.data(), id: doc.id });
+        });
+        resolve(messages);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+  let allMessages = await updateMessages;
+  addMessages(allMessages, team);
+};

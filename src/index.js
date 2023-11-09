@@ -25,19 +25,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "names");
 
-window.updateUsers = function () {
+window.updateUsers = new Promise((resolve, reject) => {
   getDocs(colRef)
     .then((snapshot) => {
       window.names = [];
       snapshot.docs.forEach((doc) => {
         names.push({ ...doc.data(), id: doc.id });
       });
-      sessionStorage.setItem("names", JSON.stringify(names));
+      resolve(names);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
+});
 
 window.login = function (name, pass) {
   let teams = JSON.parse(sessionStorage.teams);
@@ -64,13 +64,6 @@ window.login = function (name, pass) {
     return true;
   }
   return false;
-};
-
-window.onload = function () {
-  var team = sessionStorage.getItem("currentTeam");
-  if (team == null && window.location.pathname != "/index.html") {
-    window.location.href = "index.html";
-  }
 };
 
 window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {

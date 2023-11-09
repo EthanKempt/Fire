@@ -56,11 +56,11 @@
       </div>
     </nav>
 
-    <div class="container column text-center">
+    <div class="container column">
       <div class="row align-items-middle" id="wholeRow">
         <div class="col col-2 left-side"></div>
         <div class="col-sm-8">
-          <div class="container text-center">
+          <div class="container">
             <div class="row align-items-start" id="innerRow">
               <div class="col" id="col1"></div>
               <div class="col" id="col2"></div>
@@ -86,11 +86,35 @@
     }
     let currentCol = document.getElementById("col" + colN);
     currentCol.innerHTML +=
-      '<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#' + a + '">' +
+      '<button onclick="initMessages(this)" type="button" class="btn btn-primary teamButton" data-bs-toggle="modal" data-bs-target="#' +
+      a +
+      '">' +
       teams[a].teamName +
-      "</button>" +
-      '<div class="modal fade modal-xl" id="' + a + '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' + teams[a].teamName + '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">...</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="button" class="btn btn-primary">Save changes</button></div></div></div></div>';
+      '</button><div class="modal fade modal-xl" id="' +
+      a +
+      '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' +
+      teams[a].teamName +
+      '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body" id="body' +
+      teams[a].teamName +
+      '"></div></div></div></div>';
   }
+
+  window.addMessages = function (allMessages, team) {
+    var body = document.getElementById("body" + team);
+    body.innerHTML = "";
+    for (let b = 0; b < allMessages.length; b++) {
+      let message = allMessages[b].value;
+      let color = "primary";
+      body.innerHTML +=
+        '<h4><div class="badge bg-' +
+        color +
+        ' message">' +
+        message +
+        "</div></h4>";
+    }
+    body.innerHTML +=
+      '<div class="input-group mb-3 messageIn"> <input type="text" class="form-control" placeholder="your message" aria-label="Recipients username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2">send</button></div>';
+  };
 </script>
 
 <style>
@@ -147,5 +171,21 @@
     #logout {
       margin-top: 15px;
     }
+  }
+  .teamButton {
+    margin-left: 5rem;
+    margin-right: 5rem;
+    margin-top: 2rem;
+  }
+  .message {
+    text-align: left !important;
+  }
+  .modal-content {
+    height: 100%;
+  }
+  .messageIn {
+    position: absolute;
+    bottom: 10px;
+    width: 67rem
   }
 </style>
