@@ -15,6 +15,7 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="/src/site.js"></script>
     <script src="/dist/bundle.js"></script>
     <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
@@ -89,9 +90,6 @@
       teams[a].teamName +
       "</button>" +
       '<div class="modal fade modal-xl" id="' + a + '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' + teams[a].teamName + '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body">...</div><div class="modal-footer"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="button" class="btn btn-primary">Save changes</button></div></div></div></div>';
-  }
-  function logout() {
-    window.location.href = "/dist/index.html";
   }
 </script>
 

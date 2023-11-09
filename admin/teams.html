@@ -29,6 +29,7 @@
       rel="stylesheet"
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
+    <script src="/src/site.js"></script>
     <script src="/dist/bundle.js"></script>
     <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
@@ -418,10 +419,6 @@
 </html>
 
 <script>
-  function logout() {
-    window.location.href = "/dist/index.html";
-  }
-
   var names = JSON.parse(sessionStorage.names);
   var teams = JSON.parse(sessionStorage.teams);
 

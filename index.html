@@ -1,15 +1,119 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Redirect</title>
-</head>
-<body>
-    <h1>You should be redirected in just a second!</h1>
-</body>
-</html>
+  <html>
+    <head>
+      <title>Log In</title>
+      <meta charset="utf-8" />
+      <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+        crossorigin="anonymous"
+      />
+      <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+        crossorigin="anonymous"
+      ></script>
+      <script src="/dist/bundle.js"></script>
+      <script src="/dist/bundleTeams.js"></script>
+      <script src="/dist/bundleAdmin.js"></script>
+    </head>
+    <body>
+      <div class="container text-center">
+        <div class="row align-items-start">
+          <div class="col"></div>
 
-<script>
-    window.location.href = '/dist/index.html';
-</script>
+          <div class="col d-flex justify-content-center">
+            <div id="card" class="card">
+              <div class="card-body">
+                <h5 class="card-title">Log In</h5>
+                <div class="input-group mb-3">
+                  <input
+                    type="text"
+                    name="name"
+                    class="form-control"
+                    placeholder="Team Name or Your Name"
+                    id="username"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <div class="input-group mb-3">
+                  <input
+                    type="password"
+                    name="password"
+                    class="form-control"
+                    placeholder="Password"
+                    id="password"
+                    aria-label="Username"
+                    aria-describedby="basic-addon1"
+                  />
+                </div>
+                <button onclick="userCheck()" class="btn btn-primary">
+                  Log In
+                </button>
+                <br />
+                <a href="#" class="card-link">Create Team</a>
+                <a href="#" class="card-link">Reset Password</a>
+              </div>
+            </div>
+          </div>
+          <div class="col"></div>
+        </div>
+      </div>
+    </body>
+  </html>
+
+  <style>
+    .card {
+      margin-top: 20%;
+      width: 25rem;
+    }
+    @media (max-width: 991px) {
+      #card {
+        width: 100rem;
+        height: 50rem;
+      }
+    }
+    .navbar-toggler {
+      border-color: white;
+      border-width: 2px;
+    }
+  </style>
+
+  <script>
+    function userCheck() {
+      let userIn = document.getElementById("username").value;
+      let userInP = document.getElementById("password").value;
+      updateTeams();
+      updateUsers();
+      updateAdmin();
+      let result = login(userIn, userInP);
+      let type = result.constructor;
+      if (result == "pass") {
+        alert("incorrect pasword");
+      } else if (!result) {
+        alert("teamname or username does not exist");
+      } else if (result == true) {
+        sessionStorage.setItem("currentTeam", "admin");
+        window.location.href = '/admin/home.html';
+      } else {
+        sessionStorage.setItem("currentTeam", result);
+        window.location.href = '/dist/home.html';
+      }
+    }
+
+    document.addEventListener(
+      "keyup",
+      (event) => {
+        var key = event.key;
+        if (key === "Enter") {
+          userCheck();
+        }
+      },
+      false
+    );
+    sessionStorage.removeItem("currentTeam");
+  </script>
+</html>

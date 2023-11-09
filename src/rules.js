@@ -1,5 +1,12 @@
 import { initializeApp } from "firebase/app";
-import { getFirestore, collection, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore";
+import {
+  getFirestore,
+  collection,
+  getDocs,
+  doc,
+  deleteDoc,
+  setDoc,
+} from "firebase/firestore";
 
 const firebaseConfig = {
   apiKey: "AIzaSyAKEhJRciR51okIFqsFamrDqWsyRzTd2RE",
@@ -17,17 +24,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "rules");
 
-getDocs(colRef)
-  .then((snapshot) => {
-    var rules = [];
-    snapshot.docs.forEach((doc) => {
-      rules.push({ ...doc.data(), id: doc.id });
+window.updateRules = function () {
+  getDocs(colRef)
+    .then((snapshot) => {
+      var rules = [];
+      snapshot.docs.forEach((doc) => {
+        rules.push({ ...doc.data(), id: doc.id });
+      });
       sessionStorage.setItem("rules", JSON.stringify(rules));
+    })
+    .catch((err) => {
+      console.log(err.message);
     });
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+};
 
 window.updateTitles = function (a, b, c) {
   var titlesArray = a;
@@ -36,7 +45,7 @@ window.updateTitles = function (a, b, c) {
   var rules = JSON.parse(sessionStorage.rules);
   for (let z = 0; z < rules.length; z++) {
     let current = rules[z].id;
-    deleteDoc(doc(db, 'rules', current));
+    deleteDoc(doc(db, "rules", current));
   }
   for (let y = 0; y < titlesArray.length; y++) {
     setDoc(doc(db, "rules", titlesArray[y]), {

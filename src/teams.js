@@ -29,18 +29,6 @@ const db = getFirestore();
 
 const colRef = collection(db, "teams");
 
-getDocs(colRef)
-  .then((snapshot) => {
-    window.teams = [];
-    snapshot.docs.forEach((doc) => {
-      teams.push({ ...doc.data() });
-    });
-    sessionStorage.setItem("teams", JSON.stringify(teams));
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-
 window.updateTeams = function () {
   getDocs(colRef)
     .then((snapshot) => {

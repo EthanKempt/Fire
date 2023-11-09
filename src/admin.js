@@ -24,18 +24,6 @@ const db = getFirestore();
 
 const colRef = collection(db, "admin");
 
-getDocs(colRef)
-  .then((snapshot) => {
-    window.admin = [];
-    snapshot.docs.forEach((doc) => {
-      admin.push({ ...doc.data() });
-    });
-    sessionStorage.setItem("admin", JSON.stringify(admin));
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-
 window.updateAdmin = function () {
   getDocs(colRef)
     .then((snapshot) => {
@@ -51,15 +39,15 @@ window.updateAdmin = function () {
 };
 
 window.savePot = function (a) {
-  const docRef = doc(db, "admin", 'admin');
+  const docRef = doc(db, "admin", "admin");
   updateDoc(docRef, {
     pot: a,
   });
-}
+};
 
 window.saveDate = function (a) {
-  const docRef = doc(db, "admin", 'admin');
+  const docRef = doc(db, "admin", "admin");
   updateDoc(docRef, {
     startDate: a,
   });
-} 
+};

@@ -15,6 +15,7 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="/src/site.js"></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
     <script src="bundleAdmin.js"></script>
@@ -153,10 +154,6 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
       "";
   }
   setInterval(refreshTime, 1000);
-
-  function logout() {
-    window.location.href = "/dist/index.html";
-  }
 
   var admin = JSON.parse(sessionStorage.admin);
   let pot = document.getElementById("pot");

@@ -5,7 +5,7 @@ import {
   getDocs,
   setDoc,
   doc,
-  updateDoc
+  updateDoc,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -24,17 +24,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "history");
 
-getDocs(colRef)
-  .then((snapshot) => {
-    var history = [];
-    snapshot.docs.forEach((doc) => {
-      history.push({ ...doc.data(), id: doc.id });
+window.updateHistory = function () {
+  getDocs(colRef)
+    .then((snapshot) => {
+      var history = [];
+      snapshot.docs.forEach((doc) => {
+        history.push({ ...doc.data(), id: doc.id });
+      });
       sessionStorage.setItem("history", JSON.stringify(history));
+    })
+    .catch((err) => {
+      console.log(err.message);
     });
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
+};
 
 window.saveHistory = function (random) {
   var history = JSON.parse(sessionStorage.history);

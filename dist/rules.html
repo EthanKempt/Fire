@@ -15,6 +15,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rules</title>
+    <script src="/src/site.js"></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
     <script src="bundleAdmin.js"></script>
@@ -71,13 +72,10 @@
 </html>
 
 <script>
-  function logout() {
-    window.location.href = "/dist/index.html";
-  }
-
   initAccordian();
 
   function initAccordian() {
+    updateRules();
     var rules = JSON.parse(sessionStorage.rules);
     for (let a = 0; a < rules.length; a++) {
       for (let b = 0; b < rules.length; b++) {

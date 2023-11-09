@@ -25,75 +25,51 @@ const db = getFirestore();
 
 const colRef = collection(db, "names");
 
-getDocs(colRef)
-  .then((snapshot) => {
-    window.names = [];
-    snapshot.docs.forEach((doc) => {
-      names.push({ ...doc.data(), id: doc.id });
-      sessionStorage.setItem("names", JSON.stringify(names));
-    });
-  })
-  .catch((err) => {
-    console.log(err.message);
-  });
-
 window.updateUsers = function () {
   getDocs(colRef)
     .then((snapshot) => {
       window.names = [];
       snapshot.docs.forEach((doc) => {
         names.push({ ...doc.data(), id: doc.id });
-        sessionStorage.setItem("names", JSON.stringify(names));
       });
+      sessionStorage.setItem("names", JSON.stringify(names));
     })
     .catch((err) => {
       console.log(err.message);
     });
 };
 
-window.login = function () {
-  userCheck(); //sets userIn and UserInP to current input
-  var in2 = userIn.trim();
-  var userInput = in2.toLowerCase();
-  var in2P = userInP.trim();
-  var userInputP = in2P.toLowerCase();
-  for (var i = 0; i < names.length; i++) {
-    if (i < teams.length) {
-      var teamsName = JSON.parse(sessionStorage.teams)[i].teamName;
-      var teamsPassword = JSON.parse(sessionStorage.teams)[i].teamPass;
-    }
-    var userName = JSON.parse(sessionStorage.names)[i].name;
-    var userPassword = JSON.parse(sessionStorage.names)[i].password;
-    var adminUsername = JSON.parse(sessionStorage.admin)[0].teamName;
-    var adminPassword = JSON.parse(sessionStorage.admin)[0].teamPass;
-    if (
-      (userInput == teamsName && userInputP == teamsPassword) ||
-      (userInput == adminUsername && userInputP == adminPassword)
-    ) {
-      sessionStorage.setItem("currentTeam", teamsName);
-      if (userInput == "admin") {
-        window.location.href = "/admin/home.html";
+window.login = function (name, pass) {
+  let teams = JSON.parse(sessionStorage.teams);
+  let names = JSON.parse(sessionStorage.names);
+  for (let a = 0; a < teams.length; a++) {
+    if (teams[a].teamName == name) {
+      if (teams[b].teamPass == pass) {
+        return teams[b].teamName;
       } else {
-        window.location.href = "/dist/home.html";
+        return "pass";
       }
-    } else if (userInput == userName && userInputP == userPassword) {
-      var userTeam = JSON.parse(sessionStorage.names)[i].team;
-      sessionStorage.setItem("currentTeam", userTeam);
-      if (userInput == "admin") {
-        window.location.href = "/admin/home.html";
-      } else {
-        window.location.href = "/dist/home.html";
-        return true;
-      }
-    } else if (i + 1 == names.length) {
-      alert("incorrect username or password");
     }
   }
+  for (let b = 0; b < names.length; b++) {
+    if (names[b].id == name) {
+      if (names[b].password == pass) {
+        return names[b].team;
+      } else {
+        return "pass";
+      }
+    }
+  }
+  if (name == "admin" && pass == "adm1n") {
+    return true;
+  }
+  return false;
 };
+
 window.onload = function () {
   var team = sessionStorage.getItem("currentTeam");
-  if (team == null && window.location.pathname != "/dist/index.html") {
-    window.location.href = "/dist/index.html";
+  if (team == null && window.location.pathname != "/index.html") {
+    window.location.href = "index.html";
   }
 };
 
@@ -147,39 +123,39 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {
 };
 
 window.writeNewUsers = function (a, b, c, d, e, f, g, h, i, j) {
-  setDoc(doc(db, 'names', c), {
+  setDoc(doc(db, "names", c), {
     name: c,
     password: b,
     status: g,
     team: a,
-  })
-  setDoc(doc(db, 'names', d), {
+  });
+  setDoc(doc(db, "names", d), {
     name: d,
     password: b,
     status: h,
     team: a,
-  })
-  setDoc(doc(db, 'names', e), {
+  });
+  setDoc(doc(db, "names", e), {
     name: e,
     password: b,
     status: i,
     team: a,
-  })
+  });
   if (f) {
-    setDoc(doc(db, 'names', f), {
+    setDoc(doc(db, "names", f), {
       name: f,
       password: b,
       status: j,
       team: a,
-    })
+    });
   }
-}
+};
 
 window.deleteUsers = function (a, b, c, d) {
-  deleteDoc(doc(db, 'names', a))
-  deleteDoc(doc(db, 'names', b))
-  deleteDoc(doc(db, 'names', c))
+  deleteDoc(doc(db, "names", a));
+  deleteDoc(doc(db, "names", b));
+  deleteDoc(doc(db, "names", c));
   if (d) {
-  deleteDoc(doc(db, 'names', d))
+    deleteDoc(doc(db, "names", d));
   }
-}
+};

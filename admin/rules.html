@@ -15,6 +15,7 @@
       integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
       crossorigin="anonymous"
     ></script>
+    <script src="/src/site.js"></script>
     <script src="/dist/bundle.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
     <script src="/dist/bundleRules.js"></script>
@@ -87,9 +88,6 @@
 </html>
 
 <script>
-  function logout() {
-    window.location.href = "/dist/index.html";
-  }
   var names = JSON.parse(sessionStorage.names);
   var rules = JSON.parse(sessionStorage.rules);
 
