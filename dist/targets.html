@@ -137,7 +137,7 @@
   var infill3 = document.getElementById("target");
   var infill4 = document.getElementById("teamTitle");
   var team = sessionStorage.currentTeam;
-  var teams = JSON.parse(sessionStorage.teams);
+  var teams = updateTeams;
   for (let i = 0; i < teams.length; i++) {
     if (team == teams[i].teamName) {
       if (teams[i].safe) {
@@ -204,7 +204,7 @@
             }
           }
           function checkIn(a) {
-            var names = JSON.parse(sessionStorage.names);
+            //var names = JSON.parse(sessionStorage.names);
             for (let y = 0; y < names.length; y++) {
               var userIn = names[y].name;
               if (a == userIn) {
@@ -231,9 +231,8 @@
   }
 
   initMessages();
-  function initMessages() {
-    getMessages();
-    var messagesArray = JSON.parse(sessionStorage.messages);
+  async function initMessages() {
+    var messagesArray = await messageUpdate;
     var sorted = messagesArray.sort((a, b) => a.time.seconds - b.time.seconds);
     var messageBox = document.getElementById("messager");
     var done = true;
@@ -260,7 +259,6 @@
 
   function sendMessage() {
     var team = sessionStorage.currentTeam;
-    getMessages(team);
     let auth = "team";
     let val = document.getElementById("messageVal").value;
     addMessage(team, auth, val); //teamName + author + value
@@ -269,15 +267,10 @@
   let messageBox = document.getElementById("messager");
   messageBox.addEventListener("scroll", (event) => {
     var messageBox = document.getElementById("messager");
-    var totalMessages = JSON.parse(sessionStorage.messages);
-    // console.clear()
-    // console.log('scrollHeight' + messageBox.scrollHeight)
-    // console.log('scrollTop' + messageBox.scrollTop)
-    // console.log('offsetHeight' + messageBox.offsetHeight)
-    // console.log('clientHeight' + messageBox.clientHeight)
+    //var totalMessages = JSON.parse(sessionStorage.messages);
     if (messageBox.scrollTop == 0 && messageBox.childElementCount != totalMessages.length - 1) {
       var keep = messageBox.firstElementChild;
-      var messagesArray = JSON.parse(sessionStorage.messages);
+      //var messagesArray = JSON.parse(sessionStorage.messages);
       var sorted = messagesArray.sort(
         (a, b) => a.time.seconds - b.time.seconds
       );

@@ -42,8 +42,8 @@ window.updateUsers = new Promise((resolve, reject) => {
 window.login = function (name, pass, teams, names) {
   for (let a = 0; a < teams.length; a++) {
     if (teams[a].teamName == name) {
-      if (teams[b].teamPass == pass) {
-        return teams[b].teamName;
+      if (teams[a].teamPass == pass) {
+        return teams[a].teamName;
       } else {
         return "pass";
       }

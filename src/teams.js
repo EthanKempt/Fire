@@ -122,7 +122,7 @@ window.newSave = function (random) {
   }
 };
 
-window.getMessages = function () {
+window.messageUpdate = new Promise((resolve, reject) => {
   const colRef2 = collection(
     db,
     "teams",
@@ -136,12 +136,12 @@ window.getMessages = function () {
         messages.push({ ...doc.data() });
       });
       var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
-      sessionStorage.setItem("messages", JSON.stringify(sorted));
+      resolve(sorted);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
+});
 
 window.addMessage = function (a, b, c) {
   addDoc(collection(db, "teams", a, "messages"), {
@@ -251,8 +251,7 @@ if (window.location.pathname == "/admin/messages.html") {
 function insertMessage(message, team) {
   if (message.time.seconds >= startTime) {
     let body = document.getElementById("body" + team);
-    let messageBox = (document.getElementById("messageBox" + team).innerHTML =
-      "");
+    document.getElementById("messageBox" + team).innerHTML = "";
     var color = "secondary";
     if (message.author == "admin") {
       color = "primary";
