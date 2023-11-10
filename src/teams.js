@@ -11,7 +11,6 @@ import {
   onSnapshot,
   query,
   addDoc,
-  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -181,11 +180,13 @@ function addMessage() {
   }
   let message = last.value;
   var scroll = false;
-  if (
-    messageBox.scrollTop + messageBox.clientHeight ==
-    messageBox.scrollHeight
-  ) {
-    scroll = true;
+  if (messageBox.scrollHeight > messageBox.clientHeight) {
+    if (
+      messageBox.scrollTop + messageBox.clientHeight ==
+      messageBox.scrollHeight
+    ) {
+      scroll = true;
+    }
   }
   if (last.time.seconds >= startTime) {
     messageBox.innerHTML +=
@@ -267,8 +268,12 @@ if (window.location.pathname == "/admin/messages.html") {
 }
 
 function insertMessage(message, team) {
+  let body = document.getElementById("body" + team);
   if (message.time.seconds >= startTime) {
-    let body = document.getElementById("body" + team);
+    var scroll = false;
+    if (body.scrollTop == body.scrollHeight - body.clientHeight) {
+      scroll = true;
+    }
     var color = "secondary";
     if (message.author == "admin") {
       color = "primary";
@@ -279,7 +284,9 @@ function insertMessage(message, team) {
       ' message">' +
       message.value +
       "</div></h4>";
-    scrollBottom(team);
+    if (scroll) {
+      scrollBottom(team);
+    }
     let a = document.getElementById("messageBox" + team);
     a.value = "";
   }
