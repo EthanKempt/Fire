@@ -156,15 +156,15 @@ if (window.location.pathname == "/dist/targets.html") {
     collection(db, "teams", sessionStorage.currentTeam, "messages")
   );
   onSnapshot(q, (querySnapshot) => {
-   // if (!querySnapshot.metadata.hasPendingWrites) {
-      const messages = [];
-      querySnapshot.forEach((doc) => {
-        messages.push(doc.data());
-      });
-      var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
-      sessionStorage.setItem("messages", JSON.stringify(sorted));
-      addMessage();
-  //  }
+    // if (!querySnapshot.metadata.hasPendingWrites) {
+    const messages = [];
+    querySnapshot.forEach((doc) => {
+      messages.push(doc.data());
+    });
+    var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
+    sessionStorage.setItem("messages", JSON.stringify(sorted));
+    addMessage();
+    //  }
   });
 }
 
@@ -211,6 +211,7 @@ window.updateMessages = new Promise((resolve, reject) => {
       snapshot.docs.forEach((doc) => {
         messages.push({ ...doc.data(), id: doc.id });
       });
+      window.allSize = messages.length;
       resolve(messages);
     })
     .catch((err) => {
@@ -221,7 +222,7 @@ window.updateMessages = new Promise((resolve, reject) => {
 window.initMessages = async function (a) {
   var team = a.innerHTML;
 
-  window.updateMessages = new Promise((resolve, reject) => {
+  window.updateMessagesAd = new Promise((resolve, reject) => {
     const colRef3 = query(collection(db, "teams", team, "messages"));
     getDocs(colRef3)
       .then((snapshot) => {
@@ -235,8 +236,8 @@ window.initMessages = async function (a) {
         console.log(err.message);
       });
   });
-  let allMessages = await updateMessages;
-  let sorted = allMessages.sort((a, b) => a.time.seconds - b.time.seconds);
+  let allMessages = await updateMessagesAd;
+  let sorted = allMessages.sort((a, b) => b.time.seconds - a.time.seconds);
   addMessages(allMessages, team);
 };
 
@@ -279,8 +280,7 @@ function insertMessage(message, team) {
       message.value +
       "</div></h4>";
     scrollBottom(team);
-    debugger
     let a = document.getElementById("messageBox" + team);
-    a.value = '';
+    a.value = "";
   }
 }

@@ -220,10 +220,6 @@
     }
   }
 
-  document.addEventListener("DOMContentLoaded", () => {
-    scrollBottom();
-  });
-
   function scrollBottom() {
     let messageBox = document.getElementById("messager");
     messageBox.scrollTop = messageBox.scrollHeight;
@@ -254,6 +250,7 @@
         message +
         "</div></h4>";
     }
+    scrollBottom();
   }
 
   function sendMessage() {
@@ -271,7 +268,7 @@
       var messageBox = document.getElementById("messager");
       if (
         messageBox.scrollTop == 0 &&
-        messageBox.childElementCount != totalMessages.length
+        messageBox.childElementCount != allSize - 1
       ) {
         var keep = messageBox.firstElementChild;
         var sorted = totalMessages.sort(
