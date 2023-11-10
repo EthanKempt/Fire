@@ -11,6 +11,7 @@ import {
   onSnapshot,
   query,
   addDoc,
+  where,
 } from "firebase/firestore";
 
 const firebaseConfig = {
@@ -218,5 +219,50 @@ window.initMessages = async function (a) {
       });
   });
   let allMessages = await updateMessages;
+  let sorted = allMessages.sort((a, b) => a.time.seconds - b.time.seconds);
   addMessages(allMessages, team);
 };
+
+window.saveMessageAdmin = function (team, message, author) {
+  addDoc(collection(db, "teams", team, "messages"), {
+    author: author,
+    value: message,
+    time: new Date(),
+  });
+};
+
+if (window.location.pathname == "/admin/messages.html") {
+  initListeners();
+  async function initListeners() {
+    let teams = await updateTeams;
+    for (let a = 0; a < teams.length; a++) {
+      const q = query(collection(db, "teams", teams[a].teamName, "messages"));
+      onSnapshot(q, (snapshot) => {
+        snapshot.docChanges().forEach((change) => {
+          if (change.type === "added") {
+            insertMessage(change.doc.data(), teams[a].teamName);
+          }
+        });
+      });
+    }
+  }
+}
+
+function insertMessage(message, team) {
+  if (message.time.seconds >= startTime) {
+    let body = document.getElementById("body" + team);
+    let messageBox = (document.getElementById("messageBox" + team).innerHTML =
+      "");
+    var color = "secondary";
+    if (message.author == "admin") {
+      color = "primary";
+    }
+    body.innerHTML +=
+      '<h4><div class="badge bg-' +
+      color +
+      ' message">' +
+      message.value +
+      "</div></h4>";
+    scrollBottom(team);
+  }
+}

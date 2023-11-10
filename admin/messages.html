@@ -98,9 +98,9 @@
         teams[a].teamName +
         '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body" id="body' +
         teams[a].teamName +
-        '"></div> <div class="modal-footer" id="footer' +
+        '"></div><div class="modal-footer" id="footer' +
         teams[a].teamName +
-        '">a</div></div></div></div>';
+        '"></div></div></div></div>';
     }
   }
 
@@ -112,13 +112,21 @@
   window.addMessages = function (allMessages, team) {
     var body = document.getElementById("body" + team);
     body.innerHTML = "";
+
     var footer = document.getElementById("footer" + team);
     footer.innerHTML =
-      '<div class="input-group mb-3 messageIn"> <input type="text" class="form-control" placeholder="your message" aria-label="Recipients username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" id="button-addon2">send</button></div>';
+      '<div class="input-group mb-3 messageIn"> <input type="text" id="messageBox' +
+      team +
+      '" class="form-control" placeholder="your message" aria-label="Recipients username" aria-describedby="button-addon2"><button class="btn btn-outline-secondary" type="button" onclick="sendMessage(this)" id="' +
+      team +
+      '">send</button></div>';
 
     for (let b = 0; b < allMessages.length; b++) {
       let message = allMessages[b].value;
-      let color = "primary";
+      var color = "secondary";
+      if (allMessages[b].author == "admin") {
+        color = "primary";
+      }
       body.innerHTML +=
         '<h4><div class="badge bg-' +
         color +
@@ -128,6 +136,12 @@
     }
     scrollBottom(team);
   };
+
+  function sendMessage(button) {
+    let team = button.id;
+    let message = document.getElementById("messageBox" + team).value;
+    saveMessageAdmin(team, message, "admin");
+  }
 </script>
 
 <style>
@@ -194,10 +208,5 @@
   }
   .modal-content {
     height: 100%;
-  }
-  .messageIn {
-    position: absolute;
-    bottom: 10px;
-    width: 68rem;
   }
 </style>
