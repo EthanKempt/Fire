@@ -131,86 +131,89 @@
 </html>
 
 <script>
-  var infill = document.getElementById("not");
-  var infill2 = document.getElementById("safer");
-  var infill3 = document.getElementById("target");
-  var infill4 = document.getElementById("teamTitle");
-  var team = sessionStorage.currentTeam;
-  var teams = updateTeams;
-  for (let i = 0; i < teams.length; i++) {
-    if (team == teams[i].teamName) {
-      if (teams[i].safe) {
-        infill.innerHTML = "has";
-        infill2.innerHTML = "safe";
-      } else {
-        infill.innerHTML = "has not";
-        infill2.innerHTML = "not safe";
-      }
+  initInfo();
+  async function initInfo() {
+    var infill = document.getElementById("not");
+    var infill2 = document.getElementById("safer");
+    var infill3 = document.getElementById("target");
+    var infill4 = document.getElementById("teamTitle");
+    var team = sessionStorage.currentTeam;
+    var teams = await updateTeams;
+    for (let i = 0; i < teams.length; i++) {
       if (team == teams[i].teamName) {
-        var target = teams[i].targets;
-        infill3.innerHTML = target;
-        infill4.innerHTML = target;
-      }
-      for (let x = 0; x < teams.length; x++) {
-        if (target == teams[x].teamName) {
-          var target1 = teams[x].player1;
-          var target2 = teams[x].player2;
-          var target3 = teams[x].player3;
-          player1.innerHTML = target1;
-          if (checkIn(target1)) {
-            var ele = document.getElementById("player1");
-            ele.innerHTML +=
-              "<span class='badge bg-primary rounded-pill'>In</span>";
-          } else {
-            var ele = document.getElementById("player1");
-            ele.innerHTML +=
-              "<span class='badge bg-primary rounded-pill'>Out</span>";
-          }
-          player2.innerHTML = target2;
-          if (checkIn(target2)) {
-            var ele = document.getElementById("player2");
-            ele.innerHTML +=
-              "<span class='badge bg-primary rounded-pill'>In</span>";
-          } else {
-            var ele = document.getElementById("player2");
-            ele.innerHTML +=
-              "<span class='badge bg-primary rounded-pill'>Out</span>";
-          }
-          player3.innerHTML = target3;
-          if (checkIn(target3)) {
-            var ele = document.getElementById("player3");
-            ele.innerHTML +=
-              "<span class='badge bg-primary rounded-pill'>In</span>";
-          } else {
-            var ele = document.getElementById("player3");
-            ele.innerHTML +=
-              "<span class='badge bg-primary rounded-pill'>Out</span>";
-          }
-          if (teams[x].player4) {
-            var list = document.getElementById("list");
-            list.innerHTML +=
-              "<li class='list-group-item d-flex justify-content-between align-items-center' id='player4'> <span class='badge bg-primary rounded-pill'>In</span> </li>";
-            var target4 = teams[x].player4;
-            player4.innerHTML = target4;
-            if (checkIn(target4)) {
-              var ele = document.getElementById("player4");
+        if (teams[i].safe) {
+          infill.innerHTML = "has";
+          infill2.innerHTML = "safe";
+        } else {
+          infill.innerHTML = "has not";
+          infill2.innerHTML = "not safe";
+        }
+        if (team == teams[i].teamName) {
+          var target = teams[i].targets;
+          infill3.innerHTML = target;
+          infill4.innerHTML = target;
+        }
+        for (let x = 0; x < teams.length; x++) {
+          if (target == teams[x].teamName) {
+            var target1 = teams[x].player1;
+            var target2 = teams[x].player2;
+            var target3 = teams[x].player3;
+            player1.innerHTML = target1;
+            if (checkIn(target1)) {
+              var ele = document.getElementById("player1");
               ele.innerHTML +=
                 "<span class='badge bg-primary rounded-pill'>In</span>";
             } else {
-              var ele = document.getElementById("player4");
+              var ele = document.getElementById("player1");
               ele.innerHTML +=
                 "<span class='badge bg-primary rounded-pill'>Out</span>";
             }
-          }
-          function checkIn(a) {
-            //var names = JSON.parse(sessionStorage.names);
-            for (let y = 0; y < names.length; y++) {
-              var userIn = names[y].name;
-              if (a == userIn) {
-                if (names[y].status) {
-                  return true;
-                } else {
-                  return false;
+            player2.innerHTML = target2;
+            if (checkIn(target2)) {
+              var ele = document.getElementById("player2");
+              ele.innerHTML +=
+                "<span class='badge bg-primary rounded-pill'>In</span>";
+            } else {
+              var ele = document.getElementById("player2");
+              ele.innerHTML +=
+                "<span class='badge bg-primary rounded-pill'>Out</span>";
+            }
+            player3.innerHTML = target3;
+            if (checkIn(target3)) {
+              var ele = document.getElementById("player3");
+              ele.innerHTML +=
+                "<span class='badge bg-primary rounded-pill'>In</span>";
+            } else {
+              var ele = document.getElementById("player3");
+              ele.innerHTML +=
+                "<span class='badge bg-primary rounded-pill'>Out</span>";
+            }
+            if (teams[x].player4) {
+              var list = document.getElementById("list");
+              list.innerHTML +=
+                "<li class='list-group-item d-flex justify-content-between align-items-center' id='player4'> <span class='badge bg-primary rounded-pill'>In</span> </li>";
+              var target4 = teams[x].player4;
+              player4.innerHTML = target4;
+              if (checkIn(target4)) {
+                var ele = document.getElementById("player4");
+                ele.innerHTML +=
+                  "<span class='badge bg-primary rounded-pill'>In</span>";
+              } else {
+                var ele = document.getElementById("player4");
+                ele.innerHTML +=
+                  "<span class='badge bg-primary rounded-pill'>Out</span>";
+              }
+            }
+            function checkIn(a) {
+              //var names = JSON.parse(sessionStorage.names);
+              for (let y = 0; y < names.length; y++) {
+                var userIn = names[y].name;
+                if (a == userIn) {
+                  if (names[y].status) {
+                    return true;
+                  } else {
+                    return false;
+                  }
                 }
               }
             }

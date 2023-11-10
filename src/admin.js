@@ -24,19 +24,19 @@ const db = getFirestore();
 
 const colRef = collection(db, "admin");
 
-window.updateAdmin = function () {
+window.updateAdmin = new Promise((resolve, reject) => {
   getDocs(colRef)
     .then((snapshot) => {
       window.admin = [];
       snapshot.docs.forEach((doc) => {
-        admin.push({ ...doc.data() });
+        admin.push({ ...doc.data(), id: doc.id });
       });
-      sessionStorage.setItem("admin", JSON.stringify(admin));
+      resolve(admin);
     })
     .catch((err) => {
       console.log(err.message);
     });
-};
+});
 
 window.savePot = function (a) {
   const docRef = doc(db, "admin", "admin");

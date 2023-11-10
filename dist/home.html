@@ -114,15 +114,15 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
 
 <script>
   refreshTime();
-  function refreshTime() {
-    var admin = JSON.parse(sessionStorage.admin);
+  async function refreshTime() {
+    var admin = await updateAdmin;
     let startMilli = admin[0].startDate.seconds * 1000;
 
     const current = new Date();
     let milli = current.getTime();
 
     let timeSince = milli - startMilli;
-    
+
     let weeksLong = timeSince / 604800000;
     let weeks = Math.floor(weeksLong);
     let daysLong = (weeksLong - weeks) * 7;
@@ -155,17 +155,20 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   }
   setInterval(refreshTime, 1000);
 
-  var admin = JSON.parse(sessionStorage.admin);
-  let pot = document.getElementById("pot");
-  pot.innerHTML += admin[0].pot;
+  updateGeneral();
+  async function updateGeneral() {
+    var admin = await updateAdmin;
+    let pot = document.getElementById("pot");
+    pot.innerHTML += admin[0].pot;
 
-  var teams = JSON.parse(sessionStorage.teams);
-  let input = document.getElementById("teamsR");
-  input.innerHTML = teams.length;
+    var teams = await updateTeams;
+    let input = document.getElementById("teamsR");
+    input.innerHTML = teams.length;
 
-  var names = JSON.parse(sessionStorage.names);
-  let input2 = document.getElementById("playersR");
-  input2.innerHTML = names.length;
+    var names = await updateUsers;
+    let input2 = document.getElementById("playersR");
+    input2.innerHTML = names.length;
+  }
 </script>
 
 <style>

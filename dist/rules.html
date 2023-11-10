@@ -16,9 +16,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Rules</title>
     <script src="/src/site.js"></script>
-    <script src="bundle.js"></script>
-    <script src="bundleTeams.js"></script>
-    <script src="bundleAdmin.js"></script>
     <script src="bundleRules.js"></script>
   </head>
   <body>
@@ -73,10 +70,8 @@
 
 <script>
   initAccordian();
-
-  function initAccordian() {
-    updateRules();
-    var rules = JSON.parse(sessionStorage.rules);
+  async function initAccordian() {
+    var rules = await updateRules;
     for (let a = 0; a < rules.length; a++) {
       for (let b = 0; b < rules.length; b++) {
         if (rules[b].order == a) {
