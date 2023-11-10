@@ -117,6 +117,7 @@
                           class="btn-close"
                           data-bs-dismiss="modal"
                           aria-label="Close"
+                          onclick="clearAddForm()"
                         ></button>
                       </div>
                       <div class="modal-body" id="addBody">
@@ -266,6 +267,7 @@
                           type="button"
                           class="btn btn-secondary"
                           data-bs-dismiss="modal"
+                          onclick="clearAddForm()"
                         >
                           Close
                         </button>
@@ -419,250 +421,190 @@
 </html>
 
 <script>
-  var names = JSON.parse(sessionStorage.names);
-  var teams = JSON.parse(sessionStorage.teams);
+  initPage();
+  async function initPage() {
+    var teams = await updateTeams;
+    var currentColNum = 0;
 
-  var currentColNum = 0;
+    var addArea = document.getElementById("addBody");
+    addArea.innerHTML += "Targets: <select id='addSelect'> </select>";
+    var addSelect = document.getElementById("addSelect");
+    addSelect.innerHTML += "<option value='null'>none</option>";
 
-  updateTeams();
-  updateUsers();
-
-  var addArea = document.getElementById("addBody");
-  addArea.innerHTML += "Targets: <select id='addSelect'> </select>";
-  var addSelect = document.getElementById("addSelect");
-  addSelect.innerHTML += "<option value='null'>none</option>";
-
-  for (let z = 0; z < teams.length; z++) {
-    addSelect.innerHTML +=
-      "<option value='" +
-      teams[z].teamName +
-      "'>" +
-      teams[z].teamName +
-      "</option>";
-  }
-
-  var deleteArea = document.getElementById("deleteBody");
-  deleteArea.innerHTML += "Targets: <select id='deleteSelect'> </select>";
-  var deleteSelect = document.getElementById("deleteSelect");
-
-  for (let a = 0; a < teams.length; a++) {
-    deleteSelect.innerHTML +=
-      "<option value='" +
-      teams[a].teamName +
-      "'>" +
-      teams[a].teamName +
-      "</option>";
-  }
-
-  for (let i = 0; i < teams.length; i++) {
-    if (currentColNum < 3) {
-      currentColNum++;
-    } else {
-      var currentColNum = 1;
+    for (let z = 0; z < teams.length; z++) {
+      addSelect.innerHTML +=
+        "<option value='" +
+        teams[z].teamName +
+        "'>" +
+        teams[z].teamName +
+        "</option>";
     }
 
-    $(document).ready(function () {
-      $("#" + teams[i].teamName + "Select").select2({
-        dropdownParent: $("#" + teams[i].teamName),
-      });
-    });
+    var deleteArea = document.getElementById("deleteBody");
+    deleteArea.innerHTML += "Targets: <select id='deleteSelect'> </select>";
+    var deleteSelect = document.getElementById("deleteSelect");
 
-    $(document).ready(function () {
-      $("#addSelect").select2({
-        dropdownParent: $("#addModal"),
-      });
-    });
+    for (let a = 0; a < teams.length; a++) {
+      deleteSelect.innerHTML +=
+        "<option value='" +
+        teams[a].teamName +
+        "'>" +
+        teams[a].teamName +
+        "</option>";
+    }
 
-    $(document).ready(function () {
-      $("#deleteSelect").select2({
-        dropdownParent: $("#deleteModal"),
-      });
-    });
+    for (let i = 0; i < teams.length; i++) {
+      if (currentColNum < 3) {
+        currentColNum++;
+      } else {
+        var currentColNum = 1;
+      }
 
-    var currentCol = "col" + currentColNum;
-    var col = document.getElementById(currentCol);
-    col.innerHTML +=
-      "<button type='button' id='input' class='btn btn-primary teamButton' data-bs-toggle='modal' data-bs-target='#" +
-      teams[i].teamName +
-      "'>" +
-      teams[i].teamName +
-      "</button>";
-    col.innerHTML +=
-      "<div class='modal fade' id='" +
-      teams[i].teamName +
-      "' aria-labelledby='exampleModalLabel' aria-hidden='true'> <div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'>  <h1 class='modal-title fs-5' id='exampleModalLabel'>" +
-      teams[i].teamName +
-      "</h1> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button> </div> <div id='" +
-      teams[i].teamName +
-      "textArea' class='modal-body'></div> <div class='modal-footer'> <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button> <button onclick='save(" +
-      i +
-      ")' type='button' class='btn btn-primary'>Save changes</button> </div> </div>  </div> </div>";
-    var modalArea = document.getElementById(teams[i].teamName + "textArea");
-    modalArea.innerHTML +=
-      "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 1</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
-      teams[i].teamName +
-      "Box1' aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
-      teams[i].teamName +
-      "-player1' value='" +
-      teams[i].player1 +
-      "'> </div>";
-    modalArea.innerHTML +=
-      "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 2</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
-      teams[i].teamName +
-      "Box2'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
-      teams[i].teamName +
-      "-player2' value='" +
-      teams[i].player2 +
-      "'> </div>";
-    modalArea.innerHTML +=
-      "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 3</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
-      teams[i].teamName +
-      "Box3'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
-      teams[i].teamName +
-      "-player3' value='" +
-      teams[i].player3 +
-      "'> </div>";
-    if (teams[i].player4) {
+      $(document).ready(function () {
+        $("#" + teams[i].teamName + "Select").select2({
+          dropdownParent: $("#" + teams[i].teamName),
+        });
+      });
+
+      $(document).ready(function () {
+        $("#addSelect").select2({
+          dropdownParent: $("#addModal"),
+        });
+      });
+
+      $(document).ready(function () {
+        $("#deleteSelect").select2({
+          dropdownParent: $("#deleteModal"),
+        });
+      });
+
+      var currentCol = "col" + currentColNum;
+      var col = document.getElementById(currentCol);
+      col.innerHTML +=
+        "<button type='button' id='input' class='btn btn-primary teamButton' data-bs-toggle='modal' data-bs-target='#" +
+        teams[i].teamName +
+        "'>" +
+        teams[i].teamName +
+        "</button>";
+      col.innerHTML +=
+        "<div class='modal fade' id='" +
+        teams[i].teamName +
+        "' aria-labelledby='exampleModalLabel' aria-hidden='true'> <div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'>  <h1 class='modal-title fs-5' id='exampleModalLabel'>" +
+        teams[i].teamName +
+        "</h1> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button> </div> <div id='" +
+        teams[i].teamName +
+        "textArea' class='modal-body'></div> <div class='modal-footer'> <button type='button' class='btn btn-secondary' data-bs-dismiss='modal'>Close</button> <button onclick='save(" +
+        i +
+        ")' type='button' class='btn btn-primary'>Save changes</button> </div> </div>  </div> </div>";
+      var modalArea = document.getElementById(teams[i].teamName + "textArea");
       modalArea.innerHTML +=
-        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
+        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 1</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
         teams[i].teamName +
-        "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        "Box1' aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
         teams[i].teamName +
-        "-player4' value='" +
-        teams[i].player4 +
+        "-player1' value='" +
+        teams[i].player1 +
         "'> </div>";
-    } else {
       modalArea.innerHTML +=
-        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <div class='input-group-text'> <input class='form-check-input mt-0' type='checkbox' id='" +
+        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 2</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
         teams[i].teamName +
-        "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        "Box2'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
         teams[i].teamName +
-        "-player4'> </div>";
-    }
-    modalArea.innerHTML +=
-      "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Password</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
-      teams[i].teamName +
-      "Password' value='" +
-      teams[i].teamPass +
-      "'> </div>";
+        "-player2' value='" +
+        teams[i].player2 +
+        "'> </div>";
+      modalArea.innerHTML +=
+        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 3</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
+        teams[i].teamName +
+        "Box3'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        teams[i].teamName +
+        "-player3' value='" +
+        teams[i].player3 +
+        "'> </div>";
+      if (teams[i].player4) {
+        modalArea.innerHTML +=
+          "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
+          teams[i].teamName +
+          "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+          teams[i].teamName +
+          "-player4' value='" +
+          teams[i].player4 +
+          "'> </div>";
+      } else {
+        modalArea.innerHTML +=
+          "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <div class='input-group-text'> <input class='form-check-input mt-0' type='checkbox' id='" +
+          teams[i].teamName +
+          "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+          teams[i].teamName +
+          "-player4'> </div>";
+      }
+      modalArea.innerHTML +=
+        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Password</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        teams[i].teamName +
+        "Password' value='" +
+        teams[i].teamPass +
+        "'> </div>";
 
-    modalArea.innerHTML +=
-      "Targets: <select id='" + teams[i].teamName + "Select'> </select>";
-    var currentSelect = document.getElementById(teams[i].teamName + "Select");
-    for (let y = 0; y < teams.length; y++) {
-      if (teams[i].teamName != teams[y].teamName) {
-        if (teams[i].targets != teams[y].teamName) {
-          currentSelect.innerHTML +=
-            "<option value='" +
-            teams[y].teamName +
-            "'>" +
-            teams[y].teamName +
-            "</option>";
-        } else if (teams[i].targets == teams[y].teamName) {
-          currentSelect.innerHTML +=
-            "<option value='" +
-            teams[y].teamName +
-            "' selected>" +
-            teams[y].teamName +
-            "</option>";
+      modalArea.innerHTML +=
+        "Targets: <select id='" + teams[i].teamName + "Select'> </select>";
+      var currentSelect = document.getElementById(teams[i].teamName + "Select");
+      for (let y = 0; y < teams.length; y++) {
+        if (teams[i].teamName != teams[y].teamName) {
+          if (teams[i].targets != teams[y].teamName) {
+            currentSelect.innerHTML +=
+              "<option value='" +
+              teams[y].teamName +
+              "'>" +
+              teams[y].teamName +
+              "</option>";
+          } else if (teams[i].targets == teams[y].teamName) {
+            currentSelect.innerHTML +=
+              "<option value='" +
+              teams[y].teamName +
+              "' selected>" +
+              teams[y].teamName +
+              "</option>";
+          }
         }
       }
-    }
-    var user1 = teams[i].player1;
-    var user2 = teams[i].player2;
-    var user3 = teams[i].player3;
-    for (let x = 0; x < names.length; x++) {
-      if (names[x].name == user1) {
-        if (names[x].status) {
-          var ele = document.getElementById(teams[i].teamName + "Box1");
-          ele.setAttribute("checked", "true");
-        }
-      }
-    }
-    for (let x = 0; x < names.length; x++) {
-      if (names[x].name == user2) {
-        if (names[x].status) {
-          var ele = document.getElementById(teams[i].teamName + "Box2");
-          ele.setAttribute("checked", "true");
-        }
-      }
-    }
-    for (let x = 0; x < names.length; x++) {
-      if (names[x].name == user3) {
-        if (names[x].status) {
-          var ele = document.getElementById(teams[i].teamName + "Box3");
-          ele.setAttribute("checked", "true");
-        }
-      }
-    }
-    if (teams[i].player4) {
-      var user4 = teams[i].player4;
+      var user1 = teams[i].player1;
+      var user2 = teams[i].player2;
+      var user3 = teams[i].player3;
       for (let x = 0; x < names.length; x++) {
-        if (names[x].name == user4) {
+        if (names[x].name == user1) {
           if (names[x].status) {
-            var ele = document.getElementById(teams[i].teamName + "Box4");
+            var ele = document.getElementById(teams[i].teamName + "Box1");
             ele.setAttribute("checked", "true");
           }
         }
       }
-    }
-  }
-  function save(a) {
-    var currentTeam = teams[a].teamName;
-    var teamArray = teams[a];
-    var player1Var = document.getElementById(currentTeam + "-player1").value;
-    var player2Var = document.getElementById(currentTeam + "-player2").value;
-    var player3Var = document.getElementById(currentTeam + "-player3").value;
-    var player4Var = document.getElementById(currentTeam + "-player4");
-    var player4Var2 = document.getElementById(currentTeam + "-player4");
-    if (player4Var.value) {
-      var player4Var = document.getElementById(currentTeam + "-player4").value;
-    } else {
-      var player4Var = null;
-    }
-
-    var newPassword = document.getElementById(currentTeam + "Password").value;
-
-    var player1Checked = document.getElementById(currentTeam + "Box1").checked;
-    var player2Checked = document.getElementById(currentTeam + "Box2").checked;
-    var player3Checked = document.getElementById(currentTeam + "Box3").checked;
-    if (player4Var2.value) {
-      var player4Checked = document.getElementById(
-        currentTeam + "Box4"
-      ).checked;
-    } else {
-      var player4Checked = null;
-    }
-
-    if ((player1Var, player2Var, player3Var)) {
-      adminEditCheck(
-        a,
-        player1Checked,
-        player2Checked,
-        player3Checked,
-        player4Checked,
-        player1Var,
-        player2Var,
-        player3Var,
-        player4Var,
-        newPassword
-      );
-
-      var targets = document.getElementById(currentTeam + "Select").value;
-
-      adminEdit(
-        a,
-        player1Var,
-        player2Var,
-        player3Var,
-        player4Var,
-        targets,
-        newPassword
-      );
-      updateTeams();
-      updateUsers();
-    } else {
-      alert("Must have all values filled (excpet player 4)");
+      for (let x = 0; x < names.length; x++) {
+        if (names[x].name == user2) {
+          if (names[x].status) {
+            var ele = document.getElementById(teams[i].teamName + "Box2");
+            ele.setAttribute("checked", "true");
+          }
+        }
+      }
+      for (let x = 0; x < names.length; x++) {
+        if (names[x].name == user3) {
+          if (names[x].status) {
+            var ele = document.getElementById(teams[i].teamName + "Box3");
+            ele.setAttribute("checked", "true");
+          }
+        }
+      }
+      if (teams[i].player4) {
+        var user4 = teams[i].player4;
+        for (let x = 0; x < names.length; x++) {
+          if (names[x].name == user4) {
+            if (names[x].status) {
+              var ele = document.getElementById(teams[i].teamName + "Box4");
+              ele.setAttribute("checked", "true");
+            }
+          }
+        }
+      }
     }
   }
   function addTeam() {
@@ -682,7 +624,7 @@
     } else {
       var player4 = false;
     }
-    var target = document.getElementById("addSelect").value;
+    var target = document.getElementById("select2-addSelect-container").innerHTML = '';
     var teamExists = false;
     for (let c = 0; c < teams.length; c++) {
       if (name == teams[c].teamName) {
@@ -731,12 +673,9 @@
     }
   }
 
-  function upDelete() {
-    updateTeams();
-  }
+  function upDelete() {}
 
   function deleteTeam() {
-    updateTeams();
     var input = document.getElementById("deleteSelect").value;
     for (let b = 0; b < teams.length; b++) {
       if (teams[b].teamName == input) {
@@ -754,10 +693,10 @@
     deleteUsers(del1, del2, del3, del4);
   }
 
-  function generateTeams() {
-    let history = JSON.parse(sessionStorage.history);
-    let teams = JSON.parse(sessionStorage.teams);
-    let read = JSON.parse(sessionStorage.teams);
+  async function generateTeams() {
+    let history = await updateHistory;
+    let teams = await updateTeams;
+    let read = await updateTeams;
 
     window.randomTeams = [];
     let errors = 0;
@@ -812,6 +751,7 @@
     } else {
       alert("sorry, there was an error");
     }
+
     function getValidTeam(numb) {
       let team = teams[numb].teamName;
       let length = randomTeams.length;
@@ -884,9 +824,9 @@
 
   initTargets();
 
-  function initTargets() {
-    var history = JSON.parse(sessionStorage.history);
-    var admin = JSON.parse(sessionStorage.admin);
+  async function initTargets() {
+    var history = await updateHistory;
+    var admin = await updateAdmin;
     var modalBody = document.getElementById("randomBody");
     modalBody.innerHTML += "<div id=rep></div>";
 
@@ -964,6 +904,79 @@
   const tooltipList = [...tooltipTriggerList].map(
     (tooltipTriggerEl) => new bootstrap.Tooltip(tooltipTriggerEl)
   );
+
+  async function save(a) {
+    var teams = await updateTeams;
+    var currentTeam = teams[a].teamName;
+    var teamArray = teams[a];
+    var player1Var = document.getElementById(currentTeam + "-player1").value;
+    var player2Var = document.getElementById(currentTeam + "-player2").value;
+    var player3Var = document.getElementById(currentTeam + "-player3").value;
+    var player4Var = document.getElementById(currentTeam + "-player4");
+    var player4Var2 = document.getElementById(currentTeam + "-player4");
+    if (player4Var.value) {
+      var player4Var = document.getElementById(currentTeam + "-player4").value;
+    } else {
+      var player4Var = null;
+    }
+
+    var newPassword = document.getElementById(currentTeam + "Password").value;
+
+    var player1Checked = document.getElementById(currentTeam + "Box1").checked;
+    var player2Checked = document.getElementById(currentTeam + "Box2").checked;
+    var player3Checked = document.getElementById(currentTeam + "Box3").checked;
+    if (player4Var2.value) {
+      var player4Checked = document.getElementById(
+        currentTeam + "Box4"
+      ).checked;
+    } else {
+      var player4Checked = null;
+    }
+
+    if ((player1Var, player2Var, player3Var)) {
+      adminEditCheck(
+        a,
+        player1Checked,
+        player2Checked,
+        player3Checked,
+        player4Checked,
+        player1Var,
+        player2Var,
+        player3Var,
+        player4Var,
+        newPassword
+      );
+
+      var targets = document.getElementById(currentTeam + "Select").value;
+
+      adminEdit(
+        a,
+        player1Var,
+        player2Var,
+        player3Var,
+        player4Var,
+        targets,
+        newPassword
+      );
+    } else {
+      alert("Must have all values filled (excpet player 4)");
+    }
+  }
+
+  function clearAddForm() {
+    var name = (document.getElementById("addName").value = "");
+    var checked = (document.getElementById("addCheck").checked = true);
+    var password = (document.getElementById("addPassword").value = "");
+    var player1 = (document.getElementById("addPlayer1").value = "");
+    var checked1 = (document.getElementById("newP1").checked = true);
+    var player2 = (document.getElementById("addPlayer2").value = "");
+    var checked2 = (document.getElementById("newP2").checked = true);
+    var player3 = (document.getElementById("addPlayer3").value = "");
+    var checked3 = (document.getElementById("newP3").checked = true);
+    var testVal = (document.getElementById("addPlayer4").value = "");
+    var checked4 = (document.getElementById("newP4").checked = true);
+    var target = document.getElementById("addSelect").value = 'defaultValue';
+  }
 </script>
 
 <style>

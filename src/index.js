@@ -73,7 +73,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {
 
   for (let i = 0; i < names.length; i++) {
     if (names[i].name == player1) {
-      var currentName = names[i].id;
+      var currentName = names[i].name;
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
         status: a,
@@ -82,7 +82,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {
       });
     }
     if (names[i].name == player2) {
-      var currentName = names[i].id;
+      var currentName = names[i].name;
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
         status: b,
@@ -91,7 +91,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {
       });
     }
     if (names[i].name == player3) {
-      var currentName = names[i].id;
+      var currentName = names[i].name;
       const docRef = doc(db, "names", currentName);
       updateDoc(docRef, {
         status: c,
@@ -101,7 +101,7 @@ window.adminEditCheck = function (i, a, b, c, d, a2, b2, c2, d2, e) {
     }
     if (d != null) {
       if (names[i].name == player4) {
-        var currentName = names[i].id;
+        var currentName = names[i].name;
         const docRef = doc(db, "names", currentName);
         updateDoc(docRef, {
           status: d,

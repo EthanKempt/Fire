@@ -16,10 +16,7 @@
       crossorigin="anonymous"
     ></script>
     <script src="/src/site.js"></script>
-    <script src="/dist/bundle.js"></script>
-    <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
-    <script src="/dist/bundleHistory.js"></script>
   </head>
   <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
@@ -192,8 +189,10 @@
             >
               Update
             </button>
-            <div id="underTime" class="form-text"> 
-              Your password must be 8-20 characters long, contain letters and numbers, and must not contain spaces, special characters, or emoji.
+            <div id="underTime" class="form-text">
+              Your password must be 8-20 characters long, contain letters and
+              numbers, and must not contain spaces, special characters, or
+              emoji.
             </div>
           </div>
         </div>
@@ -204,12 +203,12 @@
 </html>
 
 <script>
-  var names = JSON.parse(sessionStorage.names);
-  var teams = JSON.parse(sessionStorage.teams);
-  var admin = JSON.parse(sessionStorage.admin);
-
-  let pot = document.getElementById("potVal");
-  pot.value = admin[0].pot;
+  initPot();
+  async function initPot() {
+    var admin = await updateAdmin;
+    let pot = document.getElementById("potVal");
+    pot.value = admin[0].pot;
+  }
 
   document.getElementById("M").innerHTML = "AM";
 
@@ -254,7 +253,8 @@
   }
 
   initDate();
-  function initDate() {
+  async function initDate() {
+    var admin = await updateAdmin;
     let months = [
       "January",
       "February",
@@ -288,15 +288,15 @@
   }
 
   refreshTime();
-  function refreshTime() {
-    var admin = JSON.parse(sessionStorage.admin);
+  async function refreshTime() {
+    var admin = await updateAdmin;
     let startMilli = admin[0].startDate.seconds * 1000;
 
     const current = new Date();
     let milli = current.getTime();
 
     let timeSince = milli - startMilli;
-    
+
     let weeksLong = timeSince / 604800000;
     let weeks = Math.floor(weeksLong);
     let daysLong = (weeksLong - weeks) * 7;

@@ -24,14 +24,14 @@ const db = getFirestore();
 
 const colRef = collection(db, "history");
 
-window.updateUsers = new Promise((resolve, reject) => {
+window.updateHistory = new Promise((resolve, reject) => {
   getDocs(colRef)
     .then((snapshot) => {
-      window.history = [];
+      window.hist = [];
       snapshot.docs.forEach((doc) => {
-        history.push({ ...doc.data(), id: doc.id });
+        hist.push({ ...doc.data(), id: doc.id });
       });
-      resolve(history);
+      resolve(hist);
     })
     .catch((err) => {
       console.log(err.message);
