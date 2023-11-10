@@ -18,7 +18,6 @@
     <script src="/src/site.js"></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
-    <script src="bundleTeams.js"></script>
     <script
       src="https://code.jquery.com/jquery-3.7.1.js"
       integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
@@ -264,47 +263,52 @@
     addMessage(team, auth, val); //teamName + author + value
   }
 
-  let messageBox = document.getElementById("messager");
-  messageBox.addEventListener("scroll", (event) => {
-    var messageBox = document.getElementById("messager");
-    //var totalMessages = JSON.parse(sessionStorage.messages);
-    if (messageBox.scrollTop == 0 && messageBox.childElementCount != totalMessages.length - 1) {
-      var keep = messageBox.firstElementChild;
-      //var messagesArray = JSON.parse(sessionStorage.messages);
-      var sorted = messagesArray.sort(
-        (a, b) => a.time.seconds - b.time.seconds
-      );
+  initUserMessages();
+  async function initUserMessages() {
+    var totalMessages = await updateMessages;
+    let messageBox = document.getElementById("messager");
+    messageBox.addEventListener("scroll", (event) => {
+      var messageBox = document.getElementById("messager");
+      if (
+        messageBox.scrollTop == 0 &&
+        messageBox.childElementCount != totalMessages.length
+      ) {
+        var keep = messageBox.firstElementChild;
+        var sorted = totalMessages.sort(
+          (a, b) => a.time.seconds - b.time.seconds
+        );
 
-      indexF = sorted.findIndex(firstOf);
-      function firstOf(checking) {
-        return checking.time.seconds == firstMessage.time.seconds;
-      }
-      let short = sorted.splice(0, indexF);
-      var amountToLoad = 20;
-      if (short.length < 20) {
-        amountToLoad = short.length;
-      }
-      for (let b = 0; b < amountToLoad - 1; b++) {
-        var fullMessage = short.pop();
-        if (b == amountToLoad - 2) {
-          window.firstMessage = fullMessage;
+        indexF = sorted.findIndex(firstOf);
+        function firstOf(checking) {
+          return checking.time.seconds == firstMessage.time.seconds;
         }
-        var color = "primary";
-        if (fullMessage.author == "admin") {
-          color = "secondary";
+        let short = sorted.splice(0, indexF);
+        var amountToLoad = 20;
+        if (short.length < 20) {
+          amountToLoad = short.length;
         }
-        let message = fullMessage.value;
-        let currentMessage =
-          '<h4><div class="badge bg-' +
-          color +
-          ' message">' +
-          message +
-          "</div></h4>";
-        messageBox.insertAdjacentHTML("afterbegin", currentMessage);
+        for (let b = 0; b < amountToLoad - 1; b++) {
+          var fullMessage = short.pop();
+          if (b == amountToLoad - 2) {
+            window.firstMessage = fullMessage;
+          }
+          var color = "primary";
+          if (fullMessage.author == "admin") {
+            color = "secondary";
+          }
+          let message = fullMessage.value;
+          let currentMessage =
+            '<h4><div class="badge bg-' +
+            color +
+            ' message">' +
+            message +
+            "</div></h4>";
+          messageBox.insertAdjacentHTML("afterbegin", currentMessage);
+        }
+        keep.scrollIntoView();
       }
-      keep.scrollIntoView();
-    }
-  });
+    });
+  }
 </script>
 
 <style>

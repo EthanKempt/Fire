@@ -156,7 +156,7 @@ if (window.location.pathname == "/dist/targets.html") {
     collection(db, "teams", sessionStorage.currentTeam, "messages")
   );
   onSnapshot(q, (querySnapshot) => {
-    if (!querySnapshot.metadata.hasPendingWrites) {
+   // if (!querySnapshot.metadata.hasPendingWrites) {
       const messages = [];
       querySnapshot.forEach((doc) => {
         messages.push(doc.data());
@@ -164,7 +164,7 @@ if (window.location.pathname == "/dist/targets.html") {
       var sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
       sessionStorage.setItem("messages", JSON.stringify(sorted));
       addMessage();
-    }
+  //  }
   });
 }
 
@@ -200,6 +200,23 @@ function addMessage() {
     scrollBottom();
   }
 }
+
+//if (window.location.pathname == "/dist/targets.html") {
+window.updateMessages = new Promise((resolve, reject) => {
+  var team = sessionStorage.currentTeam;
+  const colRef3 = query(collection(db, "teams", team, "messages"));
+  getDocs(colRef3)
+    .then((snapshot) => {
+      window.messages = [];
+      snapshot.docs.forEach((doc) => {
+        messages.push({ ...doc.data(), id: doc.id });
+      });
+      resolve(messages);
+    })
+    .catch((err) => {
+      console.log(err.message);
+    });
+});
 
 window.initMessages = async function (a) {
   var team = a.innerHTML;
@@ -251,7 +268,6 @@ if (window.location.pathname == "/admin/messages.html") {
 function insertMessage(message, team) {
   if (message.time.seconds >= startTime) {
     let body = document.getElementById("body" + team);
-    document.getElementById("messageBox" + team).innerHTML = "";
     var color = "secondary";
     if (message.author == "admin") {
       color = "primary";
@@ -263,5 +279,8 @@ function insertMessage(message, team) {
       message.value +
       "</div></h4>";
     scrollBottom(team);
+    debugger
+    let a = document.getElementById("messageBox" + team);
+    a.value = '';
   }
 }
