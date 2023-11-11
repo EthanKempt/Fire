@@ -21,7 +21,7 @@
     <script src="/dist/bundleAdmin.js"></script>
   </head>
   <body>
-    <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary">
       <div class="container-fluid">
         <a class="navbar-brand">Higley</a>
         <button
@@ -192,19 +192,11 @@
 <style>
   .navbar {
     background-color: #2e4b73 !important;
-    height: 9vh;
+    min-height: 9vh;
   }
-  .navbar-brand {
-    color: white;
-  }
-  .navbar-brand:hover {
-    color: white !important;
-  }
-  .nav-link {
-    color: #c0c0c0;
-  }
-  .nav-link.active {
-    color: white !important;
+  .navbar-toggler {
+    border-color: white;
+    border-width: 1px;
   }
   .container {
     margin-left: 0px;
