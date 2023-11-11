@@ -208,12 +208,11 @@ window.updateMessages = new Promise((resolve, reject) => {
   const colRef3 = query(collection(db, "teams", team, "messages"));
   getDocs(colRef3)
     .then((snapshot) => {
-      window.messages = [];
+      var messages3 = [];
       snapshot.docs.forEach((doc) => {
-        messages.push({ ...doc.data(), id: doc.id });
+        messages3.push({ ...doc.data(), id: doc.id });
       });
-      window.allSize = messages.length;
-      resolve(messages);
+      resolve(messages3);
     })
     .catch((err) => {
       console.log(err.message);
@@ -291,3 +290,23 @@ function insertMessage(message, team) {
     a.value = "";
   }
 }
+
+window.addScrollMessages = async function (team) {
+  window.getMess = new Promise((resolve, reject) => {
+    const colRef3 = query(collection(db, "teams", team, "messages"));
+    getDocs(colRef3)
+      .then((snapshot) => {
+        window.messages = [];
+        snapshot.docs.forEach((doc) => {
+          messages.push({ ...doc.data(), id: doc.id });
+        });
+        let sorted = messages.sort((a, b) => a.time.seconds - b.time.seconds);
+        resolve(sorted);
+      })
+      .catch((err) => {
+        console.log(err.message);
+      });
+  });
+  let allMessages = await getMess;
+  insertScrollMessages(allMessages, team);
+};
