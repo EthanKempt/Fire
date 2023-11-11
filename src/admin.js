@@ -43,6 +43,7 @@ window.savePot = function (a) {
   updateDoc(docRef, {
     pot: a,
   });
+  makeToast("Pot value was updated successfully");
 };
 
 window.saveDate = function (a) {
@@ -50,4 +51,5 @@ window.saveDate = function (a) {
   updateDoc(docRef, {
     startDate: a,
   });
+  makeToast("Start date was updated successfully");
 };

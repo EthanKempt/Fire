@@ -70,6 +70,7 @@ window.adminEdit = function (i, a, b, c, d, e, f) {
       });
     }
   }
+  makeToast('Team edited successfully')
 };
 
 window.writeNewTeam = function (a, b, c, d, e, f, g, h) {
@@ -97,10 +98,12 @@ window.writeNewTeam = function (a, b, c, d, e, f, g, h) {
       targets: "none",
     });
   }
+  makeToast('Team succesfully added')
 };
 
 window.deleteCurrent = function (a) {
   deleteDoc(doc(db, "teams", a));
+  makeToast('Team succesfully deleted')
 };
 
 window.newSave = function (random) {
@@ -119,6 +122,7 @@ window.newSave = function (random) {
       targets: target,
     });
   }
+  makeToast('Targets saved successfully')
 };
 
 window.messageUpdate = new Promise((resolve, reject) => {

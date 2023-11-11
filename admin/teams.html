@@ -413,6 +413,32 @@
               </div>
             </div>
           </div>
+          <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <!-- Position it: -->
+            <!-- - `.toast-container` for spacing between toasts -->
+            <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
+            <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
+            <div class="toast-container">
+              <!-- Then put toasts within -->
+              <div
+                class="toast align-items-center text-bg-success border-0"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+                id="liveToast"
+              >
+                <div class="d-flex">
+                  <div class="toast-body" id="toastBody"></div>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col col-2" id="right"></div>
       </div>
@@ -421,6 +447,14 @@
 </html>
 
 <script>
+  window.makeToast = function (content) {
+    const toastLiveExample = document.getElementById("liveToast");
+    const toastBootstrap =
+      bootstrap.Toast.getOrCreateInstance(toastLiveExample);
+    toastBootstrap.show();
+    var body = (document.getElementById("toastBody").innerHTML = content);
+  };
+
   initPage();
   async function initPage() {
     var teams = await updateTeams;
@@ -624,7 +658,9 @@
     } else {
       var player4 = false;
     }
-    var target = document.getElementById("select2-addSelect-container").innerHTML = '';
+    var target = (document.getElementById(
+      "select2-addSelect-container"
+    ).innerHTML = "");
     var teamExists = false;
     for (let c = 0; c < teams.length; c++) {
       if (name == teams[c].teamName) {
@@ -975,7 +1011,7 @@
     var checked3 = (document.getElementById("newP3").checked = true);
     var testVal = (document.getElementById("addPlayer4").value = "");
     var checked4 = (document.getElementById("newP4").checked = true);
-    var target = document.getElementById("addSelect").value = 'defaultValue';
+    var target = (document.getElementById("addSelect").value = "defaultValue");
   }
 </script>
 
@@ -1056,5 +1092,10 @@
   #rep {
     margin-top: 1rem;
     margin-bottom: -1rem;
+  }
+  .toast-container {
+    right: 2vh;
+    position: fixed;
+    top: 11vh;
   }
 </style>

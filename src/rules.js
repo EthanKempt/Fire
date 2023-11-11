@@ -54,4 +54,5 @@ window.updateTitles = function (a, b, c) {
       enabled: checked[y],
     });
   }
+  makeToast('Rules updated successfully')
 };

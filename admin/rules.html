@@ -88,11 +88,9 @@
 </html>
 
 <script>
-  var names = JSON.parse(sessionStorage.names);
-  var rules = JSON.parse(sessionStorage.rules);
-
   initRules();
-  function initRules() {
+  async function initRules() {
+    var rules = await updateRules;
     let column = document.getElementById("middle");
     for (let a = 0; a < rules.length; a++) {
       for (let b = 0; b < rules.length; b++) {
