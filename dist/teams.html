@@ -1,119 +1,131 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Teams</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm" crossorigin="anonymous"></script>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
     <script src="/src/site.js"></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
-</head>
-<body>
+  </head>
+  <body>
     <nav class="navbar sticky-top navbar-expand-lg bg-body-tertiary">
-        <div class="container-fluid">
-          <a class="navbar-brand">Higley</a>
-          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-            <div class="navbar-nav">
-              <a class="nav-link" href='home.html' aria-current="page">Home</a>
-              <a class="nav-link active" href="teams.html">Teams</a>
-              <a class="nav-link" href="targets.html">Targets</a>
-              <a class="nav-link" href="rules.html">Rules</a>
-              <button type="button" id='logout' onclick='logout()' class="btn btn-primary me-auto loginButton" data-bs-toggle="modal" data-bs-target="#loginModal">
-                Log Out
-              </button>
-            </div>
-          </div>
-        </div>
-      </nav>
-
-      <div class="container-fluid text-center">
-        <div class="row align-items-start" id="row">
-          <div class="col col-2" id="left">
-
-          </div>
-          <div class="col">
-            <div class="container text-center">
-              <div class="row align-items-start">
-                <div class="col">
-                  <div class="card">
-                    <div class="card-header">
-                      Team Name
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">Squad Wipes: 2</li>
-                      <li class="list-group-item">Kills: 6</li>
-                      <li class="list-group-item">Members left: 3</li>
-                    </ul>
-                  </div>                </div>
-                <div class="col">
-                  <div class="card">
-                    <div class="card-header">
-                      Teams
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">An item</li>
-                      <li class="list-group-item">A second item</li>
-                      <li class="list-group-item">A third item</li>
-                    </ul>
-                  </div>                </div>
-                <div class="col">
-                  <div class="card">
-                    <div class="card-header">
-                      Teams
-                    </div>
-                    <ul class="list-group list-group-flush">
-                      <li class="list-group-item">An item</li>
-                      <li class="list-group-item">A second item</li>
-                      <li class="list-group-item">A third item</li>
-                    </ul>
-                  </div>                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col col-2" id="right">
-
+      <div class="container-fluid">
+        <a class="navbar-brand">Higley</a>
+        <button
+          class="navbar-toggler"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#navbarNavAltMarkup"
+          aria-controls="navbarNavAltMarkup"
+          aria-expanded="false"
+          aria-label="Toggle navigation"
+        >
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav">
+            <a class="nav-link" href="home.html" aria-current="page">Home</a>
+            <a class="nav-link active" href="teams.html">Teams</a>
+            <a class="nav-link" href="targets.html">Targets</a>
+            <a class="nav-link" href="rules.html">Rules</a>
+            <button
+              type="button"
+              id="logout"
+              onclick="logout()"
+              class="btn btn-primary me-auto loginButton"
+              data-bs-toggle="modal"
+              data-bs-target="#loginModal"
+            >
+              Log Out
+            </button>
           </div>
         </div>
       </div>
+    </nav>
 
-    </body>
-  </html>
+    <div class="container-fluid text-center">
+      <div class="row align-items-start" id="row">
+        <div class="col col-2" id="left"></div>
+        <div class="col">
+          <div class="container text-center">
+            <div class="row align-items-start">
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">Team Name</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">Squad Wipes: 2</li>
+                    <li class="list-group-item">Kills: 6</li>
+                    <li class="list-group-item">Members left: 3</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">Teams</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="col">
+                <div class="card">
+                  <div class="card-header">Teams</div>
+                  <ul class="list-group list-group-flush">
+                    <li class="list-group-item">An item</li>
+                    <li class="list-group-item">A second item</li>
+                    <li class="list-group-item">A third item</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-2" id="right"></div>
+      </div>
+    </div>
+  </body>
+</html>
 
-  <!-- <p class="fs-3">There are currently <b id="current"></b> teams left out of <b id="total"></b>
-    original teams with <b id="average"></b> of players left.
-    A full list of teams and people left is provided below:
-  </p> -->
-
-  <script>
-    var names = JSON.parse(sessionStorage.names);
-    var teams = JSON.parse(sessionStorage.teams);
-    let a = 0;
-    for (let i = 0; i < teams.length; i++) {
-      if (teams[i].status) {
-        a++;
-      }
+<script>
+  var names = JSON.parse(sessionStorage.names);
+  var teams = JSON.parse(sessionStorage.teams);
+  let a = 0;
+  for (let i = 0; i < teams.length; i++) {
+    if (teams[i].status) {
+      a++;
     }
-    var current = document.getElementById('current');
-    current.innerHTML = a;
-    total.innerHTML = teams.length; 
-    var usersLeft = 0;
-    for (let i = 0; i < names.length; i++) {
-      if (names[i].status) {
-        usersLeft++;
-      }
+  }
+  var current = document.getElementById("current");
+  current.innerHTML = a;
+  total.innerHTML = teams.length;
+  var usersLeft = 0;
+  for (let i = 0; i < names.length; i++) {
+    if (names[i].status) {
+      usersLeft++;
     }
-    var totalUsers = names.length;
-    let average = usersLeft/totalUsers*100;
-    var innerAverage = document.getElementById('average').innerHTML = average + '%';
-  </script>
+  }
+  var totalUsers = names.length;
+  let average = (usersLeft / totalUsers) * 100;
+  var innerAverage = (document.getElementById("average").innerHTML =
+    average + "%");
+</script>
 
-  <style>
-   .navbar {
+<style>
+  .navbar {
     background-color: #2e4b73 !important;
     min-height: 9vh;
   }
@@ -124,7 +136,7 @@
     color: white !important;
   }
   .nav-link {
-    color: #C0C0C0;
+    color: #c0c0c0;
   }
   .nav-link.active {
     color: white !important;
@@ -158,11 +170,11 @@
     min-height: 91vh;
   }
   #left {
-    background-color: #8B8B8B;
+    background-color: #8b8b8b;
     height: 100%;
   }
   #right {
-    background-color: #8B8B8B;
+    background-color: #8b8b8b;
     height: 100%;
   }
   .navbar-toggler {
@@ -172,4 +184,4 @@
   .card {
     margin-top: 1rem;
   }
-  </style>
+</style>

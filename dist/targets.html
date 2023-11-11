@@ -64,7 +64,43 @@
     <div class="container column text-center">
       <div class="row align-items-middle">
         <div class="col col-2 left-side"></div>
-        <div class="col">
+        <div id="mobileControl">
+          <div
+            class="btn-group"
+            role="group"
+            aria-label="Basic radio toggle button group"
+          >
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio1"
+              autocomplete="off"
+              checked
+            />
+            <label
+              class="btn btn-outline-primary"
+              for="btnradio1"
+              onclick="selectTargets()"
+              >Targets</label
+            >
+
+            <input
+              type="radio"
+              class="btn-check"
+              name="btnradio"
+              id="btnradio2"
+              autocomplete="off"
+            />
+            <label
+              class="btn btn-outline-primary"
+              for="btnradio2"
+              onclick="selectMessages()"
+              >Messages</label
+            >
+          </div>
+        </div>
+        <div class="col" id="targetsCol">
           <br />
           <p class="fs-5">
             Your team <b id="not"></b> gotten someone out this week meaning you
@@ -96,7 +132,7 @@
             </li>
           </ul>
         </div>
-        <div class="col message-col">
+        <div class="col message-col" id="messagesCol">
           <br />
 
           <div class="card text-bg-light mb-3 message-display text-start">
@@ -308,6 +344,20 @@
       delete totalMessages;
     }
   }
+
+  function selectTargets() {
+    var targetsC = document.getElementById("targetsCol");
+    var messagesC = document.getElementById("messagesCol");
+    targetsC.style.display = "block";
+    messagesC.style.display = "none";
+  }
+
+  function selectMessages() {
+    var targetsC = document.getElementById("targetsCol");
+    var messagesC = document.getElementById("messagesCol");
+    targetsC.style.display = "none";
+    messagesC.style.display = "block";
+  }
 </script>
 
 <style>
@@ -371,6 +421,12 @@
     #logout {
       margin-top: 15px;
     }
+    #mobileControl {
+      margin-top: 1rem !important;
+    }
+    #messagesCol {
+      display: none;
+    }
   }
   .message-display {
     max-width: 100%;
@@ -379,12 +435,15 @@
   .message-header {
     font-weight: 700;
   }
-  .message-col {
-    max-width: 33.33%;
-  }
   .message {
     max-width: 100%;
     white-space: normal;
     text-align: left;
+  }
+  @media (min-width: 991px) {
+    #mobileControl {
+      display: none;
+      margin-top: 1rem !important;
+    }
   }
 </style>
