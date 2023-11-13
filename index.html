@@ -27,8 +27,8 @@
           <div class="col d-flex justify-content-center">
             <div id="card" class="card">
               <div class="card-body">
-                <h5 class="card-title">Log In</h5>
-                <div class="input-group mb-3">
+                <h5 class="card-title logT">Log In</h5>
+                <div class="input-group mb-3 user">
                   <input
                     type="text"
                     name="name"
@@ -39,7 +39,7 @@
                     aria-describedby="basic-addon1"
                   />
                 </div>
-                <div class="input-group mb-3">
+                <div class="input-group mb-3 pass">
                   <input
                     type="password"
                     name="password"
@@ -50,12 +50,9 @@
                     aria-describedby="basic-addon1"
                   />
                 </div>
-                <button onclick="userCheck()" class="btn btn-primary">
+                <button onclick="userCheck()" class="btn btn-primary logB">
                   Log In
                 </button>
-                <br />
-                <a href="#" class="card-link">Create Team</a>
-                <a href="#" class="card-link">Reset Password</a>
               </div>
             </div>
           </div>
@@ -80,11 +77,34 @@
       border-color: white;
       border-width: 2px;
     }
+    @media (max-width: 991px) {
+      #username {
+        font-size: 2.5rem;
+        text-align: center
+      }
+      #password {
+        font-size: 2.5rem;
+        text-align: center
+      }
+      .logT {
+        font-size: 5rem;
+        margin-bottom: 5rem;
+        margin-top: 1rem;
+      }
+      .logB {
+        width: 15rem;
+        height: 3rem;
+        font-size: 1.5rem;
+      }
+    }
   </style>
 
   <script>
     async function userCheck() {
-      let userIn = document.getElementById("username").value.toLowerCase().trim();
+      let userIn = document
+        .getElementById("username")
+        .value.toLowerCase()
+        .trim();
       let userInP = document.getElementById("password").value;
       let teams = await updateTeams;
       let users = await updateUsers;
@@ -96,10 +116,10 @@
         alert("teamname or username does not exist");
       } else if (result == true) {
         sessionStorage.setItem("currentTeam", "admin");
-        window.location.href = '/admin/home.html';
+        window.location.href = "/admin/home.html";
       } else {
         sessionStorage.setItem("currentTeam", result);
-        window.location.href = '/dist/home.html';
+        window.location.href = "/dist/home.html";
       }
     }
 
