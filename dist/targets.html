@@ -183,14 +183,14 @@
             <div class="col">
               <div class="mb-3">
                 <label
-                  for="exampleFormControlTextarea1"
+                  for="noteArea"
                   class="fs-4"
                   class="form-label"
                   >notes</label
                 >
                 <textarea
                   class="form-control"
-                  id="exampleFormControlTextarea1"
+                  id="noteArea"
                   rows="3"
                 ></textarea>
               </div>
@@ -414,6 +414,23 @@
     targetsC.style.display = "none";
     messagesC.style.display = "none";
     notesR.style.display = "block";
+  }
+
+  initNotes()
+  async function initNotes() {
+    var teams = await updateTeams;
+    var text = document.getElementById('noteArea');
+    for (let a = 0; a < teams.length; a++) {
+      if (teams[a].teamName == sessionStorage.currentTeam) {
+        text.value = teams[a].notes
+        setInterval(saveNotes, 5000);
+      }
+    }
+  }
+
+  function saveNotes() {
+    var text = document.getElementById('noteArea').value;
+    updateNotes(text, sessionStorage.currentTeam)
   }
 </script>
 
