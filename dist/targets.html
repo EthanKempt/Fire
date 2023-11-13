@@ -25,7 +25,9 @@
     ></script>
   </head>
   <body>
-    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary">
+    <nav
+      class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
+    >
       <div class="container-fluid">
         <a class="navbar-brand">Higley</a>
         <button
@@ -147,13 +149,13 @@
               type="text"
               class="form-control"
               placeholder="your message"
-              aria-describedby="button-addon2"
+              aria-describedby="sendM"
               id="messageVal"
             />
             <button
               class="btn btn-outline-primary"
               type="button"
-              id="button-addon2"
+              id="sendM"
               onclick="sendMessage()"
             >
               Send
@@ -298,6 +300,12 @@
     let val = document.getElementById("messageVal").value;
     addMessage(team, auth, val); //teamName + author + value
   }
+
+  var btn = document.getElementById("sendM");
+
+  btn.addEventListener("touchend", (e) => {
+    alert('a');
+  });
 
   var messageBox = document.getElementById("messager");
 
