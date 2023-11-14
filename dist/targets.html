@@ -223,7 +223,6 @@
           infill3.innerHTML = target;
           infill4.innerHTML = target;
         }
-        debugger
         for (let x = 0; x < teams.length; x++) {
           if (target == teams[x].teamName) {
             var target1 = teams[x].player1;
@@ -419,9 +418,14 @@
     var text = document.getElementById("noteArea");
     for (let a = 0; a < teams.length; a++) {
       if (teams[a].teamName == sessionStorage.currentTeam) {
-        text.value = teams[a].notes;
+        if (teams[a].notes === 'undefined') {
+          var notes = ''
+        } else {
+          var notes = teams[a].notes;
+        }
+        sessionStorage.setItem("notes", notes);
         setInterval(saveNotes, 5000);
-        sessionStorage.setItem("notes", text.value);
+        text.value = notes
       }
     }
   }
@@ -430,6 +434,7 @@
     var text = document.getElementById("noteArea").value;
     if (sessionStorage.notes != text) {
       updateNotes(text, sessionStorage.currentTeam);
+      sessionStorage.setItem("notes", text);
     }
   }
 </script>
