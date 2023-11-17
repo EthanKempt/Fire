@@ -418,14 +418,15 @@
     var text = document.getElementById("noteArea");
     for (let a = 0; a < teams.length; a++) {
       if (teams[a].teamName == sessionStorage.currentTeam) {
-        if (teams[a].notes === 'undefined') {
-          var notes = ''
-        } else {
+        if (teams[a].notes) {
           var notes = teams[a].notes;
+        } else {
+          var notes = ''
         }
         sessionStorage.setItem("notes", notes);
-        setInterval(saveNotes, 5000);
+        debugger
         text.value = notes
+        setInterval(saveNotes, 5000);
       }
     }
   }

@@ -458,6 +458,7 @@
   initPage();
   async function initPage() {
     var teams = await updateTeams;
+    var names = await updateUsers;
     var currentColNum = 0;
 
     var addArea = document.getElementById("addBody");
@@ -495,8 +496,8 @@
       }
 
       $(document).ready(function () {
-        $("#" + teams[i].teamName + "Select").select2({
-          dropdownParent: $("#" + teams[i].teamName),
+        $("#" + teams[i].teamName.replace(/\s/g, '') + "Select").select2({
+          dropdownParent: $("#" + teams[i].teamName.replace(/\s/g, '')),
         });
       });
 
@@ -514,15 +515,17 @@
 
       var currentCol = "col" + currentColNum;
       var col = document.getElementById(currentCol);
+      var modalName = teams[i].teamName.replace(/\s/g, '')
       col.innerHTML +=
         "<button type='button' id='input' class='btn btn-primary teamButton' data-bs-toggle='modal' data-bs-target='#" +
-        teams[i].teamName +
+        modalName +
         "'>" +
         teams[i].teamName +
         "</button>";
+
       col.innerHTML +=
         "<div class='modal fade' id='" +
-        teams[i].teamName +
+        modalName +
         "' aria-labelledby='exampleModalLabel' aria-hidden='true'> <div class='modal-dialog'> <div class='modal-content'> <div class='modal-header'>  <h1 class='modal-title fs-5' id='exampleModalLabel'>" +
         teams[i].teamName +
         "</h1> <button type='button' class='btn-close' data-bs-dismiss='modal' aria-label='Close'></button> </div> <div id='" +
@@ -580,8 +583,8 @@
         "'> </div>";
 
       modalArea.innerHTML +=
-        "Targets: <select id='" + teams[i].teamName + "Select'> </select>";
-      var currentSelect = document.getElementById(teams[i].teamName + "Select");
+        "Targets: <select id='" + teams[i].teamName.replace(/\s/g, '') + "Select'> </select>";
+      var currentSelect = document.getElementById(teams[i].teamName.replace(/\s/g, '') + "Select");
       for (let y = 0; y < teams.length; y++) {
         if (teams[i].teamName != teams[y].teamName) {
           if (teams[i].targets != teams[y].teamName) {

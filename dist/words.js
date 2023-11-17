@@ -2304,6 +2304,6 @@ window.findWord = function (a) {
 
   let numb1 = Math.floor(Math.random() * words.length);
   let numb2 = Math.floor(Math.random() * words.length);
-  let word = words[numb1] + " " + words[numb2];
+  let word = words[numb1] + "." + words[numb2];
   a.value = word;
 };
