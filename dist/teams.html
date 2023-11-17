@@ -63,35 +63,14 @@
         <div class="col">
           <div class="container text-center">
             <div class="row align-items-start">
-              <div class="col">
-                <div class="card">
-                  <div class="card-header">Team Name</div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Squad Wipes: 2</li>
-                    <li class="list-group-item">Kills: 6</li>
-                    <li class="list-group-item">Members left: 3</li>
-                  </ul>
-                </div>
+              <div class="col" id="col1">
+
               </div>
-              <div class="col">
-                <div class="card">
-                  <div class="card-header">Teams</div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                  </ul>
-                </div>
+              <div class="col" id="col2">
+
               </div>
-              <div class="col">
-                <div class="card">
-                  <div class="card-header">Teams</div>
-                  <ul class="list-group list-group-flush">
-                    <li class="list-group-item">An item</li>
-                    <li class="list-group-item">A second item</li>
-                    <li class="list-group-item">A third item</li>
-                  </ul>
-                </div>
+              <div class="col" id="col3">
+
               </div>
             </div>
           </div>
@@ -103,27 +82,24 @@
 </html>
 
 <script>
-  var names = JSON.parse(sessionStorage.names);
-  var teams = JSON.parse(sessionStorage.teams);
-  let a = 0;
-  for (let i = 0; i < teams.length; i++) {
-    if (teams[i].status) {
-      a++;
+  initialTables();
+  async function initialTables() {
+    var teams = await updateTeams;
+    var column1 = document.getElementById('col1')
+    var column2 = document.getElementById('col2')
+    var column3 = document.getElementById('col3')
+    var current = 0;
+ 
+    for (let a = 0; a < teams.length; a++) {
+      if (current == 3) {
+        current = 1
+      } else {
+        current++;
+      }
+      var currentCol = eval('column' + current)
+      currentCol.innerHTML += '<div class="card"> <div class="card-header">' + teams[a].teamName + '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Squad Wipes: 2</li> <li class="list-group-item">Kills: 6</li> <li class="list-group-item">Members left: 3</li> </ul> </div>'
     }
   }
-  var current = document.getElementById("current");
-  current.innerHTML = a;
-  total.innerHTML = teams.length;
-  var usersLeft = 0;
-  for (let i = 0; i < names.length; i++) {
-    if (names[i].status) {
-      usersLeft++;
-    }
-  }
-  var totalUsers = names.length;
-  let average = (usersLeft / totalUsers) * 100;
-  var innerAverage = (document.getElementById("average").innerHTML =
-    average + "%");
 </script>
 
 <style>
