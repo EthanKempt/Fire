@@ -92,7 +92,7 @@
           <h1 class="display-1" id="playersR">Could not load</h1>
           <hr />
           <p class="h5">Safe:</p>
-          <h1 class="display-1"></h1>
+          <h1 class="display-1" id="safeID"></h1>
         </div>
         <div class="col col-2 right-side" id="right"></div>
       </div>
@@ -158,16 +158,28 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
   updateGeneral();
   async function updateGeneral() {
     var admin = await updateAdmin;
+    var names = await updateUsers;
+    var teams = await updateTeams;
+
     let pot = document.getElementById("pot");
     pot.innerHTML += admin[0].pot;
 
-    var teams = await updateTeams;
     let input = document.getElementById("teamsR");
     input.innerHTML = teams.length;
 
-    var names = await updateUsers;
     let input2 = document.getElementById("playersR");
     input2.innerHTML = names.length;
+
+    var input3 = document.getElementById("safeID");
+    for (let a = 0; a < teams.length; a++) {
+      if (teams[a].teamName == sessionStorage.currentTeam) {
+        if (teams[a].safe == true) {
+          input3.innerHTML = 'Your team has gotten someone out'
+        } else {
+          input3.innerHTML = 'Your team has not gotten someone out'
+        }
+      }
+    }
   }
 </script>
 
