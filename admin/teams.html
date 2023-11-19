@@ -49,7 +49,9 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary">
+    <nav
+      class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
+    >
       <div class="container-fluid">
         <a class="navbar-brand">Higley</a>
         <button
@@ -496,8 +498,8 @@
       }
 
       $(document).ready(function () {
-        $("#" + teams[i].teamName.replace(/\s/g, '') + "Select").select2({
-          dropdownParent: $("#" + teams[i].teamName.replace(/\s/g, '')),
+        $("#" + teams[i].teamName.replace(/\s/g, "") + "Select").select2({
+          dropdownParent: $("#" + teams[i].teamName.replace(/\s/g, "")),
         });
       });
 
@@ -515,7 +517,7 @@
 
       var currentCol = "col" + currentColNum;
       var col = document.getElementById(currentCol);
-      var modalName = teams[i].teamName.replace(/\s/g, '')
+      var modalName = teams[i].teamName.replace(/\s/g, "");
       col.innerHTML +=
         "<button type='button' id='input' class='btn btn-primary teamButton' data-bs-toggle='modal' data-bs-target='#" +
         modalName +
@@ -583,8 +585,12 @@
         "'> </div>";
 
       modalArea.innerHTML +=
-        "Targets: <select id='" + teams[i].teamName.replace(/\s/g, '') + "Select'> </select>";
-      var currentSelect = document.getElementById(teams[i].teamName.replace(/\s/g, '') + "Select");
+        "Targets: <select id='" +
+        teams[i].teamName.replace(/\s/g, "") +
+        "Select'> </select>";
+      var currentSelect = document.getElementById(
+        teams[i].teamName.replace(/\s/g, "") + "Select"
+      );
       for (let y = 0; y < teams.length; y++) {
         if (teams[i].teamName != teams[y].teamName) {
           if (teams[i].targets != teams[y].teamName) {
@@ -732,45 +738,266 @@
     deleteUsers(del1, del2, del3, del4);
   }
 
-  async function generateTeams() {
-    let history = await updateHistory;
-    let teams = await updateTeams;
-    let read = await updateTeams;
+  // async function generateTeams() {
+  //   let history = await updateHistory;
+  //   let teams = await updateTeams;
+  //   let read = await updateTeams;
 
-    window.randomTeams = [];
-    let errors = 0;
+  //   window.randomTeams = [];
+  //   let errors = 0;
 
-    while (teams.length != 0) {
-      let numb = genInt();
-      let team = getValidTeam(numb);
-      randomTeams.push(team);
-      let a = 0;
-      let found = false;
-      while (a < teams.length && found == false) {
-        if (teams[a].teamName == team) {
-          var teamNumber = teams.indexOf(teams[a]);
-          found = true;
-        }
-        a++;
-      }
-      teams.splice(teamNumber, 1);
+  //   while (teams.length != 0) {
+  //     let numb = genInt();
+  //     let team = getValidTeam(numb);
+  //     randomTeams.push(team);
+  //     let a = 0;
+  //     let found = false;
+  //     while (a < teams.length && found == false) {
+  //       if (teams[a].teamName == team) {
+  //         var teamNumber = teams.indexOf(teams[a]);
+  //         found = true;
+  //       }
+  //       a++;
+  //     }
+  //     teams.splice(teamNumber, 1);
+  //   }
+  //   if (teams.length == 0) {
+  //     let modalBody = document.getElementById("randomBody");
+
+  //     while (modalBody.childElementCount > 1) {
+  //       modalBody.lastElementChild.remove();
+  //     }
+  //     modalBody.innerHTML += "<div id=rep></div>";
+
+  //     for (let b = 0; b < randomTeams.length; b++) {
+  //       modalBody.innerHTML +=
+  //         '<br> <span class="badge text-bg-secondary">' + randomTeams[b];
+  //       let c = b - 1;
+  //       if (c == -1) {
+  //         c = randomTeams.length - 1;
+  //       }
+  //       if (checkHistory(randomTeams[c], randomTeams[b])) {
+  //         modalBody.innerHTML +=
+  //           '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
+  //         errors++;
+  //       } else {
+  //         modalBody.innerHTML +=
+  //           '</span> <br> <i class="bi bi-caret-down-fill"></i>';
+  //       }
+  //     }
+  //     modalBody.lastElementChild.remove();
+  //     let replacement = document.getElementById("rep");
+  //     if (errors > 0) {
+  //       replacement.innerHTML +=
+  //         '<h3><span class="badge bg-warning"><i class="bi bi-exclamation-triangle"></i> There are ' +
+  //         errors +
+  //         ' teams with repeat targets <i class="bi bi-exclamation-triangle"></i></span></h3>';
+  //     }
+  //   } else {
+  //     alert("sorry, there was an error");
+  //   }
+
+  //   function getValidTeam(numb) {
+  //     let team = teams[numb].teamName;
+  //     let length = randomTeams.length;
+  //     if (length == 0) {
+  //       //if there are no random teams yet (first one only)
+  //       return team;
+  //     }
+  //     let length2 = length - 1;
+  //     let pers = randomTeams[length2]; //this tells us who the new teams pers would be
+
+  //     if (checkHistory(pers, team)) {
+  //       //if they have history
+  //       for (let a = 0; a < teams.length; a++) {
+  //         //find a new team
+  //         let team2 = teams[a].teamName;
+  //         let x = a + 1;
+  //         if (team == team2 && x != teams.length) {
+  //           a++;
+  //           let team2 = teams[a].teamName;
+  //         }
+  //         if (checkHistory(pers, team2)) {
+  //           //if the new target does have history
+  //           for (let b = 0; b < teams.length; b++) {
+  //             //look for new pers
+  //             let pers2 = teams[b].teamName;
+  //             if (checkHistory(pers2, team)) {
+  //               //if they also have history switch out persuer
+  //               let removedPers = randomTeams.pop();
+  //               for (let c = 0; c < read.length; c++) {
+  //                 //get object > string
+  //                 if (read[c].teamName == removedPers) {
+  //                   teams.push(read[c]);
+  //                 }
+  //               }
+  //               teams.push(remover);
+  //               randomTeams.push(pers2);
+  //               return team;
+  //             } else {
+  //               //else give up
+  //               return team;
+  //             }
+  //           }
+  //         } else {
+  //           return team2;
+  //         }
+  //       }
+  //       //if there are no remaining targets that work
+  //     } else {
+  //       return team;
+  //     }
+  //   }
+
+  //   function checkHistory(a, b) {
+  //     //a = pers   b = target
+  //     for (let c = 0; c < history.length; c++) {
+  //       let past = eval("history[c]." + a + ";");
+  //       if (past == b) {
+  //         return true;
+  //       }
+  //       return false;
+  //     }
+  //   }
+
+  //   function genInt() {
+  //     let size = teams.length;
+  //     let number = Math.floor(Math.random() * size);
+  //     return number;
+  //   }
+  // }
+
+  // Function to generate a random order for teams
+  function generateRandomOrder(teams) {
+    const shuffledTeams = teams.slice();
+    shuffleArray(shuffledTeams);
+    return shuffledTeams;
+  }
+
+  // Function to shuffle an array using Fisher-Yates (Knuth) algorithm
+  function shuffleArray(array) {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [array[i], array[j]] = [array[j], array[i]];
     }
-    if (teams.length == 0) {
-      let modalBody = document.getElementById("randomBody");
+  }
 
-      while (modalBody.childElementCount > 1) {
-        modalBody.lastElementChild.remove();
+  // Function to generate a chasing order for teams, avoiding consecutive matches
+  function generateChasingOrder(teams, previousChasingList) {
+    let randomizedChasingOrder;
+    do {
+      randomizedChasingOrder = generateRandomOrder(teams);
+    } while (
+      randomizedChasingOrder.some(
+        (team, index) => previousChasingList[0][index] === team
+      )
+    );
+
+    return randomizedChasingOrder;
+  }
+
+  async function generateTeams() {
+    var teams = await updateTeams;
+    var history = await updateHistory;
+    if (history[0]) {
+      var previousChasingList = [];
+      for (let a = 0; a < history.length; a++) {
+        var current = [];
+        var currentArray = Object.keys(history[a]);
+        currentArray.pop();
+        for (let b = 0; b < currentArray.length; b++) {
+          if (b == 0) {
+            var currentTeam = currentArray[0];
+          }
+          current.push(currentTeam);
+          var currentTeam = history[a][currentTeam];
+        }
+        previousChasingList.push(current);
       }
+
+      var teamNames = [];
+      for (let c = 0; c < teams.length; c++) {
+        teamNames.push(teams[c].teamName);
+      }
+      const randomizedChasingOrder = generateChasingOrder(
+        teamNames,
+        previousChasingList
+      );
+
+      updateTable(randomizedChasingOrder);
+    } else {
+      var teamNames = [];
+      for (let d = 0; d < teams.length; d++) {
+        teamNames.push(teams[d].id);
+      }
+      for (var i = teamNames.length - 1; i > 0; i--) {
+        var j = Math.floor(Math.random() * (i + 1));
+        var temp = teamNames[i];
+        teamNames[i] = teamNames[j];
+        teamNames[j] = temp;
+      }
+      updateTable(teamNames);
+    }
+  }
+
+  function updateTable(order) {
+    var modalBody = document.getElementById("randomBody");
+    while (modalBody.childElementCount > 1) {
+      modalBody.removeChild(modalBody.lastChild);
+    }
+    if (modalBody.childElementCount == 1) {
+      modalBody.innerHTML += "<div id=rep></div>";
+    }
+    for (let a = 0; a < order.length; a++) {
+      modalBody.innerHTML +=
+        '<br> <span class="badge text-bg-secondary teamBadge">' + order[a];
+      modalBody.innerHTML +=
+        '</span> <br> <i class="bi bi-caret-down-fill"></i>';
+    }
+    modalBody.removeChild(modalBody.lastChild);
+  }
+
+  initTargets();
+
+  async function initTargets() {
+    var history = await updateHistory;
+    var modalBody = document.getElementById("randomBody");
+    if (history[0]) {
+      var admin = await updateAdmin;
       modalBody.innerHTML += "<div id=rep></div>";
 
-      for (let b = 0; b < randomTeams.length; b++) {
+      let length = history.length - 1;
+      let currentWeek = history[length];
+      let week = Object.values(currentWeek);
+      let firstTeam = week[0];
+      let order = [];
+      let errors = 0;
+      order.push(firstTeam);
+      let xlength2 = order.length - 1;
+      let xlast = order[xlength2];
+      let xnewTeam =currentWeek[xlast];
+      let xlength3 = order.xlength - 1;
+      let xlast2 = order[xlength3];
+      modalBody.innerHTML +=
+        '<br> <span class="badge text-bg-secondary">' + order[0];
+      if (checkInit(order[xlast], order[xlast2])) {
         modalBody.innerHTML +=
-          '<br> <span class="badge text-bg-secondary">' + randomTeams[b];
-        let c = b - 1;
-        if (c == -1) {
-          c = randomTeams.length - 1;
-        }
-        if (checkHistory(randomTeams[c], randomTeams[b])) {
+          '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
+      } else {
+        modalBody.innerHTML +=
+          '</span> <br> <i class="bi bi-caret-down-fill"></i>';
+      }
+
+      for (let a = 0; a < week.length - 2; a++) {
+        let length2 = order.length - 1;
+        let last = order[length2];
+        let newTeam = currentWeek[last];
+        order.push(newTeam);
+        let length3 = order.length - 1;
+        let last2 = order[length3];
+        modalBody.innerHTML +=
+          '<br> <span class="badge text-bg-secondary">' + order[length3];
+        if (checkInit(order[last], order[last2])) {
           modalBody.innerHTML +=
             '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
           errors++;
@@ -779,7 +1006,7 @@
             '</span> <br> <i class="bi bi-caret-down-fill"></i>';
         }
       }
-      modalBody.lastElementChild.remove();
+
       let replacement = document.getElementById("rep");
       if (errors > 0) {
         replacement.innerHTML +=
@@ -787,149 +1014,30 @@
           errors +
           ' teams with repeat targets <i class="bi bi-exclamation-triangle"></i></span></h3>';
       }
-    } else {
-      alert("sorry, there was an error");
-    }
-
-    function getValidTeam(numb) {
-      let team = teams[numb].teamName;
-      let length = randomTeams.length;
-      if (length == 0) {
-        //if there are no random teams yet (first one only)
-        return team;
-      }
-      let length2 = length - 1;
-      let pers = randomTeams[length2]; //this tells us who the new teams pers would be
-
-      if (checkHistory(pers, team)) {
-        //if they have history
-        for (let a = 0; a < teams.length; a++) {
-          //find a new team
-          let team2 = teams[a].teamName;
-          let x = a + 1;
-          if (team == team2 && x != teams.length) {
-            a++;
-            let team2 = teams[a].teamName;
+      modalBody.lastElementChild.remove();
+      function checkInit(a, b) {
+        //a = pers   b = target
+        for (let c = 0; c + 1 < history.length; c++) {
+          let past = eval("history[c]." + a + ";");
+          if (past == b) {
+            return true;
           }
-          if (checkHistory(pers, team2)) {
-            //if the new target does have history
-            for (let b = 0; b < teams.length; b++) {
-              //look for new pers
-              let pers2 = teams[b].teamName;
-              if (checkHistory(pers2, team)) {
-                //if they also have history switch out persuer
-                let removedPers = randomTeams.pop();
-                for (let c = 0; c < read.length; c++) {
-                  //get object > string
-                  if (read[c].teamName == removedPers) {
-                    teams.push(read[c]);
-                  }
-                }
-                teams.push(remover);
-                randomTeams.push(pers2);
-                return team;
-              } else {
-                //else give up
-                return team;
-              }
-            }
-          } else {
-            return team2;
-          }
+          return false;
         }
-        //if there are no remaining targets that work
-      } else {
-        return team;
       }
-    }
-
-    function checkHistory(a, b) {
-      //a = pers   b = target
-      for (let c = 0; c < history.length; c++) {
-        let past = eval("history[c]." + a + ";");
-        if (past == b) {
-          return true;
-        }
-        return false;
-      }
-    }
-
-    function genInt() {
-      let size = teams.length;
-      let number = Math.floor(Math.random() * size);
-      return number;
-    }
-  }
-
-  initTargets();
-
-  async function initTargets() {
-    var history = await updateHistory;
-    var admin = await updateAdmin;
-    var modalBody = document.getElementById("randomBody");
-    modalBody.innerHTML += "<div id=rep></div>";
-
-    let length = history.length - 1;
-    let currentWeek = history[length];
-    let week = Object.values(currentWeek);
-    let firstTeam = week[0];
-    let order = [];
-    let errors = 0;
-    order.push(firstTeam);
-    let xlength2 = order.length - 1;
-    let xlast = order[xlength2];
-    let xnewTeam = eval("currentWeek." + xlast + ";");
-    let xlength3 = order.xlength - 1;
-    let xlast2 = order[xlength3];
-    modalBody.innerHTML +=
-      '<br> <span class="badge text-bg-secondary">' + order[0];
-    if (checkInit(order[xlast], order[xlast2])) {
-      modalBody.innerHTML +=
-        '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
     } else {
       modalBody.innerHTML +=
-        '</span> <br> <i class="bi bi-caret-down-fill"></i>';
-    }
-
-    for (let a = 0; a < week.length - 2; a++) {
-      let length2 = order.length - 1;
-      let last = order[length2];
-      let newTeam = eval("currentWeek." + last + ";");
-      order.push(newTeam);
-      let length3 = order.length - 1;
-      let last2 = order[length3];
-      modalBody.innerHTML +=
-        '<br> <span class="badge text-bg-secondary">' + order[length3];
-      if (checkInit(order[last], order[last2])) {
-        modalBody.innerHTML +=
-          '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
-        errors++;
-      } else {
-        modalBody.innerHTML +=
-          '</span> <br> <i class="bi bi-caret-down-fill"></i>';
-      }
-    }
-
-    let replacement = document.getElementById("rep");
-    if (errors > 0) {
-      replacement.innerHTML +=
-        '<h3><span class="badge bg-warning"><i class="bi bi-exclamation-triangle"></i> There are ' +
-        errors +
-        ' teams with repeat targets <i class="bi bi-exclamation-triangle"></i></span></h3>';
-    }
-    modalBody.lastElementChild.remove();
-    function checkInit(a, b) {
-      //a = pers   b = target
-      for (let c = 0; c + 1 < history.length; c++) {
-        let past = eval("history[c]." + a + ";");
-        if (past == b) {
-          return true;
-        }
-        return false;
-      }
+        "<div>looks like you havent had any weeks yet</div>";
     }
   }
   function saveTeams() {
+    document.getElementById("randomBody");
+    var classList = document.getElementsByClassName("teamBadge");
+    var randomTeams = [];
+    for (let a = 0; a < classList.length; a++) {
+      randomTeams.push(classList[a].innerHTML);
+    }
+
     if (typeof randomTeams === "undefined") {
       alert("there was no change");
     } else {

@@ -38,8 +38,8 @@ window.updateHistory = new Promise((resolve, reject) => {
     });
 });
 
-window.saveHistory = function (random) {
-  var history = JSON.parse(sessionStorage.history);
+window.saveHistory = async function (random) {
+  var history = await updateHistory;
   let size = history.length + 1;
   let thisWeek = "week" + size;
   setDoc(doc(db, "history", thisWeek), {});
