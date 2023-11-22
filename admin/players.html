@@ -191,9 +191,10 @@
     var oldTeam = players.find((o) => o.name === name).team;
     var oldTeamObj = teams.find((o) => o.teamName === oldTeam);
 
-    //updateUserInfo(name, newName, status, team, password);
+    updateUserInfo(name, newName, status, team, password);
+
     if (oldTeam != team) {
-      if (oldTeam.player4) {
+      if (oldTeamObj.player4) {
         var playerN;
         if (oldTeamObj.player1 == name) {
           playerN = "player1";
@@ -207,10 +208,27 @@
         if (oldTeamObj.player4 == name) {
           playerN = "player4";
         }
-        deleteOldTeamInfo(oldTeam, playerN);
+
+        deleteOldTeamInfo(oldTeam, playerN, oldTeamObj.player4);
         updateTeamInfo(team, newName);
       }
-    }
+    } else {
+      var order;
+        if (oldTeamObj.player1 == name) {
+          order = "player1";
+        }
+        if (oldTeamObj.player2 == name) {
+          order = "player2";
+        }
+        if (oldTeamObj.player3 == name) {
+          order = "player3";
+        }
+        if (oldTeamObj.player4 == name) {
+          order = "player4";
+        }
+        debugger
+      updateUserTeam(team, newName, order);
+      }
   }
 </script>
 

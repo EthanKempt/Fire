@@ -322,7 +322,7 @@ window.updateNotes = function (a, team) {
   });
 };
 
-window.deleteOldTeamInfo = function (team, playerOrder) {
+window.deleteOldTeamInfo = function (team, playerOrder, fourthPlayer) {
   const docRef = doc(db, "teams", team);
   updateDoc(docRef, {
     [playerOrder]: fourthPlayer,
@@ -330,4 +330,16 @@ window.deleteOldTeamInfo = function (team, playerOrder) {
   });
 };
 
-window.updateTeamInfo = function (team, name) {};
+window.updateTeamInfo = function (team, name) {
+  const docRef = doc(db, "teams", team);
+  updateDoc(docRef, {
+    player4: name,
+  });
+};
+
+window.updateUserTeam = function (team, name, order) {
+  const docRef = doc(db, "teams", team);
+  updateDoc(docRef, {
+    [order]: name,
+  });
+}
