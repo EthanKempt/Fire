@@ -73,7 +73,7 @@
             <a class="nav-link" href="messages.html">Messages</a>
             <a class="nav-link" href="rules.html">Rules</a>
             <button
-              type="button" 
+              type="button"
               id="logout"
               onclick="logout()"
               class="btn btn-primary me-auto loginButton"
@@ -540,7 +540,7 @@
       modalArea.innerHTML +=
         "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 1</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
         teams[i].teamName +
-        "Box1' aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        "Box1' aria-label='Checkbox for following text input'> </div> <input type='text' disabled class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
         teams[i].teamName +
         "-player1' value='" +
         teams[i].player1 +
@@ -548,7 +548,7 @@
       modalArea.innerHTML +=
         "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 2</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
         teams[i].teamName +
-        "Box2'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        "Box2'  aria-label='Checkbox for following text input'> </div> <input type='text' disabled class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
         teams[i].teamName +
         "-player2' value='" +
         teams[i].player2 +
@@ -556,7 +556,7 @@
       modalArea.innerHTML +=
         "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 3</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
         teams[i].teamName +
-        "Box3'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+        "Box3'  aria-label='Checkbox for following text input'> </div> <input type='text' disabled class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
         teams[i].teamName +
         "-player3' value='" +
         teams[i].player3 +
@@ -565,7 +565,7 @@
         modalArea.innerHTML +=
           "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <div class='input-group-text'> <input data-bs-toggle='tooltip' data-bs-placement='top' data-bs-title='Is this player currently alive' class='form-check-input mt-0' type='checkbox' id='" +
           teams[i].teamName +
-          "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+          "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' disabled class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
           teams[i].teamName +
           "-player4' value='" +
           teams[i].player4 +
@@ -574,7 +574,7 @@
         modalArea.innerHTML +=
           "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Player 4</span> <div class='input-group-text'> <input class='form-check-input mt-0' type='checkbox' id='" +
           teams[i].teamName +
-          "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
+          "Box4'  aria-label='Checkbox for following text input'> </div> <input type='text' disabled class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
           teams[i].teamName +
           "-player4'> </div>";
       }
@@ -976,12 +976,11 @@
       order.push(firstTeam);
       let xlength2 = order.length - 1;
       let xlast = order[xlength2];
-      let xnewTeam =currentWeek[xlast];
+      let xnewTeam = currentWeek[xlast];
       let xlength3 = order.xlength - 1;
       let xlast2 = order[xlength3];
       modalBody.innerHTML +=
         '<br> <span class="badge text-bg-secondary">' + order[0];
-          debugger
       if (checkInit(order[xlast], order[xlast2])) {
         modalBody.innerHTML +=
           '</span> <br> <i style="color: red" class="bi bi-caret-down-fill"></i>';
@@ -1071,15 +1070,32 @@
 
     var newPassword = document.getElementById(currentTeam + "Password").value;
 
+    var totalChecked = 0;
     var player1Checked = document.getElementById(currentTeam + "Box1").checked;
+    if (player1Checked) {
+      totalChecked++;
+    }
     var player2Checked = document.getElementById(currentTeam + "Box2").checked;
+    if (player1Checked) {
+      totalChecked++;
+    }
     var player3Checked = document.getElementById(currentTeam + "Box3").checked;
+    if (player1Checked) {
+      totalChecked++;
+    }
     if (player4Var2.value) {
       var player4Checked = document.getElementById(
         currentTeam + "Box4"
       ).checked;
+      if (player1Checked) {
+        totalChecked++;
+      }
     } else {
       var player4Checked = null;
+    }
+    status = true;
+    if (totalChecked == 0) {
+      var status = false;
     }
 
     if ((player1Var, player2Var, player3Var)) {
@@ -1105,7 +1121,8 @@
         player3Var,
         player4Var,
         targets,
-        newPassword
+        newPassword,
+        status
       );
     } else {
       alert("Must have all values filled (excpet player 4)");

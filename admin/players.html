@@ -98,24 +98,25 @@
       } else {
         currentColNumb++;
       }
+      var playerNameS = players[a].name.replace(/\s/g, "")
       var currentCol = eval("c" + currentColNumb);
       currentCol.innerHTML +=
         '<button onclick="initInfo(this)" id="' +
-        players[a].name +
+        playerNameS +
         '" type="button" class="btn btn-primary teamButton" data-bs-toggle="modal" data-bs-target="#' +
-        players[a].name +
+        playerNameS +
         'Modal">' +
         players[a].name +
         '</button><div class="modal fade data-bs-backdrop="static" data-bs-keyboard="false" modal-xl" id="' +
-        players[a].name +
+        playerNameS +
         'Modal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' +
         players[a].name +
         '</h1><button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button></div><div class="modal-body" id="body' +
-        players[a].name +
+        playerNameS +
         '"></div><div class="modal-footer" id="footer' +
-        players[a].name +
+        playerNameS +
         '"><button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button><button type="button" id="' +
-        players[a].name +
+        playerNameS +
         '" onclick="saveChanges(this)" class="btn btn-primary">Save changes</button></div></div></div></div>';
     }
   }
@@ -125,7 +126,7 @@
     var players = await updateUsers;
     var teams = await updateTeams;
     var body = document.getElementById("body" + playerName);
-    var player = players.find((o) => o.name === playerName);
+    var player = players.find((o) => o.name.replace(/\s/g, "") === playerName);
     if (player.status) {
       body.innerHTML =
         '<input type="radio" class="btn-check" name="options-outlined" id="' +
@@ -148,7 +149,7 @@
       '<div class="input-group mb-3 nameSpace"> <span class="input-group-text" id="basic-addon1">Name</span> <input type="text" class="form-control" id="' +
       playerName +
       'Name" placeholder="put there name here!" aria-label="Username" value="' +
-      playerName +
+      player.name +  
       '" aria-describedby="basic-addon1"></div>';
     body.innerHTML +=
       '<div class="input-group mb-3"> <span class="input-group-text" id="basic-addon1">Password</span> <input type="text" class="form-control" id="' +
@@ -188,7 +189,7 @@
     var status = document.getElementById(name + "Checked").checked;
     var team = document.getElementById(name + "Select").value;
     var password = teams.find((o) => o.teamName === team).teamPass;
-    var oldTeam = players.find((o) => o.name === name).team;
+    var oldTeam = players.find((o) => o.name.replace(/\s/g, "") === name).team;
     var oldTeamObj = teams.find((o) => o.teamName === oldTeam);
 
     updateUserInfo(name, newName, status, team, password);
@@ -226,7 +227,6 @@
         if (oldTeamObj.player4 == name) {
           order = "player4";
         }
-        debugger
       updateUserTeam(team, newName, order);
       }
   }
