@@ -50,6 +50,18 @@
                     aria-describedby="basic-addon1"
                   />
                 </div>
+                <div class="form-check rememberArea">
+                  <input
+                    class="form-check-input"
+                    type="checkbox"
+                    value=""
+                    id="rememberBox"
+                  />
+                  <label class="form-check-label" for="rememberBox">
+                    Remember Me
+                  </label>
+                </div>
+
                 <button onclick="userCheck()" class="btn btn-primary logB">
                   Log In
                 </button>
@@ -80,11 +92,11 @@
     @media (max-width: 991px) {
       #username {
         font-size: 2.5rem;
-        text-align: center
+        text-align: center;
       }
       #password {
         font-size: 2.5rem;
-        text-align: center
+        text-align: center;
       }
       .logT {
         font-size: 5rem;
@@ -97,10 +109,24 @@
         font-size: 2rem;
       }
     }
+    .pass {
+      margin-bottom: 0rem !important;
+    }
+    .rememberArea {
+      text-align: left;
+    }
   </style>
 
   <script>
+    sessionStorage.clear();
+    if (localStorage.getItem("currentTeam") === null) {
+    } else { 
+      var team = localStorage.currentTeam;
+      sessionStorage.setItem("currentTeam", team);
+      window.location.href = "/dist/home.html";
+    }
     async function userCheck() {
+      var remember = document.getElementById("rememberBox").checked;
       let userIn = document
         .getElementById("username")
         .value.toLowerCase()
@@ -118,6 +144,11 @@
         sessionStorage.setItem("currentTeam", "admin");
         window.location.href = "/admin/home.html";
       } else {
+        if (remember) {
+          localStorage.setItem("currentTeam", result);
+        } else {
+          localStorage.removeItem("currentTeam");
+        }
         sessionStorage.setItem("currentTeam", result);
         window.location.href = "/dist/home.html";
       }
@@ -133,6 +164,5 @@
       },
       false
     );
-    sessionStorage.clear();
   </script>
 </html>

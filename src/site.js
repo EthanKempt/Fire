@@ -1,5 +1,6 @@
 window.logout = function () {
   window.location.pathname = "/index.html";
+  localStorage.removeItem('currentTeam')
 };
 
 window.onload = function () {
