@@ -150,3 +150,14 @@ window.deleteUsers = function (a, b, c, d) {
     deleteDoc(doc(db, "names", d));
   }
 };
+
+window.updateUserInfo = async function (name, newName, status, team, password) {
+  const docRef = doc(db, "names", newName);
+  deleteDoc(doc(db, 'names', name))
+  setDoc(docRef, {
+    name: newName,
+    status: status,
+    team: team,
+    password: password,
+  });
+}

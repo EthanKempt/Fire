@@ -128,28 +128,41 @@
     var player = players.find((o) => o.name === playerName);
     if (player.status) {
       body.innerHTML =
-        '<input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off" checked> <label class="btn btn-outline-success" for="success-outlined">Player is In</label> <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off"> <label class="btn btn-outline-danger" for="danger-outlined">Player is Out</label>';
+        '<input type="radio" class="btn-check" name="options-outlined" id="' +
+        playerName +
+        'Checked" autocomplete="off" checked> <label class="btn btn-outline-success" for="' +
+        playerName +
+        'Checked">Player is In</label> <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off"> <label class="btn btn-outline-danger" for="danger-outlined">Player is Out</label>';
     } else {
       body.innerHTML =
-        '<input type="radio" class="btn-check" name="options-outlined" id="success-outlined" autocomplete="off"> <label class="btn btn-outline-success" for="success-outlined">Player is In</label> <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked> <label class="btn btn-outline-danger" for="danger-outlined">Player is Out</label>';
+        '<input type="radio" class="btn-check" name="options-outlined" id="' +
+        playerName +
+        'Checked" autocomplete="off"> <label class="btn btn-outline-success" for="' +
+        playerName +
+        'Checked">Player is In</label> <input type="radio" class="btn-check" name="options-outlined" id="danger-outlined" autocomplete="off" checked> <label class="btn btn-outline-danger" for="danger-outlined">Player is Out</label>';
     }
+
     body.innerHTML += "<br>";
 
     body.innerHTML +=
-      '<div class="input-group mb-3 nameSpace"> <span class="input-group-text" id="basic-addon1">Name</span> <input type="text" class="form-control" placeholder="put there name here!" aria-label="Username" aria-describedby="basic-addon1"></div>';
+      '<div class="input-group mb-3 nameSpace"> <span class="input-group-text" id="basic-addon1">Name</span> <input type="text" class="form-control" id="' +
+      playerName +
+      'Name" placeholder="put there name here!" aria-label="Username" value="' +
+      playerName +
+      '" aria-describedby="basic-addon1"></div>';
     body.innerHTML +=
-      '<div class="input-group mb-3"> <span class="input-group-text" id="basic-addon1">Password</span> <input type="text" class="form-control" placeholder="put there password here!" aria-label="Password" aria-describedby="basic-addon1"></div>';
+      '<div class="input-group mb-3"> <span class="input-group-text" id="basic-addon1">Password</span> <input type="text" class="form-control" id="' +
+      playerName +
+      'Password" disabled aria-label="Password" value="' +
+      player.password +
+      '" aria-describedby="basic-addon1"></div>';
 
     body.innerHTML += "Team: <select id='" + playerName + "Select'></select>";
 
     var select = document.getElementById(playerName + "Select");
 
     select.innerHTML +=
-          '<option value="' +
-          player.team +
-          '">' +
-          player.team +
-          "</option>";
+      '<option value="' + player.team + '">' + player.team + "</option>";
 
     for (let b = 0; b < teams.length; b++) {
       if (!teams[b].player4) {
@@ -167,8 +180,37 @@
     });
   }
 
-  function saveChanges(a) {
-    alert(a.id)
+  async function saveChanges(a) {
+    var teams = await updateTeams;
+    var players = await updateUsers;
+    var name = a.id;
+    var newName = document.getElementById(name + "Name").value;
+    var status = document.getElementById(name + "Checked").checked;
+    var team = document.getElementById(name + "Select").value;
+    var password = teams.find((o) => o.teamName === team).teamPass;
+    var oldTeam = players.find((o) => o.name === name).team;
+    var oldTeamObj = teams.find((o) => o.teamName === oldTeam);
+
+    //updateUserInfo(name, newName, status, team, password);
+    if (oldTeam != team) {
+      if (oldTeam.player4) {
+        var playerN;
+        if (oldTeamObj.player1 == name) {
+          playerN = "player1";
+        }
+        if (oldTeamObj.player2 == name) {
+          playerN = "player2";
+        }
+        if (oldTeamObj.player3 == name) {
+          playerN = "player3";
+        }
+        if (oldTeamObj.player4 == name) {
+          playerN = "player4";
+        }
+        deleteOldTeamInfo(oldTeam, playerN);
+        updateTeamInfo(team, newName);
+      }
+    }
   }
 </script>
 

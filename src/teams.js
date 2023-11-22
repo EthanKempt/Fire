@@ -321,3 +321,13 @@ window.updateNotes = function (a, team) {
     notes: a,
   });
 };
+
+window.deleteOldTeamInfo = function (team, playerOrder) {
+  const docRef = doc(db, "teams", team);
+  updateDoc(docRef, {
+    [playerOrder]: fourthPlayer,
+    player4: deleteField(),
+  });
+};
+
+window.updateTeamInfo = function (team, name) {};
