@@ -162,7 +162,7 @@
 
   function addRule() {
     let column = document.getElementById("middle");
-    let b = Number(column.lastElementChild.id.charAt(column.length - 1)) + 1;
+    let b = Number(column.lastElementChild.id) + 1;
     column.innerHTML +=
       '<hr id="hr' +
       b +
