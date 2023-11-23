@@ -55,7 +55,7 @@
               class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
               style="display:none"
             >
-            </a>
+          </a>
             <a class="nav-link" href="rules.html">Rules</a>
             <button
               type="button"
@@ -197,6 +197,7 @@
     var password = teams.find((o) => o.teamName === team).teamPass;
     var oldTeam = players.find((o) => o.name.replace(/\s/g, "") === name).team;
     var oldTeamObj = teams.find((o) => o.teamName === oldTeam);
+    var alive = 0;
 
     updateUserInfo(name, newName, status, team, password);
 
@@ -221,19 +222,35 @@
       }
     } else {
       var order;
+      var alive = 0; 
+
         if (oldTeamObj.player1 == name) {
           order = "player1";
-        }
-        if (oldTeamObj.player2 == name) {
+        } else if (oldTeamObj.player2 == name) {
           order = "player2";
-        }
-        if (oldTeamObj.player3 == name) {
+        } else if (oldTeamObj.player3 == name) {
           order = "player3";
-        }
-        if (oldTeamObj.player4 == name) {
+        } else if (oldTeamObj.player4 == name) {
           order = "player4";
         }
-      updateUserTeam(team, newName, order);
+        for (let a = 0; a < players.length; a++) {
+          if (players[a].team == team) {
+            if (players[a].status == true) {
+              if (players[a].name != name) {
+              alive++;
+              }
+            }
+          }
+        }
+        if (status == true) {
+          alive++;
+        }
+
+        var teamStatus = false;
+        if (alive > 0) {
+          teamStatus = true;
+        }
+      updateUserTeam(team, newName, order, teamStatus);
       }
   }
 

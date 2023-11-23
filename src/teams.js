@@ -400,10 +400,11 @@ window.updateTeamInfo = function (team, name) {
   });
 };
 
-window.updateUserTeam = function (team, name, order) {
+window.updateUserTeam = function (team, name, order, status) {
   const docRef = doc(db, "teams", team);
   updateDoc(docRef, {
     [order]: name,
+    status: status
   });
 };
 
