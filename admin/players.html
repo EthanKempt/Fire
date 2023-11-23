@@ -172,7 +172,7 @@
       '<option value="' + player.team + '">' + player.team + "</option>";
 
     for (let b = 0; b < teams.length; b++) {
-      if (!teams[b].player4) {
+      if (!teams[b].player4 && teams[b].teamName != player.team) {
         select.innerHTML +=
           '<option value="' +
           teams[b].teamName +
