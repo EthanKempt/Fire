@@ -3,7 +3,7 @@ window.logout = function () {
   localStorage.removeItem('currentTeam')
 };
 
-window.onload = function () {
+window.onload = async function () {
   var team = sessionStorage.getItem("currentTeam");
   if (team == null && window.location.pathname != "/index.html") {
     window.location.pathname = "index.html";

@@ -21,7 +21,9 @@
     <script src="/dist/bundleAdmin.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary">
+    <nav
+      class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
+    >
       <div class="container-fluid">
         <a class="navbar-brand">Higley</a>
         <button
@@ -87,13 +89,23 @@
       } else {
         colN++;
       }
+      var read = "none";
+
+      if (teams[a].adminRead == false) {
+        read = "inline-block";
+      }
+
       let currentCol = document.getElementById("col" + colN);
       currentCol.innerHTML +=
-        '<button onclick="initMessages(this)" type="button" class="btn btn-primary teamButton" data-bs-toggle="modal" data-bs-target="#' +
+        '<button onclick="initMessages(`' +
+        teams[a].teamName +
+        '`)" type="button" class="btn btn-primary position-relative teamButton" data-bs-toggle="modal" data-bs-target="#' +
         a +
         '">' +
         teams[a].teamName +
-        '</button><div class="modal fade modal-xl" id="' +
+        '  <span id="' + teams[a].teamName + 'Alert" style="display:' +
+        read +
+        '" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"> <span class="visually-hidden">New alerts</span> </span></button><div class="modal fade modal-xl" id="' +
         a +
         '" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"><div class="modal-dialog modal-dialog-scrollable"> <div class="modal-content"><div class="modal-header"><h1 class="modal-title fs-5" id="exampleModalLabel">' +
         teams[a].teamName +

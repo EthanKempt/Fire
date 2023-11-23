@@ -49,7 +49,13 @@
             <a class="nav-link" href="home.html">Home</a>
             <a class="nav-link" href="teams.html">Teams</a>
             <a class="nav-link active" href="players.html">Players</a>
-            <a class="nav-link" href="messages.html">Messages</a>
+            <a class="nav-link" href="messages.html">Messages
+              <span
+              id="notification"
+              class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
+              style="display:none"
+            >
+            </a>
             <a class="nav-link" href="rules.html">Rules</a>
             <button
               type="button"
@@ -230,6 +236,16 @@
       updateUserTeam(team, newName, order);
       }
   }
+
+  initNotifications();
+  async function initNotifications() {
+    var teams = await updateTeams;
+    for (let a = 0; a < teams.length; a++) {
+      if (teams[a].adminRead == false) {
+        document.getElementById('notification').style.display = 'inline-block'
+      }
+    }
+  }
 </script>
 
 <style>
@@ -289,5 +305,8 @@
   }
   .selectTeam {
     min-width: 10rem;
+  }
+  .notification {
+    display: inline-block;
   }
 </style>

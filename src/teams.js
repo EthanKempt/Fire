@@ -153,7 +153,12 @@ window.addMessage = function (a, b, c) {
     value: c,
     time: new Date(),
   });
+  updateDoc(doc(db, "teams", a), {
+    adminRead: false,
+  });
 };
+
+const startTime = new Date().getTime() / 1000;
 
 if (window.location.pathname == "/dist/targets.html") {
   const q = query(
@@ -170,9 +175,25 @@ if (window.location.pathname == "/dist/targets.html") {
     addMessage();
     //  }
   });
+} else {
+  const q = query(
+    collection(db, "teams", sessionStorage.currentTeam, "messages")
+  );
+  onSnapshot(q, (querySnapshot) => {
+    const messages = [];
+    querySnapshot.forEach((doc) => {
+      if (doc.data().time.seconds > startTime) {
+        markUnread();
+        document.getElementById("notification").style.display = "inline-block";
+      }
+    });
+  });
 }
-
-const startTime = new Date().getTime() / 1000;
+function markUnread() {
+  updateDoc(doc(db, "teams", sessionStorage.currentTeam), {
+    read: "false",
+  });
+}
 
 function addMessage() {
   let messageBox = document.getElementById("messager");
@@ -225,8 +246,8 @@ window.updateMessages = new Promise((resolve, reject) => {
 });
 
 window.initMessages = async function (a) {
-  var team = a.innerHTML;
-
+  var team = a;
+  updateRead(team);
   window.updateMessagesAd = new Promise((resolve, reject) => {
     const colRef3 = query(collection(db, "teams", team, "messages"));
     getDocs(colRef3)
@@ -246,6 +267,12 @@ window.initMessages = async function (a) {
   addMessages(allMessages, team);
 };
 
+function updateRead(team) {
+  updateDoc(doc(db, "teams", team), {
+    adminRead: true
+  });
+}
+
 window.saveMessageAdmin = function (team, message, author) {
   addDoc(collection(db, "teams", team, "messages"), {
     author: author,
@@ -264,6 +291,41 @@ if (window.location.pathname == "/admin/messages.html") {
         snapshot.docChanges().forEach((change) => {
           if (change.type === "added") {
             insertMessage(change.doc.data(), teams[a].teamName);
+          }
+        });
+      });
+    }
+  }
+
+  initListenerMessages()
+  async function initListenerMessages() {
+    let teams = await updateTeams;
+    for (let a = 0; a < teams.length; a++) {
+      const q = query(collection(db, "teams", teams[a].teamName, "messages"));
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().time.seconds > startTime) {
+            document.getElementById(teams[a].teamName + 'Alert').style.display = 'inline-block'
+          }
+        });
+      });
+    }
+  }
+} else if (window.location.pathname.slice(0, 7) == "/admin/") {
+
+  const startTime = new Date().getTime() / 1000;
+
+  initListenersAdmin();
+
+  async function initListenersAdmin() {
+    
+    let teams = await updateTeams;
+    for (let a = 0; a < teams.length; a++) {
+      const q = query(collection(db, "teams", teams[a].teamName, "messages"));
+      onSnapshot(q, (querySnapshot) => {
+        querySnapshot.forEach((doc) => {
+          if (doc.data().time.seconds > startTime) {
+            document.getElementById('notification').style.display = 'inline-block'
           }
         });
       });
@@ -343,4 +405,12 @@ window.updateUserTeam = function (team, name, order) {
   updateDoc(docRef, {
     [order]: name,
   });
-}
+};
+
+window.markRead = function () {
+  var team = sessionStorage.getItem("currentTeam");
+  const docRef = doc(db, "teams", team);
+  updateDoc(docRef, {
+    read: true,
+  });
+};
