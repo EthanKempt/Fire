@@ -108,6 +108,10 @@
         height: 4rem;
         font-size: 2rem;
       }
+      .rememberArea {
+        height: 3rem;
+        font-size: 2rem;
+      }
     }
     .pass {
       margin-bottom: 0rem !important;
@@ -120,7 +124,7 @@
   <script>
     sessionStorage.clear();
     if (localStorage.getItem("currentTeam") === null) {
-    } else { 
+    } else {
       var team = localStorage.currentTeam;
       sessionStorage.setItem("currentTeam", team);
       window.location.href = "/dist/home.html";
