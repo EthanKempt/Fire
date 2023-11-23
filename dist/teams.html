@@ -88,22 +88,36 @@
   initialTables();
   async function initialTables() {
     var teams = await updateTeams;
+    var players = await updateUsers;
     var column1 = document.getElementById("col1");
     var column2 = document.getElementById("col2");
     var column3 = document.getElementById("col3");
     var current = 0;
+    var maxCol = 3;
+    if (screen.width <= 991) {
+      maxCol = 2
+      column3.style.display = 'none'
+    }
 
     for (let a = 0; a < teams.length; a++) {
-      if (current == 3) {
+    var remainingPlayers = 0;
+      if (current == maxCol) {
         current = 1;
       } else {
         current++;
+      }
+      for (let b = 0; b < players.length; b++) {
+        if (players[b].team == teams[a].teamName) {
+          if (players[b].status == true) {
+            remainingPlayers++;
+          }
+        }
       }
       var currentCol = eval("column" + current);
       currentCol.innerHTML +=
         '<div class="card"> <div class="card-header">' +
         teams[a].teamName +
-        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Squad Wipes: 2</li> <li class="list-group-item">Kills: 6</li> <li class="list-group-item">Members left: 3</li> </ul> </div>';
+        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' + remainingPlayers + '</li> </ul> </div>';
     }
   }
 
