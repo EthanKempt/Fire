@@ -94,7 +94,7 @@
               Update
             </button>
           </div>
-          <div class="input-group mb-3">
+          <div class="input-group mb-3" id="startDate">
             <span class="input-group-text" id="inputGroup-sizing-default"
               >Date Started</span
             >
@@ -165,28 +165,28 @@
             </ul>
             <input
               type="text"
-              class="form-control text-center"
+              class="form-control text-center date"
               id="day"
               placeholder="Day"
               aria-label="Server"
             />
             <input
               type="text"
-              class="form-control text-center"
+              class="form-control text-center date"
               id="year"
               placeholder="Year"
               aria-label="Server"
             />
             <input
               type="text"
-              class="form-control text-center"
+              class="form-control text-center date"
               id="hour"
               placeholder="Hr"
               aria-label="Server"
             />
             <input
               type="text"
-              class="form-control text-center"
+              class="form-control text-center date"
               id="minute"
               placeholder="Min"
               aria-label="Server"
@@ -438,6 +438,9 @@
     }
     #logout {
       margin-top: 15px;
+    }
+    .date {
+      width: 4rem !important
     }
   }
   #pot {
