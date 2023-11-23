@@ -198,7 +198,11 @@
   function sendMessage(button) {
     let team = button.id;
     let message = document.getElementById("messageBox" + team).value;
+    if (message.trim().length > 0) {
     saveMessageAdmin(team, message, "admin");
+    } else {
+      alert('try adding a message')
+    }
   }
 </script>
 

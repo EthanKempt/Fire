@@ -330,7 +330,11 @@
     var team = sessionStorage.currentTeam;
     let auth = "team";
     let val = document.getElementById("messageVal").value;
-    addMessage(team, auth, val); //teamName + author + value
+    if (val.trim().length > 0) {
+      addMessage(team, auth, val); //teamName + author + value
+    } else {
+      alert('try adding a message')
+    }
   }
 
   var btn = document.getElementById("sendM");
@@ -421,10 +425,10 @@
         if (teams[a].notes) {
           var notes = teams[a].notes;
         } else {
-          var notes = ''
+          var notes = "";
         }
         sessionStorage.setItem("notes", notes);
-        text.value = notes
+        text.value = notes;
         setInterval(saveNotes, 5000);
       }
     }
