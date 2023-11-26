@@ -38,11 +38,11 @@ window.updateRules = new Promise((resolve, reject) => {
     });
 });
 
-window.updateTitles = function (a, b, c) {
+window.updateTitles = async function (a, b, c) {
   var titlesArray = a;
   var rulesArray = b;
   var checked = c;
-  var rules = JSON.parse(sessionStorage.rules);
+  var rules = await updateRules;
   for (let z = 0; z < rules.length; z++) {
     let current = rules[z].id;
     deleteDoc(doc(db, "rules", current));
