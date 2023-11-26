@@ -58,7 +58,7 @@ window.login = function (name, pass, teams, names) {
       }
     }
   }
-  if (name == "admin" && pass == "adm1n") {
+  if (name == "admin" && pass == "death.porch") {
     return true;
   }
   return false;
