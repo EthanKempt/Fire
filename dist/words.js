@@ -1315,7 +1315,6 @@ window.findWord = function (a) {
     "witch",
     "altar",
     "bench",
-    "bulge",
     "clone",
     "decry",
     "elope",

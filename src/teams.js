@@ -153,9 +153,11 @@ window.addMessage = function (a, b, c) {
     value: c,
     time: new Date(),
   });
-  updateDoc(doc(db, "teams", a), {
-    adminRead: false,
-  });
+  if (b != 'admin') {
+    updateDoc(doc(db, "teams", a), {
+      adminRead: false,
+    });
+  }
 };
 
 const startTime = new Date().getTime() / 1000;
