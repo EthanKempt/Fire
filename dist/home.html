@@ -178,8 +178,14 @@ seleect it, and press ctrl+k then ctrl+c or type these arow things aroung it-->
     let input = document.getElementById("teamsR");
     input.innerHTML = teams.length;
 
+    var alive = 0;
     let input2 = document.getElementById("playersR");
-    input2.innerHTML = names.length;
+    for (let b = 0; b < names.length; b++) {
+      if (names[b].status == true) {
+        alive++
+      }
+    }
+    input2.innerHTML = alive;
 
     var input3 = document.getElementById("safeID");
     for (let a = 0; a < teams.length; a++) {
