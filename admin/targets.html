@@ -88,8 +88,23 @@
             aria-label="Basic radio toggle button group"
             id="radio-cont"
           ></div>
-          <button type="button" id="saveButton" class="btn saveBtn btn-primary">
+
+          <button
+            type="button"
+            onclick="addWeek()"
+            id="addBtn"
+            class="btn btn-primary ctrBtn"
+          >
+            <i class="bi bi-plus-circle"></i>
+          </button>
+          <button type="button" id="shuffleBtn" onclick="randomizeTeams()" class="btn btn-primary ctrBtn">
+            <i class="bi bi-shuffle"></i>
+          </button>
+          <button type="button" id="saveButton" class="btn btn-primary ctrBtn">
             Save Changes
+          </button>
+          <button type="button" onclick="cancelNew()" id="cancelBtn" class="btn btn-danger ctrBtn">
+            <i class="bi bi-x-circle"></i>
           </button>
 
           <div id="assignArea"></div>
@@ -142,7 +157,10 @@
     for (let b = 0; b < Object.keys(history[a]).length; b++) {
       var current = history[a][previous];
       if (history.length - 1 == a) {
-        document.getElementById('saveButton').disabled = false
+        document.getElementById("saveButton").disabled = false;
+        document.getElementById("addBtn").disabled = false;
+        document.getElementById("shuffleBtn").disabled = false;
+
         if (b == 0) {
           body.innerHTML +=
             '<h1><div class="badge teamBadge bg-secondary">' +
@@ -160,7 +178,10 @@
             '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn down"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
         }
       } else {
-        document.getElementById('saveButton').disabled = true
+        document.getElementById("saveButton").disabled = true;
+        document.getElementById("addBtn").disabled = true;
+        document.getElementById("shuffleBtn").disabled = true;
+
         if (b + 1 > Object.keys(history[a]).length) {
           body.innerHTML +=
             '<h1><div class="badge teamBadge bg-secondary">' +
@@ -193,6 +214,64 @@
     teamObj.innerHTML = newTeam;
     newObj.innerHTML = team;
   }
+
+  async function addWeek() {
+    var history = await updateHistory;
+    document.getElementById('cancelBtn').style.display = 'inline-block'
+    document.getElementById('addBtn').disabled = true;
+    var radioContainer = document.getElementById("radio-cont");
+    radioContainer.lastElementChild.checked = false;
+    for (let a = 0; a < history.length; a++) {
+      var b = a + 1;
+      var current = document.getElementById("btnradio" + b);
+      current.disabled = true;
+    }
+    var weeks = history.length + 1;
+    radioContainer.innerHTML +=
+      '<input type="radio" class="btn-check" name="btnradio" id="btnradio' +
+      weeks +
+      '" autocomplete="off" checked/> <label class="btn btn-outline-primary" for="btnradio' +
+      weeks +
+      '">Week ' +
+      weeks +
+      "</label>";
+  }
+
+  async function cancelNew() {
+    var history = await updateHistory;
+    document.getElementById('cancelBtn').style.display = 'none'
+    document.getElementById('addBtn').disabled = false;
+
+    var box = document.getElementById('radio-cont')
+    box.lastElementChild.remove();
+    box.lastElementChild.remove();
+
+    for (let a = 0; a < history.length; a++) {
+      var b = a + 1;
+      var current = document.getElementById("btnradio" + b);
+      current.disabled = false;
+    }
+    box.lastElementChild.checked = true;
+  }
+
+  function randomizeTeams() {
+    var allTeamObjects = document.querySelectorAll(".teamBadge");
+    var oldOrder = [];
+    for (let a = 0; a < allTeamObjects.length; a++) {
+        oldOrder.push(allTeamObjects[a].innerHTML);
+    }
+    var newOrder = [];
+    for (let b = 0; b < oldOrder.length; b++) {
+        var c = Math.floor(Math.random() * (b + 1));
+        var temp = oldOrder[b];
+        oldOrder[b] = oldOrder[c];
+        oldOrder[c] = temp;
+    }
+    var newOrder = oldOrder;
+    for (let d = 0; d < newOrder.length; d++) {
+        allTeamObjects[d].innerHTML = newOrder[d];
+    }
+}
 </script>
 
 <style>
@@ -262,9 +341,13 @@
   .down {
     margin-left: 3.5rem;
   }
-  .saveBtn {
-    position: absolute;
-    margin-top: 1rem;
-    margin-left: 1.5rem;
+  .ctrBtn {
+    margin-top: -2rem;
+  }
+  #addBtn {
+    margin-left: 1rem;
+  }
+  #cancelBtn {
+    display: none;
   }
 </style>
