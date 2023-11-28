@@ -88,6 +88,10 @@
             aria-label="Basic radio toggle button group"
             id="radio-cont"
           ></div>
+          <button type="button" id="saveButton" class="btn saveBtn btn-primary">
+            Save Changes
+          </button>
+
           <div id="assignArea"></div>
         </div>
         <div class="col col-2 right-side"></div>
@@ -125,7 +129,7 @@
   initFirstWeek();
   async function initFirstWeek() {
     var history = await updateHistory;
-    initWeek(history.length - 1)
+    initWeek(history.length - 1);
   }
 
   async function initWeek(a) {
@@ -137,21 +141,37 @@
 
     for (let b = 0; b < Object.keys(history[a]).length; b++) {
       var current = history[a][previous];
-      if (b == 0) {
-        body.innerHTML +=
-          '<h1><div class="badge teamBadge bg-secondary">' +
-          current +
-          '</div><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
-      } else if (b + 1 == Object.keys(history[a]).length) {
-        body.innerHTML +=
-          '<h1><div class="badge teamBadge bg-secondary">' +
-          current +
-          '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button></h1>';
+      if (history.length - 1 == a) {
+        document.getElementById('saveButton').disabled = false
+        if (b == 0) {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            current +
+            '</div><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
+        } else if (b + 1 == Object.keys(history[a]).length) {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            current +
+            '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button></h1>';
+        } else {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            current +
+            '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn down"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
+        }
       } else {
-        body.innerHTML +=
-          '<h1><div class="badge teamBadge bg-secondary">' +
-          current +
-          '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn down"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
+        document.getElementById('saveButton').disabled = true
+        if (b + 1 > Object.keys(history[a]).length) {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            current +
+            "</div></h1>";
+        } else {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            current +
+            '</div></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
+        }
       }
       var previous = current;
     }
@@ -235,11 +255,16 @@
     margin-bottom: 3rem;
   }
   .arrowBtn {
-    margin-top: .75rem;
+    margin-top: 0.6rem;
     margin-left: 0.5rem;
     position: absolute;
   }
   .down {
-    margin-left: 3.5rem
+    margin-left: 3.5rem;
+  }
+  .saveBtn {
+    position: absolute;
+    margin-top: 1rem;
+    margin-left: 1.5rem;
   }
 </style>
