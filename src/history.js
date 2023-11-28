@@ -38,9 +38,7 @@ window.updateHistory = new Promise((resolve, reject) => {
     });
 });
 
-window.saveHistory = async function (random) {
-  var history = await updateHistory;
-  let size = history.length + 1;
+window.saveHistory = function (random, size) {
   let thisWeek = "week" + size;
   setDoc(doc(db, "history", thisWeek), {});
   let order = random;

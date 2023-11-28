@@ -97,13 +97,23 @@
           >
             <i class="bi bi-plus-circle"></i>
           </button>
-          <button type="button" id="shuffleBtn" onclick="randomizeTeams()" class="btn btn-primary ctrBtn">
+          <button
+            type="button"
+            id="shuffleBtn"
+            onclick="randomizeTeams()"
+            class="btn btn-primary ctrBtn"
+          >
             <i class="bi bi-shuffle"></i>
           </button>
-          <button type="button" id="saveButton" class="btn btn-primary ctrBtn">
+          <button type="button" id="saveButton" onclick="saveChanges()" class="btn btn-primary ctrBtn">
             Save Changes
           </button>
-          <button type="button" onclick="cancelNew()" id="cancelBtn" class="btn btn-danger ctrBtn">
+          <button
+            type="button"
+            onclick="cancelNew()"
+            id="cancelBtn"
+            class="btn btn-danger ctrBtn"
+          >
             <i class="bi bi-x-circle"></i>
           </button>
 
@@ -217,8 +227,8 @@
 
   async function addWeek() {
     var history = await updateHistory;
-    document.getElementById('cancelBtn').style.display = 'inline-block'
-    document.getElementById('addBtn').disabled = true;
+    document.getElementById("cancelBtn").style.display = "inline-block";
+    document.getElementById("addBtn").disabled = true;
     var radioContainer = document.getElementById("radio-cont");
     radioContainer.lastElementChild.checked = false;
     for (let a = 0; a < history.length; a++) {
@@ -239,10 +249,10 @@
 
   async function cancelNew() {
     var history = await updateHistory;
-    document.getElementById('cancelBtn').style.display = 'none'
-    document.getElementById('addBtn').disabled = false;
+    document.getElementById("cancelBtn").style.display = "none";
+    document.getElementById("addBtn").disabled = false;
 
-    var box = document.getElementById('radio-cont')
+    var box = document.getElementById("radio-cont");
     box.lastElementChild.remove();
     box.lastElementChild.remove();
 
@@ -251,27 +261,37 @@
       var current = document.getElementById("btnradio" + b);
       current.disabled = false;
     }
-    box.lastElementChild.checked = true;
+    box.lastElementChild.click();
   }
 
   function randomizeTeams() {
     var allTeamObjects = document.querySelectorAll(".teamBadge");
     var oldOrder = [];
     for (let a = 0; a < allTeamObjects.length; a++) {
-        oldOrder.push(allTeamObjects[a].innerHTML);
+      oldOrder.push(allTeamObjects[a].innerHTML);
     }
     var newOrder = [];
     for (let b = 0; b < oldOrder.length; b++) {
-        var c = Math.floor(Math.random() * (b + 1));
-        var temp = oldOrder[b];
-        oldOrder[b] = oldOrder[c];
-        oldOrder[c] = temp;
+      var c = Math.floor(Math.random() * (b + 1));
+      var temp = oldOrder[b];
+      oldOrder[b] = oldOrder[c];
+      oldOrder[c] = temp;
     }
     var newOrder = oldOrder;
     for (let d = 0; d < newOrder.length; d++) {
-        allTeamObjects[d].innerHTML = newOrder[d];
+      allTeamObjects[d].innerHTML = newOrder[d];
     }
-}
+  }
+
+  function saveChanges() {
+    var allTeamObjects = document.querySelectorAll(".teamBadge");
+    var order = [];
+    for (let a = 0; a < allTeamObjects.length; a++) {
+      order.push(allTeamObjects[a].innerHTML);
+    }
+    week = document.querySelector("#radio-cont").childElementCount / 2;
+    saveHistory(order, week)
+  }
 </script>
 
 <style>

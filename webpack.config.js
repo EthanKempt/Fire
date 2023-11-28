@@ -34,26 +34,26 @@
 //   watch: true,
 // };
 
-// const path4 = require("path");
-
-// module.exports = {
-//   mode: "development",
-//   entry: "./src/history.js",
-//   output: {
-//     path: path4.resolve(__dirname, "dist"),
-//     filename: "bundleHistory.js",
-//   },
-//   watch: true,
-// };
-
-const path5 = require("path");
+const path4 = require("path");
 
 module.exports = {
   mode: "development",
-  entry: "./src/rules.js",
+  entry: "./src/history.js",
   output: {
-    path: path5.resolve(__dirname, "dist"),
-    filename: "bundleRules.js",
+    path: path4.resolve(__dirname, "dist"),
+    filename: "bundleHistory.js",
   },
   watch: true,
 };
+
+// const path5 = require("path");
+
+// module.exports = {
+//   mode: "development",
+//   entry: "./src/rules.js",
+//   output: {
+//     path: path5.resolve(__dirname, "dist"),
+//     filename: "bundleRules.js",
+//   },
+//   watch: true,
+// };
