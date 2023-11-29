@@ -113,7 +113,7 @@
                   <div class="modal-body" id="addBody">
                     <div class="input-group mb-3">
                       <span class="input-group-text" id="basic-addon1"
-                        >Username</span
+                        >Player Name</span
                       >
 
                       <span class="input-group-text" id="basic-addon1">
@@ -122,12 +122,12 @@
                             class="form-check-input"
                             type="checkbox"
                             value=""
-                            id="flexCheckChecked"
+                            id="newPlayerChecked"
                             checked
                           />
                           <label
                             class="form-check-label"
-                            for="flexCheckChecked"
+                            for="newPlayerChecked"
                           >
                           </label>
                         </div>
@@ -136,9 +136,10 @@
                       <input
                         type="text"
                         class="form-control"
-                        placeholder="Username"
+                        placeholder="first and last name"
                         aria-label="Username"
                         aria-describedby="basic-addon1"
+                        id="playerName"
                       />
                     </div>
                   </div>
@@ -150,7 +151,11 @@
                     >
                       Close
                     </button>
-                    <button type="button" class="btn btn-primary">
+                    <button
+                      type="button"
+                      onclick="addNewPlayer()"
+                      class="btn btn-primary"
+                    >
                       Save changes
                     </button>
                   </div>
@@ -364,6 +369,22 @@
         document.getElementById("notification").style.display = "inline-block";
       }
     }
+  }
+
+  async function addNewPlayer() {
+    var teams = await updateTeams;
+    var name = document.getElementById("playerName").value;
+    var status = document.getElementById("newPlayerChecked").checked;
+    var team = document.querySelector("#select2-addSelect-container").innerHTML;
+    var password = ''
+    for (let a = 0; a < teams.length; a++){
+      if (teams[a].teamName == team) {
+        password = teams[a].teamPass
+      }
+    }
+
+    saveNewPlayer(name, status, team, password);
+    saveNewPlayerT(name, team);
   }
 </script>
 

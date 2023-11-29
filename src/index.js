@@ -161,3 +161,13 @@ window.updateUserInfo = async function (name, newName, status, team, password) {
     password: password,
   });
 }
+
+window.saveNewPlayer = function (name, status, team, password) {
+  const docRef = doc(db, "names", name);
+  setDoc(docRef, {
+    name: name,
+    status: status,
+    team: team,
+    password: password,
+  });
+}

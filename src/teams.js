@@ -417,3 +417,10 @@ window.markRead = function () {
     read: true,
   });
 };
+
+window.saveNewPlayerT = function (name, team) {
+  const docRef = doc(db, "teams", team);
+  updateDoc(docRef, {
+    player4: name,
+  });
+}
