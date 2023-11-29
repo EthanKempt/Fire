@@ -30,7 +30,9 @@
     <script src="/src/site.js"></script>
   </head>
   <body>
-    <nav class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary">
+    <nav
+      class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
+    >
       <div class="container-fluid">
         <a class="navbar-brand">Higley</a>
         <button
@@ -50,13 +52,15 @@
             <a class="nav-link" href="teams.html">Teams</a>
             <a class="nav-link active" href="players.html">Players</a>
             <a class="nav-link" href="targets.html">Targets</a>
-            <a class="nav-link" href="messages.html">Messages
+            <a class="nav-link" href="messages.html"
+              >Messages
               <span
-              id="notification"
-              class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
-              style="display:none"
-            >
-          </a>
+                id="notification"
+                class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
+                style="display: none"
+              >
+              </span>
+            </a>
             <a class="nav-link" href="rules.html">Rules</a>
             <button
               type="button"
@@ -77,11 +81,88 @@
       <div class="row align-items-start" id="row">
         <div class="col col-2 left-side" id="left"></div>
         <div class="col">
+          <div id="ctrlBar">
+            <button
+              type="button"
+              class="btn btn-outline-primary"
+              data-bs-toggle="modal"
+              data-bs-target="#addPlayerModal"
+            >
+              Add New Player
+            </button>
+            <div
+              class="modal fade"
+              id="addPlayerModal"
+              tabindex="-1"
+              aria-labelledby="exampleModalLabel"
+              aria-hidden="true"
+            >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">
+                      Add Player Form
+                    </h1>
+                    <button
+                      type="button"
+                      class="btn-close"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"
+                    ></button>
+                  </div>
+                  <div class="modal-body" id="addBody">
+                    <div class="input-group mb-3">
+                      <span class="input-group-text" id="basic-addon1"
+                        >Username</span
+                      >
+
+                      <span class="input-group-text" id="basic-addon1">
+                        <div class="form-check">
+                          <input
+                            class="form-check-input"
+                            type="checkbox"
+                            value=""
+                            id="flexCheckChecked"
+                            checked
+                          />
+                          <label
+                            class="form-check-label"
+                            for="flexCheckChecked"
+                          >
+                          </label>
+                        </div>
+                      </span>
+
+                      <input
+                        type="text"
+                        class="form-control"
+                        placeholder="Username"
+                        aria-label="Username"
+                        aria-describedby="basic-addon1"
+                      />
+                    </div>
+                  </div>
+                  <div class="modal-footer">
+                    <button
+                      type="button"
+                      class="btn btn-secondary"
+                      data-bs-dismiss="modal"
+                    >
+                      Close
+                    </button>
+                    <button type="button" class="btn btn-primary">
+                      Save changes
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
           <div class="container">
             <div class="row align-items-start" id="innerRow">
-              <div class="col" id="col1"></div>
-              <div class="col" id="col2"></div>
-              <div class="col" id="col3"></div>
+              <div class="col col-4" id="col1"></div>
+              <div class="col col-4" id="col2"></div>
+              <div class="col col-4" id="col3"></div>
             </div>
           </div>
         </div>
@@ -95,6 +176,7 @@
   initPage();
   async function initPage() {
     var players = await updateUsers;
+    var teams = await updateTeams;
     var c1 = document.getElementById("col1");
     var c2 = document.getElementById("col2");
     var c3 = document.getElementById("col3");
@@ -105,7 +187,7 @@
       } else {
         currentColNumb++;
       }
-      var playerNameS = players[a].name.replace(/\s/g, "")
+      var playerNameS = players[a].name.replace(/\s/g, "");
       var currentCol = eval("c" + currentColNumb);
       currentCol.innerHTML +=
         '<button onclick="initInfo(this)" id="' +
@@ -126,8 +208,27 @@
         playerNameS +
         '" onclick="saveChanges(this)" class="btn btn-primary">Save changes</button></div></div></div></div>';
     }
-  }
 
+    var addPlayerBody = document.getElementById("addBody");
+    addPlayerBody.innerHTML += "Team: <select id='addSelect'> </select>";
+    var addSelect = document.getElementById("addSelect");
+
+    for (let a = 0; a < teams.length; a++) {
+      if (!teams[a].hasOwnProperty("player4")) {
+        addSelect.innerHTML +=
+          "<option value='" +
+          teams[a].teamName +
+          "'>" +
+          teams[a].teamName +
+          "</option>";
+      }
+    }
+    $(document).ready(function () {
+      $("#addSelect").select2({
+        dropdownParent: $("#addPlayerModal"),
+      });
+    });
+  }
   async function initInfo(a) {
     var playerName = a.id;
     var players = await updateUsers;
@@ -156,7 +257,7 @@
       '<div class="input-group mb-3 nameSpace"> <span class="input-group-text" id="basic-addon1">Name</span> <input type="text" class="form-control" id="' +
       playerName +
       'Name" placeholder="put there name here!" aria-label="Username" value="' +
-      player.name +  
+      player.name +
       '" aria-describedby="basic-addon1"></div>';
     body.innerHTML +=
       '<div class="input-group mb-3"> <span class="input-group-text" id="basic-addon1">Password</span> <input type="text" class="form-control" id="' +
@@ -223,36 +324,36 @@
       }
     } else {
       var order;
-      var alive = 0; 
+      var alive = 0;
 
-        if (oldTeamObj.player1 == name) {
-          order = "player1";
-        } else if (oldTeamObj.player2 == name) {
-          order = "player2";
-        } else if (oldTeamObj.player3 == name) {
-          order = "player3";
-        } else if (oldTeamObj.player4 == name) {
-          order = "player4";
-        }
-        for (let a = 0; a < players.length; a++) {
-          if (players[a].team == team) {
-            if (players[a].status == true) {
-              if (players[a].name != name) {
+      if (oldTeamObj.player1 == name) {
+        order = "player1";
+      } else if (oldTeamObj.player2 == name) {
+        order = "player2";
+      } else if (oldTeamObj.player3 == name) {
+        order = "player3";
+      } else if (oldTeamObj.player4 == name) {
+        order = "player4";
+      }
+      for (let a = 0; a < players.length; a++) {
+        if (players[a].team == team) {
+          if (players[a].status == true) {
+            if (players[a].name != name) {
               alive++;
-              }
             }
           }
         }
-        if (status == true) {
-          alive++;
-        }
-
-        var teamStatus = false;
-        if (alive > 0) {
-          teamStatus = true;
-        }
-      updateUserTeam(team, newName, order, teamStatus);
       }
+      if (status == true) {
+        alive++;
+      }
+
+      var teamStatus = false;
+      if (alive > 0) {
+        teamStatus = true;
+      }
+      updateUserTeam(team, newName, order, teamStatus);
+    }
   }
 
   initNotifications();
@@ -260,7 +361,7 @@
     var teams = await updateTeams;
     for (let a = 0; a < teams.length; a++) {
       if (teams[a].adminRead == false) {
-        document.getElementById('notification').style.display = 'inline-block'
+        document.getElementById("notification").style.display = "inline-block";
       }
     }
   }
@@ -298,10 +399,10 @@
       margin-top: 15px;
     }
     .teamButton {
-    margin-left: 2rem;
-    margin-right: 2rem;
-    margin-top: 2rem;
-  }
+      margin-left: 2rem;
+      margin-right: 2rem;
+      margin-top: 2rem;
+    }
   }
   #container {
     min-height: 91vh;
@@ -320,10 +421,10 @@
   }
   @media (min-width: 991px) {
     .teamButton {
-    margin-left: 5rem;
-    margin-right: 5rem;
-    margin-top: 2rem;
-  }
+      margin-left: 5rem;
+      margin-right: 5rem;
+      margin-top: 2rem;
+    }
   }
 
   .nameSpace {
@@ -334,5 +435,8 @@
   }
   .notification {
     display: inline-block;
+  }
+  #ctrlBar {
+    margin-top: 1rem;
   }
 </style>
