@@ -123,7 +123,7 @@ window.newSave = function (random) {
       targets: target,
     });
   }
-  makeToast("Targets saved successfully");
+  makeToast("Assignments saved successfully");
 };
 
 window.messageUpdate = new Promise((resolve, reject) => {

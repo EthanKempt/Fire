@@ -105,7 +105,12 @@
           >
             <i class="bi bi-shuffle"></i>
           </button>
-          <button type="button" id="saveButton" onclick="saveChanges()" class="btn btn-primary ctrBtn">
+          <button
+            type="button"
+            id="saveButton"
+            onclick="saveChanges()"
+            class="btn btn-primary ctrBtn"
+          >
             Save Changes
           </button>
           <button
@@ -118,6 +123,32 @@
           </button>
 
           <div id="assignArea"></div>
+          <div aria-live="polite" aria-atomic="true" class="position-relative">
+            <!-- Position it: -->
+            <!-- - `.toast-container` for spacing between toasts -->
+            <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
+            <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
+            <div class="toast-container">
+              <!-- Then put toasts within -->
+              <div
+                class="toast align-items-center text-bg-success border-0"
+                role="alert"
+                aria-live="assertive"
+                aria-atomic="true"
+                id="liveToast"
+              >
+                <div class="d-flex">
+                  <div class="toast-body" id="toastBody"></div>
+                  <button
+                    type="button"
+                    class="btn-close btn-close-white me-2 m-auto"
+                    data-bs-dismiss="toast"
+                    aria-label="Close"
+                  ></button>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
         <div class="col col-2 right-side"></div>
       </div>
@@ -232,8 +263,8 @@
     var radioContainer = document.getElementById("radio-cont");
     radioContainer.lastElementChild.checked = false;
     for (let a = 0; a < history.length; a++) {
-      var b = a + 1;
-      var current = document.getElementById("btnradio" + b);
+      var c = a + 1;
+      var current = document.getElementById("btnradio" + c);
       current.disabled = true;
     }
     var weeks = history.length + 1;
@@ -245,6 +276,34 @@
       '">Week ' +
       weeks +
       "</label>";
+    randomizeAllTeams();
+  }
+
+  async function randomizeAllTeams() {
+    var teams = await updateTeams;
+    var body = document.getElementById("assignArea");
+    body.innerHTML = "";
+
+    for (let a = 0; a < teams.length; a++) {
+      if (teams[a].status == true) {
+        if (a == 0) {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            teams[a].teamName +
+            '</div><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
+        } else if (a + 1 == teams.length) {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            teams[a].teamName +
+            '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button></h1>';
+        } else {
+          body.innerHTML +=
+            '<h1><div class="badge teamBadge bg-secondary">' +
+            teams[a].teamName +
+            '</div><button type="button" onclick="moveTeam(this, `up`)" class="btn btn-primary arrowBtn"><i class="bi bi-caret-up-fill"></i></button><button type="button" onclick="moveTeam(this, `down`)" class="btn btn-primary arrowBtn down"><i class="bi bi-caret-down-fill"></i></button></h1> <h2><i class="bi bi-arrow-down"></i></h2>';
+        }
+      }
+    }
   }
 
   async function cancelNew() {
@@ -264,7 +323,8 @@
     box.lastElementChild.click();
   }
 
-  function randomizeTeams() {
+  async function randomizeTeams() {
+    var history = await updateHistory;
     var allTeamObjects = document.querySelectorAll(".teamBadge");
     var oldOrder = [];
     for (let a = 0; a < allTeamObjects.length; a++) {
@@ -283,14 +343,24 @@
     }
   }
 
-  function saveChanges() {
+  async function saveChanges() {
+    var history = await updateHistory;
+    document.getElementById('addBtn').disabled = false
+    document.getElementById('cancelBtn').style.display = 'none'
+
+    for (let a = 0; a < history.length; a++) {
+      var b = a + 1;
+      var current = document.getElementById("btnradio" + b);
+      current.disabled = false;
+    }
     var allTeamObjects = document.querySelectorAll(".teamBadge");
     var order = [];
     for (let a = 0; a < allTeamObjects.length; a++) {
       order.push(allTeamObjects[a].innerHTML);
     }
     week = document.querySelector("#radio-cont").childElementCount / 2;
-    saveHistory(order, week)
+    saveHistory(order, week);
+    newSave(order);
   }
 </script>
 
@@ -317,11 +387,11 @@
   }
   .left-side {
     background-color: #8b8b8b;
-    height: 100vh;
+    min-height: 91vh;
   }
   .right-side {
     background-color: #8b8b8b;
-    height: 100vh;
+    min-height: 91vh;
   }
   .row {
     width: 98.79vw;
