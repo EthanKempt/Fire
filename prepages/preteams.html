@@ -21,20 +21,20 @@
       <div class="container-fluid">
         <a class="navbar-brand">HHS</a>
         <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
-        <form class="d-flex">
+        <div class="d-flex">
           <button class="btn btn-primary" onclick="logout()" id="logout">
             log out
           </button>
-        </form>
+        </div>
       </div>
     </nav>
 
     <div class="container-fluid text-center">
-      <div class="row align-items-start" id="row">
+      <div class="row" id="row">
         <div class="col col-2" id="left"></div>
         <div class="col">
           <div class="container text-center">
-            <div class="row align-items-start">
+            <div class="row">
               <div class="col inCol" id="col1">
                 <div class="card">
                   <div class="card-body">
@@ -176,12 +176,10 @@
   }
   #left {
     background-color: #8b8b8b;
-    height: 100%;
     min-height: 91vh;
   }
   #right {
     background-color: #8b8b8b;
-    height: 100%;
     min-height: 91vh;
   }
   .card {

@@ -20,7 +20,7 @@
     <nav id="navBar" class="navbar sticky-top navbar-dark px-3 mb-3">
       <a class="navbar-brand" href="#">HHS</a>
       <ul class="nav nav-pills">
-        <button type="button" class="btn btn-primary">Log In</button>
+        <button type="button" onclick="logIn()" class="btn btn-primary">Log In</button>
       </ul>
     </nav>
 
@@ -250,23 +250,24 @@
   }
   setInterval(refreshTime, 1000);
 
+  function logIn() {
+    window.location.href = 'log.html'
+  }
+
   function preHome() {
     window.location.pathname = 'prepages/prehome.html'
   }
 
   function preTeams() {
-    alert('b')
-
+    window.location.pathname = 'prepages/preteams.html'
   } 
 
   function preTargets() {
-    alert('c')
-
+    window.location.pathname = 'prepages/pretargets.html'
   }  
 
   function preRules() {
-    alert('d')
-
+    window.location.pathname = 'prepages/prerules.html'
   }
 </script>
 

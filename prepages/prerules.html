@@ -14,57 +14,19 @@
     ></script>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="/dist/bundleRules.js"></script>
     <title>Rules</title>
-    <script src="/src/site.js"></script>
-    <script src="bundleRules.js"></script>
-    <script src="bundleTeams.js"></script>
   </head>
   <body>
-    <nav
-      class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
-    >
-      <div class="container-fluid">
-        <a class="navbar-brand">Higley</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarNavAltMarkup"
-          aria-controls="navbarNavAltMarkup"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
-          <div class="navbar-nav">
-            <a class="nav-link" href="home.html" aria-current="page">Home</a>
-            <a class="nav-link" href="teams.html">Teams</a>
-            <a class="nav-link" href="targets.html"
-              >Targets
-              <span
-                class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
-                id="notification"
-                style="display: none;"
-              >
-                <span class="visually-hidden">New alerts</span>
-              </span></a
-            >
-            <a class="nav-link active" href="rules.html">Rules</a>
-            <button
-              type="button"
-              id="logout"
-              onclick="logout()"
-              class="btn btn-primary me-auto loginButton"
-              data-bs-toggle="modal"
-              data-bs-target="#loginModal"
-            >
-              Log Out
-            </button>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand">HHS</a>
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+          <div class="d-flex">
+            <button class="btn btn-primary" onclick="logout()" id="logout">log out</button>
           </div>
         </div>
-      </div>
-    </nav>
+      </nav>
 
     <div class="container column text-left">
       <div class="row align-items-middle">
@@ -105,17 +67,8 @@
     }
   }
 
-  initNotification();
-  async function initNotification() {
-    var teams = await updateTeams;
-    var read = teams.find(
-      (o) => o.teamName === sessionStorage.getItem("currentTeam")
-    ).read;
-    if (read == true) {
-      document.getElementById("notification").style.display = "none";
-    } else {
-      document.getElementById("notification").style.display = "inline-block";
-    }
+  function logout() {
+    window.location.href = '/index.html'
   }
 </script>
 
@@ -123,6 +76,12 @@
   .navbar {
     background-color: #2e4b73 !important;
     min-height: 9vh;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: white;
   }
   .navbar-toggler {
     border-color: white;

@@ -1,0 +1,337 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Targets</title>
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9"
+      crossorigin="anonymous"
+    />
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      src="https://code.jquery.com/jquery-3.7.1.js"
+      integrity="sha256-eKhayi8LEQwp4NKxN+CfCh+3qOVUtJn3QNZ0TciWLP4="
+      crossorigin="anonymous"
+    ></script>
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid">
+        <a class="navbar-brand">HHS</a>
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0"></ul>
+        <div class="d-flex">
+          <button class="btn btn-primary" onclick="logout()" id="logout">
+            log out
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="container column text-center">
+      <div class="row bigR align-items-middle">
+        <div class="col col-2 left-side"></div>
+        <div class="col">
+          <div class="row align-items-start">
+            <div id="mobileControl">
+              <div
+                class="btn-group"
+                role="group"
+                aria-label="Basic radio toggle button group"
+              >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="btnradio1"
+                  autocomplete="off"
+                  checked
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btnradio1"
+                  onclick="selectTargets()"
+                  >Targets</label
+                >
+
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="btnradio2"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btnradio2"
+                  onclick="selectMessages()"
+                  >Messages</label
+                >
+                <input
+                  type="radio"
+                  class="btn-check"
+                  name="btnradio"
+                  id="btnradio3"
+                  autocomplete="off"
+                />
+                <label
+                  class="btn btn-outline-primary"
+                  for="btnradio3"
+                  onclick="selectNotes()"
+                  >Notes</label
+                >
+              </div>
+            </div>
+            <div class="col" id="targetsCol">
+              <br />
+              <p class="fs-5">
+                Your team <b>has</b> gotten someone out this week meaning you
+                are <b>safe</b>. Your assigned team is
+                <b>Super Splash Bros</b> and the people on the team are:
+              </p>
+              <br />
+              <div class="card-header">
+                <p class="fs-4" id="teamTitle">Super Splash Bros</p>
+              </div>
+              <ul class="list-group list-group-flush" id="list">
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                  id="player1"
+                >
+                  Little Tim
+                  <span class="badge bg-primary rounded-pill">Out</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                  id="player2"
+                >
+                  Medium Tim
+                  <span class="badge bg-primary rounded-pill">In</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                  id="player3"
+                >
+                  Big Tim
+                  <span class="badge bg-primary rounded-pill">Out</span>
+                </li>
+                <li
+                  class="list-group-item d-flex justify-content-between align-items-center"
+                  id="player3"
+                >
+                  Enormous Tim
+                  <span class="badge bg-primary rounded-pill">In</span>
+                </li>
+              </ul>
+            </div>
+            <div class="col message-col" id="messagesCol">
+              <br />
+
+              <div class="card text-bg-light mb-3 message-display text-start">
+                <div class="card-header message-header">Admin</div>
+                <div class="card-body message-body overflow-auto" id="messager">
+                  <h4>
+                    <div class="badge bg-secondary message">knock knock</div>
+                    <br />
+                    <div class="badge bg-primary message">whos there?</div>
+                    <br />
+                    <div class="badge bg-secondary message">egg</div>
+                    <br />
+                    <div class="badge bg-primary message">egg who?</div>
+                    <br />
+                    <div class="badge bg-secondary message">
+                      eggstremely disapointed you dont recognize me
+                    </div>
+                    <br />
+                  </h4>
+                </div>
+              </div>
+              <div class="input-group mb-3">
+                <input
+                  type="text"
+                  class="form-control"
+                  placeholder="your message"
+                  aria-describedby="sendM"
+                  id="messageVal"
+                />
+                <button
+                  class="btn btn-outline-primary"
+                  type="button"
+                  id="sendM"
+                  onclick="sendMessage()"
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+          <hr class="border border-primary border-3 opacity-75" />
+          <div class="row noteRow align-items-start" id="noteRow">
+            <div class="col">
+              <div class="mb-3">
+                <label for="noteArea" class="fs-4" class="form-label"
+                  >notes</label
+                >
+                <textarea class="form-control" id="noteArea" rows="3">
+These notes will autosave if your logged in!</textarea
+                >
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col col-2 right-side"></div>
+      </div>
+    </div>
+  </body>
+</html>
+
+<script>
+  function scrollBottom() {
+    let messageBox = document.getElementById("messager");
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
+  function sendMessage() {
+    var messageBox = document.getElementById("messager");
+    let val = document.getElementById("messageVal").value;
+    if (val.trim().length > 0) {
+      messageBox.innerHTML +=
+        '<h4><div class="badge bg-primary">' + val + "</div></h4>";
+    } else {
+      alert("try adding a message");
+    }
+    document.getElementById("messageVal").value = "";
+    messageBox.scrollTop = messageBox.scrollHeight;
+  }
+
+  function selectTargets() {
+    var targetsC = document.getElementById("targetsCol");
+    var messagesC = document.getElementById("messagesCol");
+    var notesR = document.getElementById("noteRow");
+    targetsC.style.display = "block";
+    messagesC.style.display = "none";
+    notesR.style.display = "none";
+  }
+
+  function selectMessages() {
+    var targetsC = document.getElementById("targetsCol");
+    var messagesC = document.getElementById("messagesCol");
+    var notesR = document.getElementById("noteRow");
+    targetsC.style.display = "none";
+    messagesC.style.display = "block";
+    notesR.style.display = "none";
+  }
+
+  function selectNotes() {
+    var targetsC = document.getElementById("targetsCol");
+    var messagesC = document.getElementById("messagesCol");
+    var notesR = document.getElementById("noteRow");
+    targetsC.style.display = "none";
+    messagesC.style.display = "none";
+    notesR.style.display = "block";
+  }
+
+  function logout() {
+    window.location.href = "/index.html";
+  }
+  scrollBottom();
+</script>
+
+<style>
+  .navbar {
+    background-color: #2e4b73 !important;
+    min-height: 9vh;
+  }
+  .navbar-brand {
+    color: white;
+  }
+  .navbar-brand:hover {
+    color: white;
+  }
+  .navbar-toggler {
+    border-color: white;
+    border-width: 1px;
+  }
+
+  .container {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .display-1 {
+    font-weight: 500;
+  }
+  .h5 {
+    margin-top: 15px;
+    margin-bottom: 0px;
+  }
+  .left-side {
+    background-color: #8b8b8b;
+    min-height: 91vh;
+  }
+  .right-side {
+    background-color: #8b8b8b;
+    min-height: 91vh;
+  }
+  .bigR {
+    width: 100vw;
+  }
+  .view-box {
+    height: 50vh;
+  }
+  .loginButton {
+    position: absolute;
+    right: 1vw;
+  }
+  @media (max-width: 991px) {
+    .right-side {
+      display: none;
+    }
+    .left-side {
+      display: none;
+    }
+    #logout {
+      margin-top: 15px;
+    }
+    #mobileControl {
+      margin-top: 1rem !important;
+    }
+    #messagesCol {
+      display: none;
+    }
+    hr {
+      display: none;
+    }
+    #noteRow {
+      display: none;
+      width: 100%;
+    }
+  }
+  .message-display {
+    max-width: 100%;
+    height: 18rem;
+  }
+  .message-header {
+    font-weight: 700;
+  }
+  .message {
+    max-width: 100%;
+    white-space: normal;
+    text-align: left;
+    margin-top: 0.5rem;
+  }
+  @media (min-width: 991px) {
+    #mobileControl {
+      display: none;
+      margin-top: 1rem !important;
+    }
+  }
+  .innerR {
+    width: 66.66%;
+  }
+</style>
