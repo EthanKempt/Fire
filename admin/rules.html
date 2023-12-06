@@ -133,7 +133,11 @@
         rule +
         '</textarea></div></div>' +
         '<div class="buttonCont"><button type="button" class="btn btn-primary"><i class="bi bi-caret-up-fill"></i></button><br> <button type="button" class="btn btn-primary"><i class="bi bi-caret-down-fill"></i></button></div></div>'
+        if (a + 1 == rules.length) {
+          document.getElementById('cont' + a).nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.remove();
+        }
     }
+    document.getElementById('cont0').nextElementSibling.firstElementChild.remove();
     sizeOrderBox();
   }
 
@@ -197,6 +201,13 @@
       var height = boxes[a].offsetHeight + "px";
       boxes[a].style.maxWidth = height;
     }
+  }
+
+  function clickUp(order) {
+
+  }
+  function clickDown(order) {
+
   }
 </script>
 
