@@ -217,6 +217,14 @@
 </html>
 
 <script>
+  autoLog();
+  function autoLog() {
+    if (localStorage.currentTeam) {
+      sessionStorage.setItem('currentTeam', localStorage.currentTeam)
+      window.location.href = 'dist/home.html'
+    }
+  }
+
   if (screen.width > 991) {
     var leftH = document.getElementById("left").offsetHeight;
     var px = "px";
