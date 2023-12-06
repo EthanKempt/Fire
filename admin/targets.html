@@ -270,7 +270,7 @@
         var team =
           arrowList[a].parentElement.nextElementSibling.firstElementChild
             .innerHTML;
-        for (let c = 0; c < document.querySelector("#radio-cont").childElementCount; c++) {
+        for (let c = 0; c < document.querySelector("#radio-cont").childElementCount / 2; c++) {
           var color = arrowList[a].parentElement.style.color;
           if (history[c].hasOwnProperty(pers)) {
             if (history[c][pers] == team && color != "red") {
@@ -281,6 +281,7 @@
         }
       }
     }
+    debugger
     if (errors > 0) {
       document.getElementById("errorArea").style.display = "inline-block";
       document.getElementById("errorArea").innerHTML =
