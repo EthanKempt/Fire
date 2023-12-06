@@ -112,7 +112,7 @@
         }
       }
       column.innerHTML +=
-        '<div class="container" id="cont' +
+        '<div><div class="container rulesCont" id="cont' +
         a +
         '"><div class="input-group mb-3" id="delTitle' +
         a +
@@ -120,10 +120,6 @@
         a +
         '" placeholder="Rule Title" value="' +
         title +
-        '" aria-label="Title" aria-describedby="basic-addon2"> <input type="text" class="form-control orderBox" id="order' +
-        a +
-        '" value="' +
-        a +
         '" aria-label="Title" aria-describedby="basic-addon2"> <button class="btn btn-outline-danger" type="button" onclick="deleteItem(' +
         a +
         ')"><i class="bi bi-trash3"></i></button> <span class="input-group-text" id="basic-addon2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="switch' +
@@ -135,9 +131,10 @@
         a +
         '" id="exampleFormControlTextarea1" rows="3">' +
         rule +
-        "</textarea></div></div>";
+        '</textarea></div></div>' +
+        '<div class="buttonCont"><button type="button" class="btn btn-primary"><i class="bi bi-caret-up-fill"></i></button><br> <button type="button" class="btn btn-primary"><i class="bi bi-caret-down-fill"></i></button></div></div>'
     }
-  sizeOrderBox();
+    sizeOrderBox();
   }
 
   function update() {
@@ -173,7 +170,7 @@
       b +
       '"> <input type="text" class="form-control title" id="title' +
       b +
-      '" placeholder="Rule Title" aria-label="Title" aria-describedby="basic-addon2">  <button class="btn btn-outline-danger" type="button" onclick="deleteItem(' +
+      '" placeholder="Rule Title" aria-label="Title" aria-describedby="basic-addon2"> <button class="btn btn-outline-danger" type="button" onclick="deleteItem(' +
       b +
       ')"><i class="bi bi-trash3"></i></button> <span class="input-group-text" id="basic-addon2"><div class="form-check form-switch"><input class="form-check-input" type="checkbox" role="switch" id="switch' +
       b +
@@ -181,7 +178,8 @@
       b +
       '"><textarea class="form-control rule" id="rule' +
       b +
-      '" id="exampleFormControlTextarea1" rows="3"></textarea></div></div>';
+      '" id="exampleFormControlTextarea1" rows="3"></textarea></div></div>'
+      sizeOrderBox();
   }
 
   initNotifications();
@@ -194,9 +192,9 @@
     }
   }
   function sizeOrderBox() {
-    var boxes = document.querySelectorAll('.orderBox');
+    var boxes = document.querySelectorAll(".orderBox");
     for (let a = 0; a < boxes.length; a++) {
-      var height = boxes[a].offsetHeight + 'px'
+      var height = boxes[a].offsetHeight + "px";
       boxes[a].style.maxWidth = height;
     }
   }
@@ -257,5 +255,14 @@
   }
   .notification {
     display: inline-block;
+  }
+  .rulesCont {
+    width: 90%;
+    display: inline-block;
+  }
+  .buttonCont {
+    display: inline-block;
+    position: absolute;
+    margin-top: 3.5rem;
   }
 </style>
