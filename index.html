@@ -29,10 +29,8 @@
     <div class="container text-center">
       <div class="row align-items-start">
         <div class="col">
-          <h3 id="gameStart">The game starts in:</h3>
-          <br />
-          <h1 id="startDate">Loading...</h1>
-        </div>
+          <script src="https://cdn.logwork.com/widget/countdown.js"></script>
+          <a href="https://logwork.com/countdown-8ksb" class="countdown-timer" data-style="columns" data-timezone="America/Phoenix" data-date="2024-01-03 12:57" disabled>Game Starts In</a>        </div>
       </div>
     </div>
 
@@ -95,7 +93,7 @@
             <div class="card-body">
               <h5 class="card-title">Teams Page</h5>
               <h6 class="card-subtitle mb-2 text-body-secondary">
-                Helpful, but not too helpful.
+                So you can see who's playing
               </h6>
               <p class="card-text">
                 Higley Assassins teams page shows a list of all the teams in the
@@ -232,7 +230,7 @@
     document.getElementById("right").style.height = height;
   }
 
-  refreshTime();
+  //refreshTime();
   async function refreshTime() {
     var startMilli = new Date("January 7, 2024 10:00:00").getTime();
     const current = new Date();
@@ -270,7 +268,7 @@
       seconds +
       "";
   }
-  setInterval(refreshTime, 1000);
+  //setInterval(refreshTime, 1000);
 
   function logIn() {
     window.location.href = "log.html";
@@ -336,5 +334,8 @@
   #startDate {
     margin-bottom: 19%;
     font-size: 6rem;
+  }
+  .countdown-timer {
+    pointer-events: none;
   }
 </style>
