@@ -197,7 +197,7 @@
       currentCol.innerHTML +=
         '<button onclick="initInfo(this)" id="' +
         playerNameS +
-        '" type="button" class="btn btn-primary teamButton" data-bs-toggle="modal" data-bs-target="#' +
+        '" type="button" class="btn btn-primary playerButton" data-bs-toggle="modal" data-bs-target="#' +
         playerNameS +
         'Modal">' +
         players[a].name +
@@ -419,10 +419,10 @@
     #logout {
       margin-top: 15px;
     }
-    .teamButton {
-      margin-left: 2rem;
-      margin-right: 2rem;
+    .playerButton {
       margin-top: 2rem;
+      height: 4rem;
+      width: 5rem;
     }
   }
   #container {
@@ -431,6 +431,7 @@
   }
   #row {
     min-height: 91vh;
+    align-items: normal !important;
   }
   #left {
     background-color: #8b8b8b;
@@ -441,10 +442,12 @@
     min-height: 91vh;
   }
   @media (min-width: 991px) {
-    .teamButton {
+    .playerButton {
       margin-left: 5rem;
       margin-right: 5rem;
       margin-top: 2rem;
+      height: 4rem;
+      width: 7rem;
     }
   }
 

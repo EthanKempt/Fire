@@ -1221,6 +1221,10 @@
     #logout {
       margin-top: 15px;
     }
+    .teamButton {
+      height: 5.3rem;
+      width: 6rem;
+    }
   }
 
   #container {
@@ -1229,6 +1233,7 @@
 
   #row {
     min-height: 90vh;
+    align-items: normal !important;
   }
 
   #left {
@@ -1238,19 +1243,20 @@
 
   #right {
     background-color: #8b8b8b;
-    height: 91vh;
-  }
-
-  @media (min-width: 991px) {
-    .teamButton {
-      margin-left: 3.5rem;
-      margin-right: 3.5rem;
-    }
+    min-height: 91vh;
   }
   .teamButton {
     margin-top: 2rem;
     margin-bottom: 1rem;
   }
+  @media (min-width: 991px) {
+  .teamButton {
+    margin-left: 1rem;
+    margin-right: 1rem;
+    height: 5rem;
+    width: 7rem;
+  }
+}
   #rep {
     margin-top: 1rem;
     margin-bottom: -1rem;

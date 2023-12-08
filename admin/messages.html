@@ -104,7 +104,9 @@
         a +
         '">' +
         teams[a].teamName +
-        '  <span id="' + teams[a].teamName + 'Alert" style="display:' +
+        '  <span id="' +
+        teams[a].teamName +
+        'Alert" style="display:' +
         read +
         '" class="position-absolute top-0 start-100 translate-middle p-2 bg-danger border border-light rounded-circle"> <span class="visually-hidden">New alerts</span> </span></button><div class="modal fade modal-xl" id="' +
         a +
@@ -200,9 +202,9 @@
     let team = button.id;
     let message = document.getElementById("messageBox" + team).value;
     if (message.trim().length > 0) {
-    saveMessageAdmin(team, message, "admin");
+      saveMessageAdmin(team, message, "admin");
     } else {
-      alert('try adding a message')
+      alert("try adding a message");
     }
   }
 </script>
@@ -252,11 +254,20 @@
     #logout {
       margin-top: 15px;
     }
+    .teamButton {
+      margin-top: 2rem;
+      height: 4rem;
+      width: 5rem;
+    }
   }
-  .teamButton {
-    margin-left: 5rem;
-    margin-right: 5rem;
-    margin-top: 2rem;
+  @media (min-width: 991px) {
+    .teamButton {
+      margin-left: 5rem;
+      margin-right: 5rem;
+      margin-top: 2rem;
+      height: 5rem;
+      width: 6rem;
+    }
   }
   .message {
     text-align: left !important;
