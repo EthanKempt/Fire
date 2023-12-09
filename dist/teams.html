@@ -113,11 +113,15 @@
           }
         }
       }
+      var stat = 'in'
+      if (remainingPlayers == 0) {
+        stat = 'out'
+      }
       var currentCol = eval("column" + current);
       currentCol.innerHTML +=
         '<div class="card"> <div class="card-header">' +
         teams[a].teamName +
-        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' + remainingPlayers + '</li> </ul> </div>';
+        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' + remainingPlayers + '</li> <li class="list-group-item">Squad wipes: ' + teams[a].squad + '</li> <li class="list-group-item">Team is ' + stat + '</li> </ul> </div>';
     }
   }
 
