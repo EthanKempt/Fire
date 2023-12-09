@@ -609,6 +609,13 @@
           "-player4'> </div>";
       }
       modalArea.innerHTML +=
+        "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Squad Wipes</span> <input type='text' class='form-control' aria-describedby='basic-addon1' id='" +
+        teams[i].teamName +
+        "squad' value='" +
+        teams[i].squad +
+        "'> </div>";
+
+      modalArea.innerHTML +=
         "<div class='input-group mb-3'> <span class='input-group-text' id='basic-addon1'>Password</span> <input type='text' class='form-control' aria-label='Username' aria-describedby='basic-addon1' id='" +
         teams[i].teamName +
         "Password' value='" +
@@ -1094,8 +1101,10 @@
     var player3Var = document.getElementById(currentTeam + "-player3").value;
     var player4Var = document.getElementById(currentTeam + "-player4");
     var player4Var2 = document.getElementById(currentTeam + "-player4");
-    var teamStat = document.getElementById('teamStatus' + currentTeam).checked;
-    var teamSafe = document.getElementById('teamSafe' + currentTeam).checked;
+    var squadWipes = document.getElementById(currentTeam + "squad").value;  
+    var targets = document.getElementById(currentTeam.replace(/\s/g, "") + "Select").value;
+    var teamStat = document.getElementById('teamStatus' + currentTeam.replace(/\s/g, "")).checked;
+    var teamSafe = document.getElementById('teamSafe' + currentTeam.replace(/\s/g, "")).checked;
     if (player4Var.value) {
       var player4Var = document.getElementById(currentTeam + "-player4").value;
     } else {
@@ -1132,7 +1141,7 @@
       var status = false;
     }
 
-    if ((player1Var, player2Var, player3Var)) {
+    if ((player1Var, player2Var, player3Var && !isNaN(squadWipes))) {
       adminEditCheck(
         a,
         player1Checked,
@@ -1146,8 +1155,6 @@
         newPassword
       );
 
-      var targets = document.getElementById(currentTeam + "Select").value;
-
       adminEdit(
         a,
         player1Var,
@@ -1157,10 +1164,11 @@
         targets,
         newPassword,
         teamStat,
-        teamSafe
+        teamSafe,
+        squadWipes
       );
     } else {
-      alert("Must have all values filled (excpet player 4)");
+      alert("Must have all values filled (excpet player 4) and Squad Wipes must be a valid number");
     }
   }
 

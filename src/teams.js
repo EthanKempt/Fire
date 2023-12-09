@@ -43,7 +43,7 @@ window.updateTeams = new Promise((resolve, reject) => {
     });
 });
 
-window.adminEdit = function (i, a, b, c, d, e, f, g, h) {
+window.adminEdit = function (i, a, b, c, d, e, f, g, h, j) {
   var team = teams[i].teamName;
   const docRef = doc(db, "teams", team);
   updateDoc(docRef, {
@@ -54,6 +54,7 @@ window.adminEdit = function (i, a, b, c, d, e, f, g, h) {
     teamPass: f,
     status: g,
     safe: h,
+    squad: j
   });
   if (d) {
     if (teams[i].player4) {
@@ -85,7 +86,8 @@ window.writeNewTeam = function (a, b, c, d, e, f, g, h, i) {
     player2: d,
     player3: e,
     status: h,
-    safe: i
+    safe: i,
+    squad: 0,
   });
   if (f) {
     updateDoc(currentRef, {
