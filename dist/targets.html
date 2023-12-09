@@ -293,7 +293,6 @@
     }
   }
 
-  scrollBottom();
   function scrollBottom() {
     let messageBox = document.getElementById("messager");
     messageBox.scrollTop = messageBox.scrollHeight;
@@ -407,6 +406,7 @@
     targetsC.style.display = "none";
     messagesC.style.display = "block";
     notesR.style.display = "none";
+    scrollBottom();
   }
 
   function selectNotes() {
