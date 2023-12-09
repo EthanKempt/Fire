@@ -30,7 +30,16 @@
       <div class="row align-items-start">
         <div class="col">
           <script src="https://cdn.logwork.com/widget/countdown.js"></script>
-          <a href="https://logwork.com/countdown-8ksb" class="countdown-timer" data-style="columns" data-timezone="America/Phoenix" data-date="2024-01-03 12:57" disabled>Game Starts In</a>        </div>
+          <a
+            href="https://logwork.com/countdown-8ksb"
+            class="countdown-timer"
+            data-style="columns"
+            data-timezone="America/Phoenix"
+            data-date="2024-01-03 12:57"
+            disabled
+            >Game Starts In</a
+          >
+        </div>
       </div>
     </div>
 
@@ -72,9 +81,7 @@
           <div class="card preCard" style="width: 18rem">
             <div class="card-body">
               <h5 class="card-title">Home Page</h5>
-              <h6 class="card-subtitle mb-2 text-body-secondary">
-                Basic Info
-              </h6>
+              <h6 class="card-subtitle mb-2 text-body-secondary">Basic Info</h6>
               <p class="card-text">
                 Higley Assassins home page is filled with relevant information
                 that makes the game more interesting. This information includes
@@ -171,9 +178,9 @@
                 Don't worry! You'll still get your assignments and be able to
                 talk to us through Instagram. This website is just allowing for
                 those without Instagram to play and, more importantly, make sure
-                all the game's information is made public. Basically, if you're set
-                on using Instagram, you can still play, you just miss out on the
-                benefits of the website.
+                all the game's information is made public. Basically, if you're
+                set on using Instagram, you can still play, you just miss out on
+                the benefits of the website.
                 <br />
                 <br />
                 Whenever you get your targets out, you'll still post the video
@@ -199,13 +206,40 @@
                 <li>
                   Pay in cash to either Ethan Kempton, Carson Wengert, or
                   Mikenna Sharp. With your cash include a paper with your team
-                  name and player names (first and last name).
+                  name, player names (first and last name), and one players Instagram.
                 </li>
                 <li>
                   Pay on Venmo. Venmo @ethankempton and in the description, put
-                  your team name and player names (first and last name).
+                  your team name, player names (first and last name) and one players Instagram.
                 </li>
               </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="container text-center" id="alt">
+      <div class="row align-items-start">
+        <div class="col">
+          <div class="card logCard">
+            <div class="card-body">
+              <h5 class="card-title">Single Player/Duos</h5>
+              <p class="card-text">
+                Many people want to play assassins but don't necessarily have a
+                full group to join with. This is why we are allowing students to
+                pay solo or in a pair and we'll put you on a team of other
+                soloists. After the game starts there will be no difference
+                between a soloist team and a normal team. If you are interested
+                in joining this way, just pay by yourself or with one other
+                person and in place of your team name, just write 'Single' or
+                'Double'. Make sure to provide your Instagram as this is our
+                only way of communicating with you.<br /><br />
+                If you are a soloist you will not be placed on a team of 3. If
+                you join as a soloist/duo and don't like your team, we
+                unfortunately can't give you a refund. After your team is made,
+                we'll put you in contact with your team members through
+                Instagram.
+              </p>
             </div>
           </div>
         </div>
@@ -218,8 +252,8 @@
   autoLog();
   function autoLog() {
     if (localStorage.currentTeam) {
-      sessionStorage.setItem('currentTeam', localStorage.currentTeam)
-      window.location.href = 'dist/home.html'
+      sessionStorage.setItem("currentTeam", localStorage.currentTeam);
+      window.location.href = "dist/home.html";
     }
   }
 
@@ -337,5 +371,10 @@
   }
   .countdown-timer {
     pointer-events: none;
+  }
+  #alt {
+    margin-top: 1rem;
+    max-width: 95vw;
+    margin-bottom: 1rem;
   }
 </style>
