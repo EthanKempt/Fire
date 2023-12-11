@@ -24,6 +24,21 @@
     <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
+  
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -52,7 +67,7 @@
               <span
                 id="notification"
                 class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
-                style="display:none"
+                style="display: none"
               >
                 <span class="visually-hidden">New alerts</span>
               </span></a
@@ -380,7 +395,7 @@
     var teams = await updateTeams;
     for (let a = 0; a < teams.length; a++) {
       if (teams[a].adminRead == false) {
-        document.getElementById('notification').style.display = 'inline-block'
+        document.getElementById("notification").style.display = "inline-block";
       }
     }
   }
@@ -433,7 +448,7 @@
       margin-top: 15px;
     }
     .date {
-      width: 4rem !important
+      width: 4rem !important;
     }
   }
   #pot {

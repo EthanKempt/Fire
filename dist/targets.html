@@ -24,6 +24,20 @@
       crossorigin="anonymous"
     ></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -333,7 +347,7 @@
     if (val.trim().length > 0) {
       addMessage(team, auth, val); //teamName + author + value
     } else {
-      alert('try adding a message')
+      alert("try adding a message");
     }
     document.getElementById("messageVal").focus();
   }

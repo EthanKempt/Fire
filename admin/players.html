@@ -29,6 +29,20 @@
     <script src="/dist/bundleTeams.js"></script>
     <script src="/src/site.js"></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -376,10 +390,10 @@
     var name = document.getElementById("playerName").value;
     var status = document.getElementById("newPlayerChecked").checked;
     var team = document.querySelector("#select2-addSelect-container").innerHTML;
-    var password = ''
-    for (let a = 0; a < teams.length; a++){
+    var password = "";
+    for (let a = 0; a < teams.length; a++) {
       if (teams[a].teamName == team) {
-        password = teams[a].teamPass
+        password = teams[a].teamPass;
       }
     }
 

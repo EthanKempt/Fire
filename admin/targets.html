@@ -29,6 +29,20 @@
     <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -270,7 +284,11 @@
         var team =
           arrowList[a].parentElement.nextElementSibling.firstElementChild
             .innerHTML;
-        for (let c = 0; c < document.querySelector("#radio-cont").childElementCount / 2; c++) {
+        for (
+          let c = 0;
+          c < document.querySelector("#radio-cont").childElementCount / 2;
+          c++
+        ) {
           var color = arrowList[a].parentElement.style.color;
           if (history[c].hasOwnProperty(pers)) {
             if (history[c][pers] == team && color != "red") {
@@ -281,7 +299,7 @@
         }
       }
     }
-    debugger
+    debugger;
     if (errors > 0) {
       document.getElementById("errorArea").style.display = "inline-block";
       document.getElementById("errorArea").innerHTML =
@@ -348,7 +366,7 @@
     var history = await updateHistory;
     document.getElementById("cancelBtn").style.display = "none";
     document.getElementById("addBtn").disabled = false;
-    document.getElementById('errorArea').style.display = 'none'
+    document.getElementById("errorArea").style.display = "none";
 
     var box = document.getElementById("radio-cont");
     box.lastElementChild.remove();

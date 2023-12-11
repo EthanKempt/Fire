@@ -37,6 +37,20 @@
     />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -65,7 +79,7 @@
               <span
                 id="notification"
                 class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
-                style="display: none;"
+                style="display: none"
               >
                 <span class="visually-hidden">New alerts</span>
               </span></a
@@ -170,7 +184,7 @@
     let input2 = document.getElementById("playersR");
     for (let b = 0; b < names.length; b++) {
       if (names[b].status == true) {
-        alive++
+        alive++;
       }
     }
     input2.innerHTML = alive;

@@ -25,6 +25,20 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
     />
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -131,13 +145,17 @@
         a +
         '" id="exampleFormControlTextarea1" rows="3">' +
         rule +
-        '</textarea></div></div>' +
-        '<div class="buttonCont"><button type="button" class="btn btn-primary"><i class="bi bi-caret-up-fill"></i></button><br> <button type="button" class="btn btn-primary"><i class="bi bi-caret-down-fill"></i></button></div></div>'
-        if (a + 1 == rules.length) {
-          document.getElementById('cont' + a).nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.remove();
-        }
+        "</textarea></div></div>" +
+        '<div class="buttonCont"><button type="button" class="btn btn-primary"><i class="bi bi-caret-up-fill"></i></button><br> <button type="button" class="btn btn-primary"><i class="bi bi-caret-down-fill"></i></button></div></div>';
+      if (a + 1 == rules.length) {
+        document
+          .getElementById("cont" + a)
+          .nextElementSibling.firstElementChild.nextElementSibling.nextElementSibling.remove();
+      }
     }
-    document.getElementById('cont0').nextElementSibling.firstElementChild.remove();
+    document
+      .getElementById("cont0")
+      .nextElementSibling.firstElementChild.remove();
     sizeOrderBox();
   }
 
@@ -182,8 +200,8 @@
       b +
       '"><textarea class="form-control rule" id="rule' +
       b +
-      '" id="exampleFormControlTextarea1" rows="3"></textarea></div></div>'
-      sizeOrderBox();
+      '" id="exampleFormControlTextarea1" rows="3"></textarea></div></div>';
+    sizeOrderBox();
   }
 
   initNotifications();
@@ -203,12 +221,8 @@
     }
   }
 
-  function clickUp(order) {
-
-  }
-  function clickDown(order) {
-
-  }
+  function clickUp(order) {}
+  function clickDown(order) {}
 </script>
 
 <style>

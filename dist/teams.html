@@ -19,6 +19,20 @@
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -95,12 +109,12 @@
     var current = 0;
     var maxCol = 3;
     if (screen.width <= 991) {
-      maxCol = 2
-      column3.style.display = 'none'
+      maxCol = 2;
+      column3.style.display = "none";
     }
 
     for (let a = 0; a < teams.length; a++) {
-    var remainingPlayers = 0;
+      var remainingPlayers = 0;
       if (current == maxCol) {
         current = 1;
       } else {
@@ -113,15 +127,21 @@
           }
         }
       }
-      var stat = 'in'
+      var stat = "in";
       if (remainingPlayers == 0) {
-        stat = 'out'
+        stat = "out";
       }
       var currentCol = eval("column" + current);
       currentCol.innerHTML +=
         '<div class="card"> <div class="card-header">' +
         teams[a].teamName +
-        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' + remainingPlayers + '</li> <li class="list-group-item">Squad wipes: ' + teams[a].squad + '</li> <li class="list-group-item">Team is ' + stat + '</li> </ul> </div>';
+        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' +
+        remainingPlayers +
+        '</li> <li class="list-group-item">Squad wipes: ' +
+        teams[a].squad +
+        '</li> <li class="list-group-item">Team is ' +
+        stat +
+        "</li> </ul> </div>";
     }
   }
 

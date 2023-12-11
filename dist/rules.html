@@ -19,6 +19,20 @@
     <script src="bundleRules.js"></script>
     <script src="bundleTeams.js"></script>
   </head>
+  <!-- Google tag (gtag.js) -->
+  <script
+    async
+    src="https://www.googletagmanager.com/gtag/js?id=G-H5Z5SD6V6S"
+  ></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag("js", new Date());
+
+    gtag("config", "G-H5Z5SD6V6S");
+  </script>
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -45,7 +59,7 @@
               <span
                 class="top-0 start-100 translate-middle p-1 bg-danger border border-light rounded-circle notification"
                 id="notification"
-                style="display: none;"
+                style="display: none"
               >
                 <span class="visually-hidden">New alerts</span>
               </span></a
