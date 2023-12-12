@@ -115,13 +115,21 @@
           <p class="h5">Time since start:</p>
           <h1 class="display-1" id="timeSinceStart">Loading...</h1>
           <hr />
+          <p class="h5 pollC">Poll:</p>
+          <br class="pollC">
+          <h1 class="display-1 pollC" id="poll">
+            <div class="progress pollProg" role="progressbar" aria-label="Basic example" aria-valuenow="75" aria-valuemin="0" aria-valuemax="100">
+              <div class="progress-bar w-25"></div>
+            </div>
+          </h1>
+          <hr class="pollC" />
           <p class="h5">Teams remaining:</p>
           <h1 class="display-1" id="teamsR">Loading...</h1>
           <hr />
           <p class="h5">Players remaining:</p>
           <h1 class="display-1" id="playersR">Loading...</h1>
           <hr />
-          <p class="h5">Safe:</p>
+          <p class="h5">Safe?</p>
           <h1 class="display-1" id="safeID"></h1>
         </div>
         <div class="col col-2 right-side" id="right"></div>
@@ -294,6 +302,16 @@
     height: 10vh;
     position: fixed;
     bottom: 0px;
+  }
+  .pollC {
+    display: none;
+  }
+  .pollProg {
+    height: 3rem;
+    background-color: #2e4b73;
+  }
+  .progress-bar {
+    background-color: #8b8b8b;
   }
 </style>
 

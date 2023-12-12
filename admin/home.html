@@ -23,8 +23,11 @@
     <script src="/src/site.js"></script>
     <script src="/dist/bundleTeams.js"></script>
     <script src="/dist/bundleAdmin.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8218773871462057"
-     crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8218773871462057"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <!-- Google tag (gtag.js) -->
   <script
@@ -40,7 +43,7 @@
 
     gtag("config", "G-H5Z5SD6V6S");
   </script>
-  
+
   <body>
     <nav
       class="navbar navbar-dark sticky-top navbar-expand-lg bg-body-tertiary"
@@ -225,38 +228,45 @@
             >
               Update
             </button>
-            <div id="underTime" class="form-text">
-              Your password must be 8-20 characters long, contain letters and
-              numbers, and must not contain spaces, special characters, or
-              emoji.
-            </div>
+            <div id="underTime" class="form-text">loading...</div>
           </div>
-
-          <div aria-live="polite" aria-atomic="true" class="position-relative">
-            <!-- Position it: -->
-            <!-- - `.toast-container` for spacing between toasts -->
-            <!-- - `top-0` & `end-0` to position the toasts in the upper right corner -->
-            <!-- - `.p-3` to prevent the toasts from sticking to the edge of the container  -->
-            <div class="toast-container">
-              <!-- Then put toasts within -->
-              <div
-                class="toast align-items-center text-bg-success border-0"
-                role="alert"
-                aria-live="assertive"
-                aria-atomic="true"
-                id="liveToast"
-              >
-                <div class="d-flex">
-                  <div class="toast-body" id="toastBody"></div>
-                  <button
-                    type="button"
-                    class="btn-close btn-close-white me-2 m-auto"
-                    data-bs-dismiss="toast"
-                    aria-label="Close"
-                  ></button>
-                </div>
-              </div>
+          <div class="input-group mb-3">
+            <span class="input-group-text">Create a Poll</span>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="poll1"
+                placeholder="Question"
+              />
+              <label for="poll1">Question</label>
             </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="poll2"
+                placeholder="Answer 1"
+              />
+              <label for="poll2">Answer 1</label>
+            </div>
+            <div class="form-floating">
+              <input
+                type="text"
+                class="form-control"
+                id="poll3"
+                placeholder="Answer 2"
+              />
+              <label for="poll3">Answer 2</label>
+            </div>
+            <button
+              class="btn btn-outline-primary"
+              type="button"
+              onclick="updatePoll()"
+              id="button-addon2"
+            >
+              Update
+            </button>
           </div>
         </div>
         <div class="col col-2 right-side"></div>
@@ -400,6 +410,13 @@
         document.getElementById("notification").style.display = "inline-block";
       }
     }
+  }
+
+  function updatePoll() {
+    var q = document.getElementById("poll1").value;
+    var a1 = document.getElementById("poll2").value;
+    var a2 = document.getElementById("poll3").value;
+    savePoll(q, a1, a2);
   }
 </script>
 

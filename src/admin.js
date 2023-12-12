@@ -53,3 +53,12 @@ window.saveDate = function (a) {
   });
   makeToast("Start date was updated successfully");
 };
+
+window.savePoll = function (a, b, c) {
+  const docRef = doc(db, "admin", "admin");
+  updateDoc(docRef, {
+    pollQ: a,
+    pollA1: b,
+    pollA2: c,
+  });
+};
