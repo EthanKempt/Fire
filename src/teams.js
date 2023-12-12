@@ -285,6 +285,9 @@ window.saveMessageAdmin = function (team, message, author) {
     value: message,
     time: new Date(),
   });
+  updateDoc(doc(db, "teams", team), {
+    read: false
+  });
 };
 
 if (window.location.pathname == "/admin/messages.html") {
