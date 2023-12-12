@@ -18,8 +18,11 @@
     <script src="/src/site.js"></script>
     <script src="bundle.js"></script>
     <script src="bundleTeams.js"></script>
-    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8218773871462057"
-     crossorigin="anonymous"></script>
+    <script
+      async
+      src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8218773871462057"
+      crossorigin="anonymous"
+    ></script>
   </head>
   <!-- Google tag (gtag.js) -->
   <script
@@ -108,7 +111,7 @@
     var column1 = document.getElementById("col1");
     var column2 = document.getElementById("col2");
     var column3 = document.getElementById("col3");
-    var current = 0;
+    var current = 1;
     var maxCol = 3;
     if (screen.width <= 991) {
       maxCol = 2;
@@ -117,11 +120,6 @@
 
     for (let a = 0; a < teams.length; a++) {
       var remainingPlayers = 0;
-      if (current == maxCol) {
-        current = 1;
-      } else {
-        current++;
-      }
       for (let b = 0; b < players.length; b++) {
         if (players[b].team == teams[a].teamName) {
           if (players[b].status == true) {
@@ -129,21 +127,48 @@
           }
         }
       }
-      var stat = "in";
-      if (remainingPlayers == 0) {
-        stat = "out";
+      if (remainingPlayers > 0) {
+        var currentCol = eval("column" + current);
+        currentCol.innerHTML +=
+          '<div class="card border-success"> <div class="card-header">' +
+          teams[a].teamName +
+          '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' +
+          remainingPlayers +
+          '</li> <li class="list-group-item">Squad wipes: ' +
+          teams[a].squad +
+          '</li> <li class="list-group-item">Team is In</li> </ul> </div>';
+        if (current == maxCol) {
+          current = 1;
+        } else {
+          current++;
+        } 
       }
-      var currentCol = eval("column" + current);
-      currentCol.innerHTML +=
-        '<div class="card"> <div class="card-header">' +
-        teams[a].teamName +
-        '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' +
-        remainingPlayers +
-        '</li> <li class="list-group-item">Squad wipes: ' +
-        teams[a].squad +
-        '</li> <li class="list-group-item">Team is ' +
-        stat +
-        "</li> </ul> </div>";
+    }
+    for (let a = 0; a < teams.length; a++) {
+      var remainingPlayers = 0;
+      for (let b = 0; b < players.length; b++) {
+        if (players[b].team == teams[a].teamName) {
+          if (players[b].status == true) {
+            remainingPlayers++;
+          }
+        }
+      }
+      if (remainingPlayers == 0) {
+        var currentCol = eval("column" + current);
+        currentCol.innerHTML +=
+          '<div class="card border-danger"> <div class="card-header">' +
+          teams[a].teamName +
+          '</div> <ul class="list-group list-group-flush"> <li class="list-group-item">Members left: ' +
+          remainingPlayers +
+          '</li> <li class="list-group-item">Squad wipes: ' +
+          teams[a].squad +
+          '</li> <li class="list-group-item">Team is Out</li> </ul> </div>';
+        if (current == maxCol) {
+          current = 1;
+        } else {
+          current++;
+        } 
+      }
     }
   }
 
